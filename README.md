@@ -16,13 +16,11 @@ video: https://youtu.be/ZDsoQOYZTCI
 
 ## Tecnologías
 
-| Paquete   | Versión | Notas                  |
-|-----------|---------|------------------------|
-| PHP       | 8.1.10  | Framework: Laravel 11  |
-| Composer  | 2.4.1   |                        |
-| Node.js   | 18      | NPM 8.18.0             |
-| MySQL     | 8.0.30  |                        |
-| Frontend  | -       | Livewire 3, Filament 4, TailwindCSS, Alpine.js |
+| Paquete   | Versión |
+|-----------|---------|
+| Laravel   | v12     |
+| Filament  | v4      |
+| Livewire  | v3      |
 
 
 
