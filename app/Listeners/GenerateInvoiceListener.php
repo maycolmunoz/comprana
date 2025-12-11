@@ -91,7 +91,7 @@ class GenerateInvoiceListener
         $this->pdf->Ln(10);
 
         $this->pdf->SetFont('Arial', 'B', 9);
-        $this->pdf->Cell(0, 7, iconv('UTF-8', 'ISO-8859-1','Gracias por su compra'), '', 0, 'C');
+        $this->pdf->Cell(0, 7, iconv('UTF-8', 'ISO-8859-1', 'Gracias por su compra'), '', 0, 'C');
 
         $this->pdf->Ln(9);
 
@@ -106,7 +106,7 @@ class GenerateInvoiceListener
         $this->pdf->close();
 
         foreach ($event->products as $product) {
-            $p = Product::select('id','stock')->firstWhere('name', $product['title']);
+            $p = Product::select('id', 'stock')->firstWhere('name', $product['title']);
 
             $p->update([
                 'stock' => $p->stock -= $product['quantity'],
