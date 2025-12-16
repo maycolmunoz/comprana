@@ -5,7 +5,6 @@ namespace App\Filament\Resources\Orders;
 use App\Filament\Resources\Orders\Pages\ManageOrders;
 use App\Models\Order;
 use Filament\Actions\ActionGroup;
-use Filament\Actions\BulkActionGroup;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Forms\Components\Select;
@@ -14,19 +13,17 @@ use Filament\Infolists\Components\ViewEntry;
 use Filament\Resources\Resource;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
-use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ViewColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
-use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 
 class OrderResource extends Resource
 {
     protected static ?string $model = Order::class;
 
-    protected static ?string $navigationLabel = 'Pedidos';
+    protected static ?string $modelLabel = 'Pedido';
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-squares-2x2';
 
@@ -81,11 +78,10 @@ class OrderResource extends Resource
                 Select::make('status')
                     ->label('Estado')
                     ->options(
-                        fn (): array => Auth::user()->isDispatcher() ?
-                        ['Procesando' => 'Procesando',
+                        [
+                            'Procesando' => 'Procesando',
                             'En Camino' => 'En Camino',
-                        ] :
-                        ['Entregado' => 'Entregado',
+                            'Entregado' => 'Entregado',
                             'No Entregado' => 'No Entregado',
                         ]
                     )
@@ -175,12 +171,6 @@ class OrderResource extends Resource
 
                             return false;
                         }),
-                ]),
-            ])
-            ->toolbarActions([
-                BulkActionGroup::make([
-                    //     Tables\Actions\DeleteBulkAction::make(),
-                    ExportBulkAction::make(),
                 ]),
             ]);
     }

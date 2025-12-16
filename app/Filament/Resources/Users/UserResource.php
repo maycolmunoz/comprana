@@ -16,14 +16,17 @@ use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
-use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
+use UnitEnum;
 
 class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 
-    protected static ?string $navigationLabel = 'Usuarios';
+    protected static ?string $modelLabel = 'Usuario';
+
+    protected static string|UnitEnum|null $navigationGroup = 'Administración';
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-users';
 
@@ -31,11 +34,12 @@ class UserResource extends Resource
     {
         return $schema
             ->components([
-                Select::make('role')
-                    ->label('Rol')
-                    ->options(User::ROLES)
-                    ->required()
-                    ->default(User::ROLE_DEFAULT),
+                Select::make('roles')
+                    ->label('Roles')
+                    ->relationship('roles', 'name')
+                    ->multiple()
+                    ->preload()
+                    ->required(),
                 TextInput::make('name')
                     ->label('Nombre')
                     ->required()
@@ -48,7 +52,7 @@ class UserResource extends Resource
                     ->maxLength(255),
                 TextInput::make('password')
                     ->label('Contraseña')
-                    ->visible(fn ($livewire) => $livewire instanceof CreateUser)
+                    ->visibleOn('create')
                     ->password()
                     ->revealable()
                     ->required()
@@ -67,35 +71,21 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('role')
-                    ->label('Rol')
-                    ->badge()
-                    ->color(fn (string $state): string => match ($state) {
-                        'ADMINISTRADOR' => 'primary',
-                        'DESPACHADOR' => 'warning',
-                        'REPARTIDOR' => 'warning',
-                        'EDITOR' => 'success',
-                        'USUARIO' => 'gray',
-                    })
-                    ->sortable()
-                    ->searchable(),
                 TextColumn::make('name')
                     ->label('Nombre')
                     ->searchable(),
                 TextColumn::make('email')
                     ->label('Correo')
                     ->searchable(),
-                TextColumn::make('email_verified_at')
-                    ->label('Verificación')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('roles.name')
+                    ->label('Roles')
+                    ->searchable()
+                    ->badge(),
                 TextColumn::make('phone')
                     ->label('Teléfono')
-                    ->searchable(),
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('address')
                     ->label('Dirección')
-                    ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('created_at')
                     ->label('Creación')
@@ -109,23 +99,21 @@ class UserResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                SelectFilter::make('Filtrar por Role')
+                    ->relationship('roles', 'name')
+                    ->multiple(),
             ])
             ->recordActions([
                 ActionGroup::make([
                     EditAction::make(),
-                    DeleteAction::make()
-                        ->hidden(fn (User $record): bool => $record->isAdmin()),
+                    DeleteAction::make(),
                 ]),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
-                    ExportBulkAction::make(),
                 ]),
-            ])->checkIfRecordIsSelectableUsing(
-                fn (User $record): bool => ! $record->isAdmin(),
-            );
+            ]);
     }
 
     public static function getRelations(): array

@@ -24,13 +24,12 @@ use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
-use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 
 class ProductResource extends Resource
 {
     protected static ?string $model = Product::class;
 
-    protected static ?string $navigationLabel = 'Productos';
+    protected static ?string $modelLabel = 'Producto';
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-building-storefront';
 
@@ -140,7 +139,6 @@ class ProductResource extends Resource
                     ViewAction::make(),
                     EditAction::make(),
                     DeleteAction::make(),
-                    ExportBulkAction::make(),
                 ]),
             ])
             ->toolbarActions([

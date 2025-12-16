@@ -1,49 +1,69 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Policies;
 
 use App\Models\Section;
-use App\Models\User;
+use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Foundation\Auth\User as AuthUser;
 
 class SectionPolicy
 {
-    /**
-     * Determine whether the user can view any models.
-     */
-    public function viewAny(User $user): bool
+    use HandlesAuthorization;
+
+    public function viewAny(AuthUser $authUser): bool
     {
-        return $user->isAdmin() || $user->isEditor();
+        return $authUser->can('ViewAny:Section');
     }
 
-    /**
-     * Determine whether the user can view the model.
-     */
-    public function view(User $user, Section $section): bool
+    public function view(AuthUser $authUser, Section $section): bool
     {
-        return $user->isAdmin() || $user->isEditor();
+        return $authUser->can('View:Section');
     }
 
-    /**
-     * Determine whether the user can create models.
-     */
-    public function create(User $user): bool
+    public function create(AuthUser $authUser): bool
     {
-        return $user->isAdmin() || $user->isEditor();
+        return $authUser->can('Create:Section');
     }
 
-    /**
-     * Determine whether the user can update the model.
-     */
-    public function update(User $user, Section $section): bool
+    public function update(AuthUser $authUser, Section $section): bool
     {
-        return $user->isAdmin() || $user->isEditor();
+        return $authUser->can('Update:Section');
     }
 
-    /**
-     * Determine whether the user can delete the model.
-     */
-    public function delete(User $user, Section $section): bool
+    public function delete(AuthUser $authUser, Section $section): bool
     {
-        return $user->isAdmin() || $user->isEditor();
+        return $authUser->can('Delete:Section');
+    }
+
+    public function restore(AuthUser $authUser, Section $section): bool
+    {
+        return $authUser->can('Restore:Section');
+    }
+
+    public function forceDelete(AuthUser $authUser, Section $section): bool
+    {
+        return $authUser->can('ForceDelete:Section');
+    }
+
+    public function forceDeleteAny(AuthUser $authUser): bool
+    {
+        return $authUser->can('ForceDeleteAny:Section');
+    }
+
+    public function restoreAny(AuthUser $authUser): bool
+    {
+        return $authUser->can('RestoreAny:Section');
+    }
+
+    public function replicate(AuthUser $authUser, Section $section): bool
+    {
+        return $authUser->can('Replicate:Section');
+    }
+
+    public function reorder(AuthUser $authUser): bool
+    {
+        return $authUser->can('Reorder:Section');
     }
 }

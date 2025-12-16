@@ -12,6 +12,8 @@ class StatsOverview extends BaseWidget
 {
     protected ?string $pollingInterval = '60s';
 
+    protected ?string $heading = 'Resumen';
+
     protected function getStats(): array
     {
         return [

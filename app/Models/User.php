@@ -3,15 +3,19 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable
+class User extends Authenticatable implements FilamentUser
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, HasRoles, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -19,7 +23,6 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'role',
         'name',
         'phone',
         'address',
@@ -47,26 +50,6 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    const ROLE_ADMIN = 'ADMINISTRADOR';
-
-    const ROLE_EDITOR = 'EDITOR';
-
-    const ROLE_DISPATCHER = 'DESPACHADOR';
-
-    const ROLE_DELIVERY = 'REPARTIDOR';
-
-    const ROLE_USER = 'USUARIO';
-
-    const ROLE_DEFAULT = self::ROLE_USER;
-
-    const ROLES = [
-        self::ROLE_ADMIN => 'Administrador',
-        self::ROLE_EDITOR => 'Editor',
-        self::ROLE_DISPATCHER => 'Despachador',
-        self::ROLE_DELIVERY => 'Repartidor',
-        self::ROLE_USER => 'Usuario',
-    ];
-
     /**
      * Get all of the carts for the User
      */
@@ -83,23 +66,8 @@ class User extends Authenticatable
         return $this->hasMany(Order::class);
     }
 
-    public function isAdmin(): bool
+    public function canAccessPanel(Panel $panel): bool
     {
-        return $this->role === self::ROLE_ADMIN;
-    }
-
-    public function isEditor(): bool
-    {
-        return $this->role === self::ROLE_EDITOR;
-    }
-
-    public function isDispatcher(): bool
-    {
-        return $this->role === self::ROLE_DISPATCHER;
-    }
-
-    public function isDelivery(): bool
-    {
-        return $this->role === self::ROLE_DELIVERY;
+        return $this->roles()->count('id') > 0;
     }
 }

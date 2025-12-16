@@ -10,15 +10,10 @@ class ListProducts extends ListRecords
 {
     protected static string $resource = ProductResource::class;
 
-    protected ?string $heading = 'Productos';
-
-    protected static ?string $title = 'Productos';
-
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make()
-                ->label('Crear Producto'),
+            CreateAction::make(),
         ];
     }
 }

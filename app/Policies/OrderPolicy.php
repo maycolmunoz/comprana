@@ -1,33 +1,69 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Policies;
 
 use App\Models\Order;
-use App\Models\User;
+use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Foundation\Auth\User as AuthUser;
 
 class OrderPolicy
 {
-    /**
-     * Determine whether the user can view any models.
-     */
-    public function viewAny(User $user): bool
+    use HandlesAuthorization;
+
+    public function viewAny(AuthUser $authUser): bool
     {
-        return $user->role != 'USUARIO';
+        return $authUser->can('ViewAny:Order');
     }
 
-    /**
-     * Determine whether the user can view the model.
-     */
-    public function view(User $user, Order $order): bool
+    public function view(AuthUser $authUser, Order $order): bool
     {
-        return $user->role != 'USUARIO';
+        return $authUser->can('View:Order');
     }
 
-    /**
-     * Determine whether the user can update the model.
-     */
-    public function update(User $user, Order $order): bool
+    public function create(AuthUser $authUser): bool
     {
-        return $user->isDispatcher() || $user->isDelivery();
+        return $authUser->can('Create:Order');
+    }
+
+    public function update(AuthUser $authUser, Order $order): bool
+    {
+        return $authUser->can('Update:Order');
+    }
+
+    public function delete(AuthUser $authUser, Order $order): bool
+    {
+        return $authUser->can('Delete:Order');
+    }
+
+    public function restore(AuthUser $authUser, Order $order): bool
+    {
+        return $authUser->can('Restore:Order');
+    }
+
+    public function forceDelete(AuthUser $authUser, Order $order): bool
+    {
+        return $authUser->can('ForceDelete:Order');
+    }
+
+    public function forceDeleteAny(AuthUser $authUser): bool
+    {
+        return $authUser->can('ForceDeleteAny:Order');
+    }
+
+    public function restoreAny(AuthUser $authUser): bool
+    {
+        return $authUser->can('RestoreAny:Order');
+    }
+
+    public function replicate(AuthUser $authUser, Order $order): bool
+    {
+        return $authUser->can('Replicate:Order');
+    }
+
+    public function reorder(AuthUser $authUser): bool
+    {
+        return $authUser->can('Reorder:Order');
     }
 }

@@ -2,12 +2,9 @@
 
 namespace App\Filament\Resources\Sections;
 
-use App\Filament\Resources\Sections\Pages\CreateSection;
-use App\Filament\Resources\Sections\Pages\EditSection;
-use App\Filament\Resources\Sections\Pages\ListSections;
-use App\Filament\Resources\Sections\RelationManagers\ProductsRelationManager;
+use App\Filament\Resources\Sections\Pages\ManageSections;
 use App\Models\Section;
-use Filament\Actions\ActionGroup;
+use BackedEnum;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
@@ -15,6 +12,7 @@ use Filament\Actions\EditAction;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -22,9 +20,11 @@ class SectionResource extends Resource
 {
     protected static ?string $model = Section::class;
 
-    protected static ?string $navigationLabel = 'Secciones';
+    protected static ?string $modelLabel = 'Sección';
 
-    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $pluralLabel = 'Secciones';
+
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     public static function form(Schema $schema): Schema
     {
@@ -49,15 +49,12 @@ class SectionResource extends Resource
                     ->counts('products')
                     ->alignCenter(),
             ])
-
             ->filters([
                 //
             ])
             ->recordActions([
-                ActionGroup::make([
-                    EditAction::make(),
-                    DeleteAction::make(),
-                ]),
+                EditAction::make(),
+                DeleteAction::make(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
@@ -66,19 +63,10 @@ class SectionResource extends Resource
             ]);
     }
 
-    public static function getRelations(): array
-    {
-        return [
-            ProductsRelationManager::class,
-        ];
-    }
-
     public static function getPages(): array
     {
         return [
-            'index' => ListSections::route('/'),
-            'create' => CreateSection::route('/create'),
-            'edit' => EditSection::route('/{record}/edit'),
+            'index' => ManageSections::route('/'),
         ];
     }
 }

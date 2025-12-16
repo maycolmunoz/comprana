@@ -1,49 +1,69 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Policies;
 
 use App\Models\Product;
-use App\Models\User;
+use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Foundation\Auth\User as AuthUser;
 
 class ProductPolicy
 {
-    /**
-     * Determine whether the user can view any models.
-     */
-    public function viewAny(User $user): bool
+    use HandlesAuthorization;
+
+    public function viewAny(AuthUser $authUser): bool
     {
-        return $user->role != 'USUARIO';
+        return $authUser->can('ViewAny:Product');
     }
 
-    /**
-     * Determine whether the user can view the model.
-     */
-    public function view(User $user, Product $product): bool
+    public function view(AuthUser $authUser, Product $product): bool
     {
-        return $user->role != 'USUARIO';
+        return $authUser->can('View:Product');
     }
 
-    /**
-     * Determine whether the user can create models.
-     */
-    public function create(User $user): bool
+    public function create(AuthUser $authUser): bool
     {
-        return $user->isEditor() || $user->isAdmin();
+        return $authUser->can('Create:Product');
     }
 
-    /**
-     * Determine whether the user can update the model.
-     */
-    public function update(User $user, Product $product): bool
+    public function update(AuthUser $authUser, Product $product): bool
     {
-        return $user->isEditor() || $user->isAdmin();
+        return $authUser->can('Update:Product');
     }
 
-    /**
-     * Determine whether the user can delete the model.
-     */
-    public function delete(User $user, Product $product): bool
+    public function delete(AuthUser $authUser, Product $product): bool
     {
-        return $user->isEditor() || $user->isAdmin();
+        return $authUser->can('Delete:Product');
+    }
+
+    public function restore(AuthUser $authUser, Product $product): bool
+    {
+        return $authUser->can('Restore:Product');
+    }
+
+    public function forceDelete(AuthUser $authUser, Product $product): bool
+    {
+        return $authUser->can('ForceDelete:Product');
+    }
+
+    public function forceDeleteAny(AuthUser $authUser): bool
+    {
+        return $authUser->can('ForceDeleteAny:Product');
+    }
+
+    public function restoreAny(AuthUser $authUser): bool
+    {
+        return $authUser->can('RestoreAny:Product');
+    }
+
+    public function replicate(AuthUser $authUser, Product $product): bool
+    {
+        return $authUser->can('Replicate:Product');
+    }
+
+    public function reorder(AuthUser $authUser): bool
+    {
+        return $authUser->can('Reorder:Product');
     }
 }
