@@ -16,13 +16,11 @@ video: https://youtu.be/ZDsoQOYZTCI
 
 ## Tecnologías
 
-| Paquete   | Versión |
-|-----------|---------|
-| Laravel   | v12     |
-| Filament  | v4      |
-| Livewire  | v3      |
-
-
+| Paquete  | Versión |
+| -------- | ------- |
+| Laravel  | v12     |
+| Filament | v4      |
+| Livewire | v3      |
 
 ## Instalación
 
@@ -34,49 +32,35 @@ Así es como puede ejecutar el proyecto localmente:
     git clone https://github.com/maycolmunoz/comprana.git
     ```
 
-1. Ingresa al directorio raíz del proyecto
+2. Ingresa al directorio raíz del proyecto
 
     ```sh
     cd comprana
     ```
 
-1. Copie el archivo .env.example al archivo .env
+3. Copie el archivo .env.example al archivo .env
+
     ```sh
     cp .env.example .env
     ```
-1. Crea base de datos `comprana`
 
-1. Crea enlace simbólico
+4. Crea base de datos `comprana`
 
-    ```sh
-    php artisan storage:link
-    ```
-
-1. Instala dependencias PHP
+5. Instala dependencias PHP
 
     ```sh
     composer install
     ```
 
-1. Genera key
+6. Instala app (Este comando ejecuta migraciones, crea storage link, ejecuta seeders, genera roles-permisos y crea administrador)
 
     ```sh
-    php artisan key:generate
+    php artisan app:install
     ```
 
-1. Instala dependencias front-end
-
+7. Instala dependencias front-end
     ```sh
     npm install && npm run build
-    ```
-
-1. Ejecuta migration
-    ```
-    php artisan migrate
-    ```
-1. Ejecuta seeder
-    ```
-    php artisan db:seed
     ```
 
 ## DB
