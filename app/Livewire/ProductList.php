@@ -43,8 +43,7 @@ class ProductList extends Component
     #[Computed()]
     public function products()
     {
-        $query = Product::select('id', 'name', 'price', 'stock', 'section_id')->search($this->search)
-            ->with(['image:product_id,name']);
+        $query = Product::search($this->search);
 
         if ($this->search != '') {
             $this->order = $this->order === 'asc' || $this->order === 'desc' ? $this->order : 'asc';

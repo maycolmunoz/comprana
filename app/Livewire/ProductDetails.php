@@ -21,8 +21,7 @@ class ProductDetails extends Component
     #[On('details')]
     public function details(string $id)
     {
-        $this->product = Product::select('id', 'name', 'description', 'stock', 'price')
-            ->where('id', $id)->with('images')->first();
+        $this->product = Product::find($id);
         $this->stock = $this->product->stock;
         $this->price = $this->product->price;
     }

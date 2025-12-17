@@ -23,7 +23,7 @@ class CartProductsList extends Component
     #[On('refresh')]
     public function render()
     {
-        $this->cart->products()->with('image')->get();
+        $this->cart->products()->get();
 
         return view('livewire.cart-products-list');
     }
