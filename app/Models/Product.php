@@ -5,8 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Product extends Model
 {
@@ -15,6 +13,7 @@ class Product extends Model
     protected $fillable = [
         'name',
         'description',
+        'images',
         'price',
         'stock',
         'section_id',
@@ -22,7 +21,7 @@ class Product extends Model
 
     protected $casts = [
         'price' => 'int',
-        // 'images' => 'array',
+        'images' => 'array',
     ];
 
     /**
@@ -31,22 +30,6 @@ class Product extends Model
     public function section(): BelongsTo
     {
         return $this->belongsTo(Section::class);
-    }
-
-    /**
-     * Get all of the images for the Product
-     */
-    public function images(): HasMany
-    {
-        return $this->hasMany(Image::class);
-    }
-
-    /**
-     * Get the image associated with the Product
-     */
-    public function image(): HasOne
-    {
-        return $this->hasOne(Image::class);
     }
 
     public function scopeSearch($query, string $search = '')

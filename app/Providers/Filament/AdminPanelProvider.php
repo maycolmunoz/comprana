@@ -34,8 +34,8 @@ class AdminPanelProvider extends PanelProvider
                 'warning' => Color::Orange,
                 'success' => Color::Emerald,
                 'info' => Color::Cyan,
-
             ])
+            ->sidebarCollapsibleOnDesktop()
             ->favicon(asset('srcs/favicon.ico'))
             ->brandLogo(asset('srcs/favicon.ico'))
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')

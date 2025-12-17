@@ -5,7 +5,6 @@ namespace App\Filament\Resources\Products;
 use App\Filament\Resources\Products\Pages\CreateProduct;
 use App\Filament\Resources\Products\Pages\EditProduct;
 use App\Filament\Resources\Products\Pages\ListProducts;
-use App\Filament\Resources\Products\RelationManagers\ImagesRelationManager;
 use App\Models\Product;
 use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
@@ -23,7 +22,6 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Model;
 
 class ProductResource extends Resource
 {
@@ -47,7 +45,7 @@ class ProductResource extends Resource
                 TextEntry::make('description')
                     ->label('Descripción')
                     ->columnSpanFull(),
-                ImageEntry::make('images.name')
+                ImageEntry::make('images')
                     ->disk('images')
                     ->label('imágenes')
                     ->columnSpanFull(),
@@ -59,26 +57,26 @@ class ProductResource extends Resource
         return $schema
             ->components([
                 Select::make('section_id')
-                    ->label('sección')
+                    ->label('Sección')
                     ->relationship('section', 'name')
                     ->required(),
                 TextInput::make('name')
                     ->label('Nombre')
                     ->required()
                     ->maxLength(100),
-                Textarea::make('description')
-                    ->label('Descripción')
-                    ->required()
-                    ->maxLength(65535)
-                    ->columnSpanFull(),
-                TextInput::make('stock')
-                    ->required()
-                    ->numeric(),
                 TextInput::make('price')
                     ->label('Precio')
                     ->required()
                     ->numeric()
                     ->prefix('$'),
+                TextInput::make('stock')
+                    ->required()
+                    ->numeric(),
+                Textarea::make('description')
+                    ->label('Descripción')
+                    ->required()
+                    ->maxLength(65535)
+                    ->columnSpanFull(),
                 FileUpload::make('images')
                     ->label('Imágenes')
                     ->disk('images')
@@ -87,15 +85,10 @@ class ProductResource extends Resource
                     ->imageEditor()
                     ->reorderable()
                     ->preserveFilenames()
-                    ->saveRelationshipsUsing(function (Model $record, $state) {
-                        foreach ($state as $img => $value) {
-                            $record->images()->create([
-                                'name' => $value,
-                            ]);
-                        }
-                    })
                     ->maxFiles(3)
-                    ->required()->hiddenOn('edit'),
+                    ->required()
+                    ->columnSpan(2)
+                    ->panelLayout('grid'),
             ]);
     }
 
@@ -146,13 +139,6 @@ class ProductResource extends Resource
                     DeleteBulkAction::make(),
                 ]),
             ]);
-    }
-
-    public static function getRelations(): array
-    {
-        return [
-            ImagesRelationManager::class,
-        ];
     }
 
     public static function getPages(): array

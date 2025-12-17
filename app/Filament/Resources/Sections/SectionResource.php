@@ -5,9 +5,7 @@ namespace App\Filament\Resources\Sections;
 use App\Filament\Resources\Sections\Pages\ManageSections;
 use App\Models\Section;
 use BackedEnum;
-use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
-use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
@@ -34,7 +32,7 @@ class SectionResource extends Resource
                     ->label('Nombre')
                     ->required()
                     ->maxLength(100),
-            ]);
+            ])->columns(1);
     }
 
     public static function table(Table $table): Table
@@ -47,19 +45,14 @@ class SectionResource extends Resource
                 TextColumn::make('products_count')
                     ->label('Productos')
                     ->counts('products')
-                    ->alignCenter(),
+                    ->alignCenter()
+                    ->sortable()
+                    ->badge(),
             ])
-            ->filters([
-                //
-            ])
+            ->filters([])
             ->recordActions([
                 EditAction::make(),
                 DeleteAction::make(),
-            ])
-            ->toolbarActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                ]),
             ]);
     }
 
