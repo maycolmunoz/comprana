@@ -43,19 +43,11 @@ return [
             'visibility' => 'public',
             'throw' => false,
         ],
-        'images' => [
-            'driver' => 'local',
-            'root' => storage_path('app/public/images'),
-            'url' => env('APP_URL').'/storage/images',
-            'visibility' => 'public',
-            'throw' => false,
-        ],
+
         'invoices' => [
             'driver' => 'local',
             'root' => storage_path('app/invoices'),
-            'url' => env('APP_URL').'/storage/invoices',
-            'visibility' => 'public',
-            'throw' => false,
+            'visibility' => 'private',
         ],
 
         's3' => [

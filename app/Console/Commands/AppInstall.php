@@ -6,6 +6,7 @@ use BezhanSalleh\FilamentShield\Support\Utils;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -80,14 +81,13 @@ class AppInstall extends Command
      */
     protected function runSeeder()
     {
-        if (! $this->confirm('Do you want to fill the system with test data?')) {
-            $this->info('❌ Seeders cancelled.');
-
-            return;
-        }
-
         $this->info('⚙️ Running database seeders...');
         Artisan::call('db:seed', [], $this->getOutput());
+
+        File::copyDirectory(
+            resource_path('images/products'),
+            storage_path('app/public/products')
+        );
         $this->info('✅ Seeders completed successfully.');
     }
 

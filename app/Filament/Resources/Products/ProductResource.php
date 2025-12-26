@@ -79,7 +79,7 @@ class ProductResource extends Resource
                     ->columnSpanFull(),
                 FileUpload::make('images')
                     ->label('Imágenes')
-                    ->disk('images')
+                    ->directory('products')
                     ->multiple()
                     ->image()
                     ->imageEditor()

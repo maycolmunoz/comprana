@@ -7,12 +7,12 @@
         {{-- images --}}
         <section x-data="{image: ''}" x-init="image = '{{$product->images[0]}}'"
             class="w-full max-w-xs md:max-w-full md:w-1/2 lg:w-1/3 dark:bg-gray-800 dark:text-gray-50">
-            <img :src="'/storage/images/'+ image" class="w-full rounded shadow-sm dark:bg-gray-500 aspect-square">
+            <img :src="'/storage/'+ image" class="w-full rounded shadow-sm dark:bg-gray-500 aspect-square">
             <div class="flex">
                 @foreach ($product->images as $image)
                 <img x-on:click="image = '{{$image}}'" alt="{{$image}}"
                     class="w-1/4 rounded shadow-sm dark:bg-gray-500 aspect-square hover:cursor-pointer"
-                    src="storage/images/{{$image}}">
+                    src="storage/{{$image}}">
                 @endforeach
             </div>
         </section>
