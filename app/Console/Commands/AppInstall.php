@@ -36,6 +36,8 @@ class AppInstall extends Command
     {
         $this->info('🚀 Starting Installation...');
 
+        $this->createKey();
+
         $this->runMigrations();
 
         $this->storageLink();
@@ -47,6 +49,18 @@ class AppInstall extends Command
         $this->createAdminUser();
 
         $this->info('🎉 Super panel installation completed successfully!');
+    }
+
+    /**
+     * Create key.
+     */
+    protected function createKey(): void
+    {
+        $this->info('🔑 Generating application key...');
+
+        Artisan::call('key:generate', [], $this->getOutput());
+
+        $this->info('✅ Application key generated successfully.');
     }
 
     /**

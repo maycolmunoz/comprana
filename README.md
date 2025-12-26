@@ -52,7 +52,7 @@ Así es como puede ejecutar el proyecto localmente:
     composer install
     ```
 
-6. Instala app (Este comando ejecuta migraciones, crea storage link, ejecuta seeders, genera roles-permisos y crea administrador)
+6. Instala app (Este comando crea la key, ejecuta migraciones, crea storage link, ejecuta seeders, genera roles-permisos y crea administrador)
 
     ```sh
     php artisan app:install
