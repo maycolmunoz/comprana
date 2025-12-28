@@ -1,3 +1,4 @@
+@import './theme.css'; /* By Sheaf.dev */ 
 @import 'tailwindcss';
 
 @plugin '@tailwindcss/forms';
@@ -39,3 +40,5 @@ input[type="number"] {
 }
 
 [x-cloak] { display: none !important; }
+
+ @custom-variant dark (&:where(.dark, .dark *)); /* By Sheaf.dev */ 
