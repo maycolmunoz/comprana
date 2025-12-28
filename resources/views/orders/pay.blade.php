@@ -106,7 +106,7 @@
             </div>
 
             {{-- Right --}}
-            <div class="flex-shrink-0 order-1 w-full mb-8 lg:w-1/2 lg:mb-0 lg:order-2">
+            <div class="shrink-0 order-1 w-full mb-8 lg:w-1/2 lg:mb-0 lg:order-2">
                 <div class="flex justify-center lg:justify-end">
                     <div class="w-full max-w-md px-4 py-3 bg-white border rounded-md">
                         <div class="flex items-center justify-between">

@@ -9,7 +9,7 @@
 		@if ($in_stock)
 			@guest
 				<a href="{{ route('login') }}"
-					class="p-2 mx-5 -mb-4 text-white bg-blue-600 rounded-full hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
+					class="p-2 mx-5 -mb-4 text-white bg-blue-600 rounded-full hover:bg-blue-500 focus:outline-hidden focus:bg-blue-500">
 					<svg class="w-5 h-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"
 						stroke="currentColor">
 						<path
@@ -26,7 +26,7 @@
 	        $dispatch('reset-count')
 	    }
 	}" @click="realizarAccion('{{ $product->id }}')"
-					class="p-2 mx-5 -mb-4 text-white bg-blue-600 rounded-full hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
+					class="p-2 mx-5 -mb-4 text-white bg-blue-600 rounded-full hover:bg-blue-500 focus:outline-hidden focus:bg-blue-500">
 					<svg class="w-5 h-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 						viewBox="0 0 24 24" stroke="currentColor">
 						<path

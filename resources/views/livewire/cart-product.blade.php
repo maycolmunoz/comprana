@@ -18,7 +18,7 @@
 					class="cursor-pointer rounded-l bg-gray-100 py-1 px-3.5 duration-100 hover:bg-blue-500 hover:text-blue-50">
 					-
 				</span>
-				<span class="flex items-center justify-center w-8 h-8 text-xs bg-white border outline-none" x-text="cant"></span>
+				<span class="flex items-center justify-center w-8 h-8 text-xs bg-white border outline-hidden" x-text="cant"></span>
 				<span @click=" pay += price
             cant = cant >= {{ $product->stock }} ? cant :  parseInt(cant) +1"
 					class="px-3 py-1 duration-100 bg-gray-100 rounded-r cursor-pointer hover:bg-blue-500 hover:text-blue-50">

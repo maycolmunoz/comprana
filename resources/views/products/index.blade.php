@@ -14,7 +14,7 @@
         <div 
             x-show="slideOverOpen"
             @keydown.window.escape="slideOverOpen=false"
-            class="relative z-[99]">
+            class="relative z-99">
             <div x-show="slideOverOpen" x-transition.opacity.duration.400ms @click="slideOverOpen = false" class="fixed inset-0 bg-black bg-opacity-10"></div>
             <div class="fixed inset-0 overflow-hidden">
                 <div class="absolute inset-0 overflow-hidden">

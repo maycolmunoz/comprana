@@ -15,7 +15,7 @@
     $orderDesc = $order === 'desc' ? true : false;
     @endphp
 
-    <div class="flex items-center rounded-md shadow-sm">
+    <div class="flex items-center rounded-md shadow-xs">
         <span class="text-sm text-gray-500 ">Ordenar por Precio: </span>
         <button wire:click="$set('order', 'asc')" {{$orderAsc ? 'disabled' : '' }}
             class="{{$orderAsc ? 'bg-slate-100 border text-blue-600 ': 'text-slate-800' }} block w-[120px] text-center   hover:text-blue-600 text-sm bg-white hover:bg-slate-100 border border-slate-200 rounded-l-lg font-medium px-2 py-1  items-center">

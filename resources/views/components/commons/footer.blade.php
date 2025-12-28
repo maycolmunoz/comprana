@@ -1,5 +1,5 @@
 <footer class="w-full bg-gray-300 border-t border-black">
-    <div class="justify-between max-w-screen-lg px-4 py-5 mx-auto text-gray-800 sm:px-6 sm:flex">
+    <div class="justify-between max-w-(--breakpoint-lg) px-4 py-5 mx-auto text-gray-800 sm:px-6 sm:flex">
         <div class="p-5 border-r sm:w-2/12 text-center sm:text-left">
             <div class="text-sm font-bold text-indigo-600 uppercase">Menu</div>
             <ul>

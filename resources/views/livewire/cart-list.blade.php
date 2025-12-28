@@ -8,7 +8,7 @@
                 Editar Nombre | <span x-text="name"></span> |
             </label>
             <input placeholder="Nombre Nuevo" type="text" wire:model='name'
-                class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
+                class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-hidden focus:ring-3 focus:ring-indigo-300 focus:ring-opacity-40">
             <div>
                 <x-input-error :messages="$errors->get('name')" class="mt-2" />
             </div>
@@ -16,11 +16,11 @@
 
         <div class="flex justify-end gap-1 mt-4">
             <button type="submit"
-                class="px-3 py-2 text-sm tracking-wide text-white capitalize transition-colors duration-200 transform bg-indigo-500 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-500 focus:ring focus:ring-indigo-300 focus:ring-opacity-50">
+                class="px-3 py-2 text-sm tracking-wide text-white capitalize transition-colors duration-200 transform bg-indigo-500 rounded-md hover:bg-indigo-600 focus:outline-hidden focus:bg-indigo-500 focus:ring-3 focus:ring-indigo-300 focus:ring-opacity-50">
                 Actualizar
             </button>
             <button type="button" @click="show = false"
-                class="px-3 py-2 text-sm tracking-wide text-white capitalize transition-colors duration-200 transform bg-red-500 rounded-md hover:bg-red-600 focus:outline-none focus:bg-red-500 focus:ring focus:ring-indigo-300 focus:ring-opacity-50">
+                class="px-3 py-2 text-sm tracking-wide text-white capitalize transition-colors duration-200 transform bg-red-500 rounded-md hover:bg-red-600 focus:outline-hidden focus:bg-red-500 focus:ring-3 focus:ring-indigo-300 focus:ring-opacity-50">
                 Cancelar
             </button>
         </div>
@@ -43,7 +43,7 @@
                             wire:click="active_cart('{{$cart->id}}')"
                             />
                             <label for="{{$cart->name}}"
-                                class="relative flex h-6 w-11 cursor-pointer items-center rounded-full bg-gray-400 px-0.5 outline-gray-400 transition-colors before:h-5 before:w-5 before:rounded-full before:bg-white before:shadow before:transition-transform before:duration-300 peer-checked:bg-green-500 peer-checked:before:translate-x-full peer-focus-visible:outline peer-focus-visible:outline-offset-2 peer-focus-visible:outline-gray-400 peer-checked:peer-focus-visible:outline-green-500"
+                                class="relative flex h-6 w-11 cursor-pointer items-center rounded-full bg-gray-400 px-0.5 outline-gray-400 transition-colors before:h-5 before:w-5 before:rounded-full before:bg-white before:shadow-sm before:transition-transform before:duration-300 peer-checked:bg-green-500 peer-checked:before:translate-x-full peer-focus-visible:outline-solid peer-focus-visible:outline-offset-2 peer-focus-visible:outline-gray-400 peer-focus-visible:peer-checked:outline-green-500"
                                 for="{{$cart->name}}">
                             </label>
                         </div>
@@ -71,7 +71,7 @@
             <hr class="my-3">
             <div class="flex justify-center mt-4">
                 <a href="{{route('carts.show', ['cart'=> $cart->id])}}" wire:navigate
-                    class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">
+                    class="px-4 py-2 font-bold text-white bg-blue-500 rounded-sm hover:bg-blue-700">
                     Mirar Carrito
                 </a>
             </div>

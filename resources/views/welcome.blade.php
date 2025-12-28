@@ -28,18 +28,18 @@
                 <nav class="z-10 flex flex-wrap gap-2 p-6 text-right sm:fixed sm:top-0 sm:right-0">   
                     @auth
                         <a href="{{ url('tienda') }}" class="relative">
-                            <span class="absolute top-0 left-0 w-full h-full mt-1 ml-1 bg-gray-700 rounded"></span>
-                            <span class="relative inline-block w-full h-full px-3 py-1 text-base font-bold text-white transition duration-100 bg-black border-2 border-black rounded fold-bold hover:bg-gray-900 hover:text-yellow-500 dark:bg-black">{{__('Tienda')}}</span>
+                            <span class="absolute top-0 left-0 w-full h-full mt-1 ml-1 bg-gray-700 rounded-sm"></span>
+                            <span class="relative inline-block w-full h-full px-3 py-1 text-base font-bold text-white transition duration-100 bg-black border-2 border-black rounded-sm fold-bold hover:bg-gray-900 hover:text-yellow-500 dark:bg-black">{{__('Tienda')}}</span>
                         </a>
                     @else
                         <a href="{{ route('login') }}" class="relative ">
-                            <span class="absolute top-0 left-0 w-full h-full mt-1 ml-1 bg-gray-700 rounded "></span>
-                            <span class="relative inline-block w-full h-full px-3 py-1 text-base font-bold text-white transition duration-100 bg-black border-2 border-black rounded fold-bold hover:bg-gray-900 hover:text-yellow-500 dark:bg-black">{{__('Login')}}</span>
+                            <span class="absolute top-0 left-0 w-full h-full mt-1 ml-1 bg-gray-700 rounded-sm "></span>
+                            <span class="relative inline-block w-full h-full px-3 py-1 text-base font-bold text-white transition duration-100 bg-black border-2 border-black rounded-sm fold-bold hover:bg-gray-900 hover:text-yellow-500 dark:bg-black">{{__('Login')}}</span>
                         </a>
                         @if (Route::has('register'))
                             <a href="{{ route('register') }}" class="relative">
-                                <span class="absolute top-0 left-0 w-full h-full mt-1 ml-1 bg-gray-700 rounded"></span>
-                                <span class="relative inline-block w-full h-full px-3 py-1 text-base font-bold text-white transition duration-100 bg-black border-2 border-black rounded fold-bold hover:bg-gray-900 hover:text-yellow-500 dark:bg-black">{{__('Register')}}</span>
+                                <span class="absolute top-0 left-0 w-full h-full mt-1 ml-1 bg-gray-700 rounded-sm"></span>
+                                <span class="relative inline-block w-full h-full px-3 py-1 text-base font-bold text-white transition duration-100 bg-black border-2 border-black rounded-sm fold-bold hover:bg-gray-900 hover:text-yellow-500 dark:bg-black">{{__('Register')}}</span>
                             </a>
                         @endif
                     @endauth
@@ -64,7 +64,7 @@
                             <span class="text-red-600 ">Supermercado</span> virtual lleno de productos frescos, ofertas exclusivas y sin salir de casa. Explora nuestro extenso catálogo, elige entre una amplia gama de productos y disfruta de la facilidad de recibir tus compras directamente en tu puerta.
                         </p>
                         <a href="{{route('products.index')}}"
-                        class="flex flex-row items-center justify-center w-full px-4 py-4 mb-4 font-bold leading-6 text-yellow-500 capitalize duration-100 transform bg-red-700 rounded-sm shadow cursor-pointer text-md focus:ring-4 focus:ring-red-500 focus:ring-opacity-50 focus:outline-none sm:mb-0 sm:w-auto hover:shadow-lg hover:-translate-y-1 hover:animate-pulse">
+                        class="flex flex-row items-center justify-center w-full px-4 py-4 mb-4 font-bold leading-6 text-yellow-500 capitalize duration-100 transform bg-red-700 rounded-xs shadow-sm cursor-pointer text-md focus:ring-4 focus:ring-red-500 focus:ring-opacity-50 focus:outline-hidden sm:mb-0 sm:w-auto hover:shadow-lg hover:-translate-y-1 hover:animate-pulse">
                         TIENDA
                         <span class="ml-4">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F1C40F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 9v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V9"/><path d="M9 22V12h6v10M2 10.6L12 2l10 8.6"/></svg>
@@ -74,7 +74,7 @@
                 </header>
             </div>
         </div>
-        <img src="{{asset('srcs/landing.jpeg')}}" alt="Leafs" class="absolute sm:relative  z-[-10] opacity-70 sm:opacity-100 object-cover w-full h-48 sm:h-screen sm:w-4/12">
+        <img src="{{asset('srcs/landing.jpeg')}}" alt="Leafs" class="absolute sm:relative  -z-10 opacity-70 sm:opacity-100 object-cover w-full h-48 sm:h-screen sm:w-4/12">
     </section>
 
 
@@ -84,7 +84,7 @@
 
             <div class="relative flex items-end justify-start w-full text-left bg-center bg-cover shadow-2xl shadow-red-700"
                 style="height: 450px; background-image:url({{asset('srcs/img1.webp')}});">
-                <div class="absolute top-0 bottom-0 left-0 right-0 mt-20 bg-gradient-to-b from-transparent to-gray-900">
+                <div class="absolute top-0 bottom-0 left-0 right-0 mt-20 bg-linear-to-b from-transparent to-gray-900">
                 </div>
                 <div class="absolute top-0 left-0 right-0 flex items-center justify-between mx-5 mt-2">
                     <a href="{{route('products.index', ['section'=> 'Bebidas'])}}"
@@ -101,7 +101,7 @@
 
             <div class="relative flex items-end justify-start w-full text-left bg-center bg-cover shadow-2xl shadow-yellow-700"
                 style="height: 450px; background-image:url({{asset('srcs/img2.webp')}});">
-                <div class="absolute top-0 bottom-0 left-0 right-0 mt-20 bg-gradient-to-b from-transparent to-gray-900">
+                <div class="absolute top-0 bottom-0 left-0 right-0 mt-20 bg-linear-to-b from-transparent to-gray-900">
                 </div>
                 <div class="absolute top-0 left-0 right-0 flex items-center justify-between mx-5 mt-2">
                     <a href="{{route('products.index', ['section'=> 'Frutas y Verduras'])}}"
@@ -119,7 +119,7 @@
 
             <div class="relative flex items-end justify-start w-full text-left bg-center bg-cover shadow-2xl shadow-cyan-700"
                 style="height: 450px; background-image:url({{asset('srcs/img4.webp')}});">
-                <div class="absolute top-0 bottom-0 left-0 right-0 mt-20 bg-gradient-to-b from-transparent to-gray-900">
+                <div class="absolute top-0 bottom-0 left-0 right-0 mt-20 bg-linear-to-b from-transparent to-gray-900">
                 </div>
                 <div class="absolute top-0 left-0 right-0 flex items-center justify-between mx-5 mt-2">
                     <a href="{{route('products.index')}}"
@@ -143,19 +143,19 @@
         <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
             <h2 class="mb-8 text-4xl font-bold">Testimonios</h2>
             <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-                <div class="p-8 bg-white rounded-lg shadow">
+                <div class="p-8 bg-white rounded-lg shadow-sm">
                     <p class="mb-4 text-gray-700">
                         "¡Comprana ha transformado la forma en que hago mis compras! La frescura de los productos y la rapidez de la entrega son increíbles. ¡Ahora puedo dedicar más tiempo a lo que realmente importa!"
                     </p>
                     <p class="font-medium text-gray-700">- María G.</p>
                 </div>
-                <div class="p-8 bg-white rounded-lg shadow">
+                <div class="p-8 bg-white rounded-lg shadow-sm">
                     <p class="mb-4 text-gray-700">
                         "Siempre busco las ofertas de Comprana. Los precios son geniales, y la calidad de los productos es insuperable. ¡Una experiencia de compra en línea que realmente vale la pena!"
                     </p>
                     <p class="font-medium text-gray-700">- Juan R.</p>
                 </div>
-                <div class="p-8 bg-white rounded-lg shadow">
+                <div class="p-8 bg-white rounded-lg shadow-sm">
                     <p class="mb-4 text-gray-700">
                         "Comprana ha simplificado mi vida. No tengo que preocuparme por cargar bolsas pesadas ni hacer filas. Todo llega directamente a mi puerta. ¡Tan conveniente y confiable!"
                     </p>

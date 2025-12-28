@@ -3,7 +3,7 @@
     <div class="flex" x-data="{query: '{{request('search'), '' }}' }" >
         <input @keyup.enter="$dispatch('search', {value: query})"
             type="text" placeholder="Buscar Producto" x-model="query"
-            class="w-full h-10 px-3 border-2 rounded-l md:w-80 border-sky-500 focus:outline-none focus:border-sky-500" >
+            class="w-full h-10 px-3 border-2 rounded-l md:w-80 border-sky-500 focus:outline-hidden focus:border-sky-500" >
         <button x-on:click="$dispatch('search', {value: query})"
             class="px-2 py-0 text-white rounded-r bg-sky-500 md:px-3 md:py-1">
             {{__('Buscar')}}
