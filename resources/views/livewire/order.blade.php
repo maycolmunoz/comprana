@@ -45,7 +45,7 @@
 
         {{-- Right  --}}
         <div class="shrink-0 order-1 w-full mb-8 lg:w-1/2 lg:mb-0 lg:order-2">
-                <img src="{{ asset('srcs/DALL·E 2024-02-28 15.36.51 - informacion de contacto estilo supermercado.png') }}" alt="contactos" class="w-1/2 mx-auto rounded-md">
+                <img src="{{ asset('srcs/contact.png') }}" alt="contactos" class="w-1/2 mx-auto rounded-md">
         </div>
 
     </div>

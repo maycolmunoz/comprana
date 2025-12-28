@@ -2,14 +2,12 @@
 @theme inline {
     /* base color variables */
 
-    /* --color-neutral-900: var(--color-neutral-950); */
-
-    /* primary color varibles */
-    --color-primary: var(--color-neutral-800);
-    --color-primary-content: var(--color-neutral-800);
-    --color-primary-fg: var(--color-white);
+    /* primary color variables */
+    --color-primary: var(--color-yellow-500);
+    --color-primary-content: var(--color-yellow-900);
+    --color-primary-fg: var(--color-neutral-900);
 
     /* radius variables */
-    --radius-field: 0.25rem;
-    --radius-box: 0.5rem;
+    --radius-field: 0.375rem;
+    --radius-box: 0.75rem;
 }

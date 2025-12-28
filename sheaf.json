@@ -6,6 +6,18 @@
         },
         "icon": {
             "installationTime": 1766886830
+        },
+        "card": {
+            "installationTime": 1766939643
+        },
+        "badge": {
+            "installationTime": 1766942403
+        },
+        "alerts": {
+            "installationTime": 1766942988
+        },
+        "brand": {
+            "installationTime": 1766946837
         }
     }
 }

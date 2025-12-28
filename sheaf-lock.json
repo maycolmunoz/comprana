@@ -3,7 +3,12 @@
     "helpers": [],
     "internalDependencies": {
         "icon": [
-            "button"
+            "button",
+            "badge",
+            "alerts"
+        ],
+        "button": [
+            "badge"
         ]
     }
 }

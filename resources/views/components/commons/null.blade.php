@@ -1,3 +1,3 @@
-<div class="py-5 my-20 text-base text-center text-blue-700 bg-blue-100 rounded-lg " role="alert">
-    Sin Elementos
-</div>
+<x-ui.alerts class="py-5 my-20">
+    <x-slot:heading>Sin Elementos</x-slot:heading>
+</x-ui.alerts>

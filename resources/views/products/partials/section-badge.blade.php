@@ -1,4 +1,3 @@
-<span
-class="shrink-0 rounded-full bg-yellow-500 px-2 font-mono text-md font-medium tracking-tight text-white">
+<x-ui.badge pill color="orange" size="sm">
     {{request('section') != '' ? request('section') : $product->section->name }}
-</span>
+</x-ui.badge>
