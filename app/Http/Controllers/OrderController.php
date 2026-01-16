@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\OrderStatus;
 use App\Models\Cart;
 use App\Models\Order;
 use Illuminate\Http\Request;
@@ -17,7 +18,7 @@ class OrderController extends Controller
     public function index()
     {
         return view('orders.index', [
-            'orderStatus' => Order::STATUS,
+            'orderStatus' => array_column(OrderStatus::cases(), 'value'),
         ]);
     }
 
@@ -66,7 +67,6 @@ class OrderController extends Controller
             }
         }
         abort(404);
-
     }
 
     public function orderComplete(Order $order, Request $request)

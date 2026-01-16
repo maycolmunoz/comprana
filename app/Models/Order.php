@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\OrderStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -22,24 +23,19 @@ class Order extends Model
         'payment_id',
     ];
 
-    const STATUS = ['Procesando', 'En Camino', 'Entregado', 'No Entregado'];
-
     protected $casts = [
+        'status' => OrderStatus::class,
         'total' => 'int',
-        // 'images' => 'array',
     ];
 
     /**
      * Get the user that owns the Order
      */
-    public function user(): BelongsTo
+    public function customer(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'customer_id', 'id');
     }
 
-    /**
-     * Get the dispatcher that owns the Order
-     */
     public function dispatcher(): BelongsTo
     {
         return $this->belongsTo(User::class, 'dispatcher_id', 'id');

@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Order;
+use App\Enums\OrderStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,19 +14,29 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->unsignedBigInteger('dispatcher_id')->nullable();
-            $table->unsignedBigInteger('delivery_id')->nullable();
-            $table->enum('status', Order::STATUS)->default('Procesando');
-            $table->decimal('total', 15)->nullable();
+            $table->enum(
+                'status',
+                array_column(OrderStatus::cases(), 'value')
+            )->default(OrderStatus::Processing->value);
+            $table->decimal('total', 14, 2)->nullable();
             $table->string('invoice')->nullable();
             $table->string('address');
             $table->string('phone', 10);
             $table->integer('payment_id')->nullable();
             $table->string('payment_status')->nullable();
 
-            $table->foreign('dispatcher_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreign('delivery_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('customer_id')
+                ->constrained('users')
+                ->cascadeOnDelete();
+
+            $table->foreignId('dispatcher_id')
+                ->constrained('users')
+                ->cascadeOnDelete();
+
+            $table->foreignId('delivery_id')
+                ->constrained('users')
+                ->cascadeOnDelete();
+
             $table->timestamps();
         });
     }

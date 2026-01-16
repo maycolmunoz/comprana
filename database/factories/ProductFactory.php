@@ -22,6 +22,7 @@ class ProductFactory extends Factory
             'products/3.png',
             'products/4.png',
         ];
+        shuffle($images);
 
         return [
             'name' => fake()->sentence(3),
