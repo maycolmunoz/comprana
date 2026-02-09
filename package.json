@@ -8,8 +8,10 @@
     "devDependencies": {
         "@tailwindcss/forms": "^0.5.2",
         "@tailwindcss/postcss": "^4.1.18",
+        "@tailwindcss/vite": "^4.1.18",
         "alpinejs": "^3.4.2",
         "axios": "^1.6.4",
+        "daisyui": "^5.5.18",
         "laravel-vite-plugin": "^2.0.1",
         "postcss": "^8.4.31",
         "tailwindcss": "^4.1.18",
