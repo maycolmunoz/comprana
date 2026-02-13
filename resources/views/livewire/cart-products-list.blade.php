@@ -1,4 +1,5 @@
 
+
 <div x-data="{pay: 0}"
 class="pt-5 bg-gray-100 ">
     <h1 class="mb-5 text-2xl font-bold text-center">Productos del carrito: {{$cart->name}}</h1>

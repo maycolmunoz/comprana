@@ -9,6 +9,8 @@ use Livewire\Component;
 
 class CartList extends Component
 {
+    public bool $myModal1 = false;
+
     public $carts;
 
     public $user_id;

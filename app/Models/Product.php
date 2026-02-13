@@ -36,4 +36,9 @@ class Product extends Model
     {
         $query->where('name', 'LIKE', "%{$search}%");
     }
+
+    public function getInStockAttribute(): bool
+    {
+        return $this->stock > 0;
+    }
 }
