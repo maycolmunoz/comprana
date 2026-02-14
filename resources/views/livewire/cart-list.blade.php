@@ -2,13 +2,13 @@
 	class="flex flex-wrap items-center justify-center gap-4 px-4 py-5 justify">
 
 
-	<x-mary-modal wire:model="myModal1" title="Hey" class="backdrop-blur">
+	{{-- <x-mary-modal wire:model="myModal1" title="Hey" class="backdrop-blur">
 		Press `ESC`, click outside or click `CANCEL` to close.
 
 		<x-slot:actions>
 			<x-mary-button label="Cancel" @click="$wire.myModal1 = false" />
 		</x-slot:actions>
-	</x-mary-modal>
+	</x-mary-modal> --}}
 
 
 	{{-- <form x-cloak x-show="show" wire:submit.prevent='edit_cart()'

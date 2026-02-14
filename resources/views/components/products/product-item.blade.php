@@ -1,28 +1,72 @@
-<x-mary-card :title="$product->name">
-	<x-slot:figure>
-		<img src="{{ asset("/storage/{$product->images[0]}") }}" />
+@php
+	$inStock = $product->inStock;
+	$sectionName = request('section') != '' ? request('section') : $product->section->name ?? 'General';
+@endphp
+
+<x-mary-card
+	class="group overflow-hidden bg-base-100 border border-base-content/5 shadow-xl shadow-red-900/5 hover:shadow-2xl hover:shadow-red-900/10 transition-all duration-500 rounded-[2rem] hover:-translate-y-2">
+	<x-slot:figure class="relative overflow-hidden aspect-square">
+		{{-- Product Image with Hover Zoom --}}
+		<img src="{{ asset("/storage/{$product->images[0]}") }}"
+			class="object-cover w-full h-full transition-transform duration-700 group-hover:scale-110"
+			alt="{{ $product->name }}" />
+
+		{{-- Section Badge overlay --}}
+		<div class="absolute top-4 left-4 z-10 animate__animated animate__fadeIn">
+			<x-mary-badge
+				class="bg-white/70 backdrop-blur-md border border-white/20 text-red-600 font-bold text-[10px] uppercase tracking-widest px-3 py-1.5 shadow-sm rounded-full"
+				:value="$sectionName" />
+		</div>
+
+		{{-- Out of Stock Overlay --}}
+		@if (!$inStock)
+			<div
+				class="absolute inset-0 bg-white/60 backdrop-blur-[2px] flex items-center justify-center rotate-[-15deg] z-20 pointer-events-none">
+				<span
+					class="text-2xl font-black text-red-600 border-4 border-red-600 px-6 py-2 tracking-tighter uppercase opacity-80">
+					Agotado
+				</span>
+			</div>
+		@endif
 	</x-slot:figure>
 
-	<x-mary-badge class="badge-primary badge-soft" :value="request('section') != '' ? request('section') : $product->section->name" />
-	<p>{{ $product->price }}</p>
-	@if (!$product->inStock)
-		<p class=" text-red-500">AGOTADO</p>
-	@endif
+	{{-- Content --}}
+	<div class="space-y-3 px-1">
+		<h3
+			class="font-black text-lg lg:text-xl leading-tight tracking-tight uppercase group-hover:text-red-600 transition-colors">
+			{{ $product->name }}
+		</h3>
 
-	<x-slot:menu>
-		@if ($product->inStock)
-			@guest
-				<x-mary-button :link="route('login')" icon="s-shopping-cart" class="btn-primary btn-circle" />
-			@else
-				<x-mary-button icon="s-shopping-cart" class="btn-primary btn-circle" x-data="{
+		<div class="flex items-center justify-between gap-2">
+			<div class="flex flex-col">
+				<span class="text-[10px] font-bold uppercase opacity-30 tracking-widest">Precio</span>
+				<span class="text-2xl font-black text-base-content italic tracking-tighter">
+					<span class="text-red-600 font-normal mr-0.5">$</span>{{ number_format($product->price, 0, ',', '.') }}
+				</span>
+			</div>
+
+			<div class="flex items-center gap-1.5">
+				@if ($inStock)
+					@guest
+						<x-mary-button :link="route('login')" icon="o-shopping-cart"
+							class="btn-primary btn-circle shadow-lg shadow-primary/20 hover:scale-110" />
+					@else
+						<x-mary-button icon="o-shopping-cart"
+							class="btn-primary btn-circle shadow-lg shadow-primary/20 hover:scale-110 active:scale-95 transition-all"
+							x-data="{
 	    realizarAccion(id) {
 	        $dispatch('slider');
 	        $dispatch('details', { 'id': id })
 	        $dispatch('reset-count')
 	    }
-	}"
-					@click="realizarAccion('{{ $product->id }}')" />
-			@endguest
-		@endif
-	</x-slot:menu>
+	}" @click="realizarAccion('{{ $product->id }}')" />
+					@endguest
+				@else
+					<div class="p-3 bg-base-content/5 rounded-full opacity-30">
+						<x-mary-icon name="o-no-symbol" class="w-6 h-6" />
+					</div>
+				@endif
+			</div>
+		</div>
+	</div>
 </x-mary-card>

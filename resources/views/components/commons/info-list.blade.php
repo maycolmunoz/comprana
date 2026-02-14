@@ -1,38 +1,38 @@
 @props([
-'title' => '',
-'list' => []
+    'title' => '',
+    'list' => [],
 ])
-<header class="max-w-2xl mx-auto my-5 divide-y bg-sky-100  shadow-sm shadow-blue-600 rounded-xl">
-    <details class="group">
-        {{-- button open --}}
-        <summary class="flex items-center gap-3 px-4 py-3 font-medium marker:content-none hover:cursor-pointer">
-            <svg class="w-5 h-5 text-gray-500 transition group-open:rotate-90" xmlns="http://www.w3.org/2000/svg"
-                width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                <path fill-rule="evenodd"
-                    d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z">
-                </path>
-            </svg>
-            <span>{{$title}}</span>
-        </summary>
 
-        {{-- info --}}
-        <article class="px-4 pb-4">
-            <ul class=" mt-2 space-y-3 font-medium">
-                @foreach ($list as $li)
-                <li class="flex items-start mt-5 lg:col-span-1 lg:mt-0">
-                    <div class="shrink-0">
-                        <svg class="w-5 h-5 text-indigo-600" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd"
-                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                    </div>
-                    <p class="ml-3 leading-5 text-gray-600">
-                        {{$li}}
-                    </p>
-                </li>
-                @endforeach
-            </ul>
-        </article>
-    </details>
-</header>
+<div
+	class="max-w-2xl mx-auto my-8 overflow-hidden bg-base-100 border border-base-content/5 shadow-xl shadow-red-900/5 rounded-3xl animate__animated animate__fadeIn">
+	<details class="group">
+		{{-- button open --}}
+		<summary
+			class="flex items-center justify-between px-6 py-4 font-bold list-none transition-colors cursor-pointer outline-none">
+			<div class="flex items-center gap-4">
+				<div
+					class="w-8 h-8 rounded-xl bg-red-600/10 flex items-center justify-center text-red-600 group-open:bg-red-600 group-open:text-white transition-all duration-300">
+					<x-mary-icon name="o-information-circle" class="w-5 h-5" />
+				</div>
+				<span
+					class="text-sm uppercase tracking-widest text-base-content/80 group-open:text-red-700 transition-colors">{{ $title }}</span>
+			</div>
+
+			<x-mary-icon name="o-chevron-right"
+				class="w-4 h-4 text-base-content/30 transition-transform duration-300 group-open:rotate-90" />
+		</summary>
+
+		{{-- info --}}
+		<article class="px-8 pb-6 animate__animated animate__fadeInDown animate__faster">
+			<div class="h-px w-full bg-linear-to-r from-transparent via-base-content/5 to-transparent mb-6"></div>
+
+			<ul class="space-y-4">
+				@foreach ($list as $li)
+					<li class="flex items-start gap-4 group/item">
+						<x-mary-icon name="o-check" class="w-3 h-3" :label="$li" />
+					</li>
+				@endforeach
+			</ul>
+		</article>
+	</details>
+</div>
