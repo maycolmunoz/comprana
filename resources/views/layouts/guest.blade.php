@@ -16,9 +16,6 @@
 	<style>
 		body {
 			font-family: 'Outfit', sans-serif;
-			background: radial-gradient(circle at 100% 100%, rgba(185, 28, 28, 0.05) 0%, transparent 50%),
-				radial-gradient(circle at 0% 0%, rgba(185, 28, 28, 0.05) 0%, transparent 50%),
-				#f3f4f6;
 		}
 	</style>
 
@@ -26,7 +23,7 @@
 	@vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="antialiased text-base-content">
+<body class="antialiased text-base-content bg-base-200">
 	<div class="min-h-screen flex flex-col items-center justify-center p-6 relative overflow-hidden">
 		{{-- Background Decorative Elements --}}
 		<div class="absolute top-0 left-0 w-full h-full -z-10 opacity-30">
@@ -50,9 +47,9 @@
 		{{-- Card Container --}}
 		<div class="w-full sm:max-w-md animate__animated animate__fadeInUp animate__faster">
 			<div
-				class="bg-base-100/80 backdrop-blur-2xl px-8 py-10 shadow-2xl shadow-red-900/5 border border-white/50 rounded-[2.5rem] relative overflow-hidden">
+				class="bg-base-100/90 backdrop-blur-2xl px-8 py-10 shadow-2xl shadow-red-900/5 border border-white/50 rounded-[2.5rem] relative overflow-hidden">
 				{{-- Subtle glass shine --}}
-				<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-red-600/20 to-transparent"></div>
+				<div class="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-transparent via-red-600/20 to-transparent"></div>
 
 				<div class="relative z-10">
 					{{ $slot }}

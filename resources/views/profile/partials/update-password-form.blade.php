@@ -1,48 +1,52 @@
 <section>
-    <header>
-        <h2 class="text-lg font-medium text-gray-900">
-            {{ __('Update Password') }}
-        </h2>
+	<header class="mb-8">
+		<h2 class="text-2xl font-black uppercase tracking-tighter text-base-content">
+			{{ __('Cambiar Contraseña') }}
+		</h2>
 
-        <p class="mt-1 text-sm text-gray-600">
-            {{ __('Ensure your account is using a long, random password to stay secure.') }}
-        </p>
-    </header>
+		<p class="text-[10px] font-bold uppercase tracking-widest text-base-content/40 mt-1">
+			{{ __('Asegúrate de usar una contraseña larga y aleatoria para mantener tu cuenta segura.') }}
+		</p>
+	</header>
 
-    <form method="post" action="{{ route('password.update') }}" class="mt-6 space-y-6">
-        @csrf
-        @method('put')
+	<form method="post" action="{{ route('password.update') }}" class="mt-6 space-y-6">
+		@csrf
+		@method('put')
 
-        <div>
-            <x-input-label for="update_password_current_password" :value="__('Current Password')" />
-            <x-text-input id="update_password_current_password" name="current_password" type="password" class="mt-1 block w-full" autocomplete="current-password" />
-            <x-input-error :messages="$errors->updatePassword->get('current_password')" class="mt-2" />
-        </div>
+		{{-- Current Password --}}
+		<div>
+			<x-mary-input label="{{ __('Contraseña Actual') }}" name="current_password" type="password" icon="o-lock-closed"
+				autocomplete="current-password" class="bg-base-content/5 border-none focus:ring-red-600/20" />
+			<x-input-error :messages="$errors->updatePassword->get('current_password')" class="" />
+		</div>
 
-        <div>
-            <x-input-label for="update_password_password" :value="__('New Password')" />
-            <x-text-input id="update_password_password" name="password" type="password" class="mt-1 block w-full" autocomplete="new-password" />
-            <x-input-error :messages="$errors->updatePassword->get('password')" class="mt-2" />
-        </div>
+		<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+			{{-- New Password --}}
+			<div>
+				<x-mary-input label="{{ __('Nueva Contraseña') }}" name="password" type="password" icon="o-key"
+					autocomplete="new-password" class="bg-base-content/5 border-none focus:ring-red-600/20" />
+				<x-input-error :messages="$errors->updatePassword->get('password')" class="" />
+			</div>
 
-        <div>
-            <x-input-label for="update_password_password_confirmation" :value="__('Confirm Password')" />
-            <x-text-input id="update_password_password_confirmation" name="password_confirmation" type="password" class="mt-1 block w-full" autocomplete="new-password" />
-            <x-input-error :messages="$errors->updatePassword->get('password_confirmation')" class="mt-2" />
-        </div>
+			{{-- Confirm Password --}}
+			<div>
+				<x-mary-input label="{{ __('Confirmar Nueva Contraseña') }}" name="password_confirmation" type="password"
+					icon="o-check-badge" autocomplete="new-password" class="bg-base-content/5 border-none focus:ring-red-600/20" />
+				<x-input-error :messages="$errors->updatePassword->get('password_confirmation')" class="" />
+			</div>
+		</div>
 
-        <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
+		<div class="flex items-center gap-4 pt-4 border-t border-base-content/5">
+			<x-mary-button type="submit" label="{{ __('Actualizar Contraseña') }}" icon="o-shield-check"
+				class="btn-primary px-8 font-black text-xs uppercase tracking-widest shadow-xl shadow-red-600/20 rounded-2xl" />
 
-            @if (session('status') === 'password-updated')
-                <p
-                    x-data="{ show: true }"
-                    x-show="show"
-                    x-transition
-                    x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-gray-600"
-                >{{ __('Saved.') }}</p>
-            @endif
-        </div>
-    </form>
+			@if (session('status') === 'password-updated')
+				<div x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 3000)"
+					class="flex items-center gap-2 text-green-600 animate__animated animate__fadeIn">
+					<x-mary-icon name="o-check-circle" class="w-4 h-4" />
+					<span class="text-[10px] font-black uppercase tracking-widest">{{ __('Guardado') }}</span>
+				</div>
+			@endif
+		</div>
+	</form>
 </section>

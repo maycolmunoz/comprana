@@ -1,55 +1,56 @@
 <section class="space-y-6">
-    <header>
-        <h2 class="text-lg font-medium text-gray-900">
-            {{ __('Delete Account') }}
-        </h2>
+	<header>
+		<h2 class="text-2xl font-black uppercase tracking-tighter text-red-600">
+			{{ __('Eliminar Cuenta') }}
+		</h2>
 
-        <p class="mt-1 text-sm text-gray-600">
-            {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.') }}
-        </p>
-    </header>
+		<p class="text-[10px] font-bold uppercase tracking-widest text-base-content/40 mt-1 leading-relaxed">
+			{{ __('Una vez que se elimine tu cuenta, todos sus recursos y datos se borrarán permanentemente. Por favor, descarga cualquier dato que desees conservar antes de proceder.') }}
+		</p>
+	</header>
 
-    <x-danger-button
-        x-data=""
-        x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')"
-    >{{ __('Delete Account') }}</x-danger-button>
+	<div class="pt-4">
+		<x-mary-button label="{{ __('Eliminar mi Cuenta') }}" icon="o-trash"
+			class="btn-error btn-outline font-black text-xs uppercase tracking-widest rounded-2xl px-8" x-data=""
+			x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')" />
+	</div>
 
-    <x-modal name="confirm-user-deletion" :show="$errors->userDeletion->isNotEmpty()" focusable>
-        <form method="post" action="{{ route('profile.destroy') }}" class="p-6">
-            @csrf
-            @method('delete')
+	<x-modal name="confirm-user-deletion" :show="$errors->userDeletion->isNotEmpty()" focusable>
+		<div class="p-8 bg-base-100 rounded-[2rem] border border-base-content/5 shadow-2xl relative overflow-hidden">
+			{{-- Warning Accent --}}
+			<div class="absolute top-0 left-0 w-full h-1.5 bg-red-600"></div>
 
-            <h2 class="text-lg font-medium text-gray-900">
-                {{ __('Are you sure you want to delete your account?') }}
-            </h2>
+			<form method="post" action="{{ route('profile.destroy') }}">
+				@csrf
+				@method('delete')
 
-            <p class="mt-1 text-sm text-gray-600">
-                {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.') }}
-            </p>
+				<div class="mb-8">
+					<h3 class="text-2xl font-black tracking-tighter uppercase text-base-content">
+						{{ __('¿Estás seguro de eliminar tu cuenta?') }}
+					</h3>
 
-            <div class="mt-6">
-                <x-input-label for="password" value="{{ __('Password') }}" class="sr-only" />
+					<p class="text-[10px] font-bold uppercase tracking-widest text-base-content/40 mt-2 leading-relaxed">
+						{{ __('Esta acción es permanente. Por favor, introduce tu contraseña para confirmar que deseas eliminar tu cuenta de forma definitiva.') }}
+					</p>
+				</div>
 
-                <x-text-input
-                    id="password"
-                    name="password"
-                    type="password"
-                    class="mt-1 block w-3/4"
-                    placeholder="{{ __('Password') }}"
-                />
+				<div class="space-y-6">
+					<div>
+						<x-mary-input label="{{ __('Tu Contraseña') }}" name="password" type="password" icon="o-lock-closed"
+							placeholder="{{ __('Ingresa tu contraseña para confirmar') }}"
+							class="bg-base-content/5 border-none focus:ring-red-600/20" />
+						<x-input-error :messages="$errors->userDeletion->get('password')" class="" />
+					</div>
+				</div>
 
-                <x-input-error :messages="$errors->userDeletion->get('password')" class="mt-2" />
-            </div>
+				<div class="mt-10 flex items-center justify-end gap-3 pt-6 border-t border-base-content/5">
+					<x-mary-button label="{{ __('Cancelar') }}" x-on:click="$dispatch('close')"
+						class="btn-ghost font-black text-xs uppercase tracking-widest rounded-xl" />
 
-            <div class="mt-6 flex justify-end">
-                <x-secondary-button x-on:click="$dispatch('close')">
-                    {{ __('Cancel') }}
-                </x-secondary-button>
-
-                <x-danger-button class="ms-3">
-                    {{ __('Delete Account') }}
-                </x-danger-button>
-            </div>
-        </form>
-    </x-modal>
+					<x-mary-button type="submit" label="{{ __('Sí, Eliminar Definitivamente') }}" icon="o-exclamation-triangle"
+						class="btn-error font-black text-xs uppercase tracking-widest shadow-xl shadow-red-600/20 rounded-xl px-6" />
+				</div>
+			</form>
+		</div>
+	</x-modal>
 </section>

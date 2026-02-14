@@ -1,39 +1,34 @@
 <x-guest-layout>
-    <form method="POST" action="{{ route('password.store') }}">
-        @csrf
+	<div class="mb-8 text-center">
+		<h2 class="text-2xl font-black uppercase tracking-tighter">{{ __('Nueva contraseña') }}</h2>
+		<p class="text-[10px] font-bold uppercase tracking-widest text-base-content/40 mt-1">
+			{{ __('Establece tus credenciales premium') }}
+		</p>
+	</div>
 
-        <!-- Password Reset Token -->
-        <input type="hidden" name="token" value="{{ $request->route('token') }}">
+	<form method="POST" action="{{ route('password.store') }}" class="space-y-6">
+		@csrf
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email', $request->email)" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
+		<!-- Password Reset Token -->
+		<input type="hidden" name="token" value="{{ $request->route('token') }}">
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-            <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
+		<x-mary-input label="{{ __('Email') }}" name="email" type="email" icon="o-envelope"
+			value="{{ old('email', $request->email) }}" required autocomplete="username"
+			class="bg-base-content/5 border-none focus:ring-red-600/20" />
+		<x-input-error :messages="$errors->get('email')" class="mt-2" />
 
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
+		<x-mary-input label="{{ __('Nueva Contraseña') }}" name="password" type="password" icon="o-key" required autofocus
+			autocomplete="new-password" class="bg-base-content/5 border-none focus:ring-red-600/20" />
+		<x-input-error :messages="$errors->get('password')" class="mt-2" />
 
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                                type="password"
-                                name="password_confirmation" required autocomplete="new-password" />
+		<x-mary-input label="{{ __('Confirmar Contraseña') }}" name="password_confirmation" type="password"
+			icon="o-check-badge" required autocomplete="new-password"
+			class="bg-base-content/5 border-none focus:ring-red-600/20" />
+		<x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
 
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                {{ __('Reset Password') }}
-            </x-primary-button>
-        </div>
-    </form>
+		<div class="pt-4">
+			<x-mary-button type="submit" label="{{ __('Restablecer Contraseña') }}"
+				class="btn-primary w-full font-black text-sm uppercase tracking-widest shadow-xl shadow-red-600/20 rounded-2xl" />
+		</div>
+	</form>
 </x-guest-layout>

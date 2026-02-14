@@ -47,7 +47,7 @@
 	<!-- Navbar -->
 	<nav class="absolute top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-6 lg:px-12">
 		<div class="animate__animated animate__fadeInDown">
-			<x-ui.brand href="/" :logo="asset('srcs/favicon.ico')" alt="comprana" class="!justify-start" />
+			<x-ui.brand href="/" :logo="asset('srcs/favicon.ico')" alt="comprana" class="justify-start!" />
 		</div>
 
 		<div class="flex items-center gap-2 lg:gap-4 animate__animated animate__fadeInDown">
