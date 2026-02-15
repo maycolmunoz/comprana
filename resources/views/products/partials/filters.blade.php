@@ -1,6 +1,6 @@
 <section class="flex flex-col md:flex-row items-center gap-6 mb-10 animate__animated animate__fadeIn">
 	{{-- -----Search Box---- --}}
-	<div class="w-full md:w-auto flex-grow max-w-md" x-data="{ query: '{{ request('search' ?? '') }}' }">
+	<div class="w-full md:w-auto grow max-w-md" x-data="{ query: '{{ request('search' ?? '') }}' }">
 		<div class="relative group">
 			<div
 				class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-base-content/30 group-focus-within:text-red-600 transition-colors">

@@ -23,6 +23,7 @@ class CartList extends Component
     public function mount()
     {
         $this->user_id = Auth::user()->id;
+        $this->myModal1 = false;
     }
 
     public function active_cart(string $cart_id)
@@ -45,7 +46,7 @@ class CartList extends Component
         Cart::where('id', $this->cart_id)->update(['name' => $this->name]);
 
         $this->dispatch('notification', 'Se edito el carrito');
-        $this->dispatch('close-edit');
+        $this->myModal1 = false;
         $this->reset('name');
     }
 

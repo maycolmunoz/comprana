@@ -19,7 +19,7 @@ class OrderList extends Component
     #[Computed()]
     public function orders()
     {
-        $query = Order::whereNotNull('payment_id')->where('user_id', Auth::user()->id)->orderBy('id', 'desc');
+        $query = Order::whereNotNull('payment_id')->where('customer_id', Auth::user()->id)->orderBy('id', 'desc');
 
         if ($this->status != '') {
             $query->where('status', $this->status);

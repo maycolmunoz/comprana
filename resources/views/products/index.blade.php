@@ -10,10 +10,10 @@
 
 	{{-- Product Details Drawer (Slide-over) --}}
 	<div x-data="{ slideOverOpen: false }" @slider.window="slideOverOpen = true" @slider-close.window="slideOverOpen = false"
-		class="relative z-[100]">
+		class="relative z-100">
 
 		<template x-teleport="body">
-			<div x-show="slideOverOpen" @keydown.window.escape="slideOverOpen = false" class="relative z-[100]" x-cloak>
+			<div x-show="slideOverOpen" @keydown.window.escape="slideOverOpen = false" class="relative z-100" x-cloak>
 
 				{{-- Backdrop --}}
 				<div x-show="slideOverOpen" x-transition:enter="transition-opacity ease-out duration-500"

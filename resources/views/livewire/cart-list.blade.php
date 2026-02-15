@@ -1,75 +1,93 @@
 <section x-data="{ id: @entangle('cart_id'), name: '', show: false }" @close-edit="show=false"
-	class="flex flex-wrap items-center justify-center gap-4 px-4 py-5 justify">
+	class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
 
+	{{-- Edit Cart Name Modal --}}
+	<x-mary-modal wire:model="myModal1" class="backdrop-blur-xl">
+		<div class="p-4 text-center">
+			<h3 class="text-2xl font-black uppercase tracking-tighter mb-2">{{ __('Renombrar Carrito') }}</h3>
+			<p class="text-[10px] font-bold uppercase tracking-widest text-base-content/40 mb-8">
+				{{ __('Asigna un nombre distintivo a tu colección premium') }}</p>
 
-	{{-- <x-mary-modal wire:model="myModal1" title="Hey" class="backdrop-blur">
-		Press `ESC`, click outside or click `CANCEL` to close.
+			<form wire:submit.prevent='edit_cart()' class="space-y-6">
+				<x-mary-input label="{{ __('Nuevo Nombre') }}" wire:model='name' icon="o-pencil-square"
+					class="bg-base-content/5 border-none focus:ring-red-600/20" />
+				<x-input-error :messages="$errors->get('name')" class="" />
 
-		<x-slot:actions>
-			<x-mary-button label="Cancel" @click="$wire.myModal1 = false" />
-		</x-slot:actions>
-	</x-mary-modal> --}}
-
-
-	{{-- <form x-cloak x-show="show" wire:submit.prevent='edit_cart()'
-		class="fixed z-50 p-5 mt-5 rounded-md md:w-1/3 top-1/2 bg-slate-500">
-		<div>
-			<label for="user name" class="block text-sm text-gray-700 capitalize dark:text-gray-200">
-				Editar Nombre | <span x-text="name"></span> |
-			</label>
-			<input placeholder="Nombre Nuevo" type="text" wire:model='name'
-				class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-hidden focus:ring-3 focus:ring-indigo-300 focus:ring-opacity-40">
-			<div>
-				<x-input-error :messages="$errors->get('name')" class="mt-2" />
-			</div>
+				<div class="flex gap-3 pt-4">
+					<x-mary-button label="{{ __('Cancelar') }}" @click="$wire.myModal1 = false"
+						class="btn-ghost flex-1 font-black text-xs uppercase tracking-widest rounded-xl" />
+					<x-mary-button type="submit" label="{{ __('Actualizar') }}"
+						class="btn-primary flex-1 font-black text-xs uppercase tracking-widest rounded-xl shadow-lg shadow-red-600/20" />
+				</div>
+			</form>
 		</div>
+	</x-mary-modal>
 
-		<div class="flex justify-end gap-1 mt-4">
-			<button type="submit"
-				class="px-3 py-2 text-sm tracking-wide text-white capitalize transition-colors duration-200 transform bg-indigo-500 rounded-md hover:bg-indigo-600 focus:outline-hidden focus:bg-indigo-500 focus:ring-3 focus:ring-indigo-300 focus:ring-opacity-50">
-				Actualizar
-			</button>
-			<button type="button" @click="show = false"
-				class="px-3 py-2 text-sm tracking-wide text-white capitalize transition-colors duration-200 transform bg-red-500 rounded-md hover:bg-red-600 focus:outline-hidden focus:bg-red-500 focus:ring-3 focus:ring-indigo-300 focus:ring-opacity-50">
-				Cancelar
-			</button>
-		</div>
-	</form> --}}
-
-	{{-- -- Card---- --}}
+	{{-- Cart Cards Grid --}}
 	@foreach ($carts as $cart)
-		<div class="flex flex-col items-center justify-center ">
-			<x-mary-card :title="$cart->name"
-				class="{{ $cart->active ? 'shadow-emerald-500  border-emerald-700' : 'border-gray-400' }} ">
-				<x-slot:figure>
-					<img src="{{ asset('srcs/cart.webp') }}" />
-				</x-slot:figure>
-				<x-slot:menu>
-					<div class="text-gray-700">
-						<input type="checkbox" {{ $cart->active === 0 ? '' : 'checked disabled' }} wire:loading.attr="disabled"
-							class="opacity-0 sr-only peer" id="{{ $cart->name }}" wire:click="active_cart('{{ $cart->id }}')" />
-						<label for="{{ $cart->name }}"
-							class="relative flex h-6 w-11 cursor-pointer items-center rounded-full bg-gray-400 px-0.5 outline-gray-400 transition-colors before:h-5 before:w-5 before:rounded-full before:bg-white before:shadow-sm before:transition-transform before:duration-300 peer-checked:bg-green-500 peer-checked:before:translate-x-full peer-focus-visible:outline-solid peer-focus-visible:outline-offset-2 peer-focus-visible:outline-gray-400 peer-focus-visible:peer-checked:outline-green-500"
-							for="{{ $cart->name }}">
-						</label>
-					</div>
-				</x-slot:menu>
+		<div class="group relative">
+			{{-- Active Glow Effect --}}
+			@if ($cart->active)
+				<div
+					class="absolute -inset-0.5 bg-linear-to-r from-red-600 to-red-400 rounded-[2.5rem] blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200 animate-pulse">
+				</div>
+			@endif
 
-				<div class="flex items-center justify-between">
-					<span class="font-bold">Productos:</span>
-					<span class="font-bold">{{ $cart->products_count }}</span>
+			<div
+				class="relative bg-base-100 border {{ $cart->active ? 'border-red-600/30 shadow-2xl shadow-red-900/10' : 'border-base-content/5 shadow-xl shadow-base-content/5' }} rounded-[2.5rem] overflow-hidden transition-all duration-500 hover:-translate-y-2">
+
+				{{-- Header with Icon & Active Toggle --}}
+				<div class="p-6 pb-0 flex items-center justify-between">
+					<div
+						class="w-12 h-12 rounded-2xl bg-base-content/5 flex items-center justify-center text-red-600 group-hover:scale-110 transition-transform duration-500">
+						<x-mary-icon name="o-shopping-cart" class="w-6 h-6" />
+					</div>
+
+					<div class="flex items-center gap-2">
+						@if ($cart->active)
+							<span
+								class="text-[8px] font-black uppercase tracking-[0.2em] text-red-600 animate__animated animate__pulse animate__infinite">{{ __('Activo') }}</span>
+						@endif
+						<div class="form-control">
+							<label class="label cursor-pointer p-0">
+								<input type="checkbox" class="toggle toggle-sm {{ $cart->active ? 'toggle-error' : 'opacity-30' }}"
+									{{ $cart->active ? 'checked disabled' : '' }} wire:loading.attr="disabled"
+									wire:click="active_cart('{{ $cart->id }}')" />
+							</label>
+						</div>
+					</div>
 				</div>
 
-				<x-slot:actions class="flex flex-col" separator>
-					<x-mary-button label="Editar Nombre" class="btn-primary" @click="$wire.myModal1 = true" />
-					<x-mary-button label="Vaciar Carrito" class="btn-error" :disabled="$cart->products_count === 0"
-						wire:click="void_cart('{{ $cart->id }}')" wire:confirm='¿Desea Vaciar el Carrito {{ $cart->name }}? ' />
-					<x-mary-button :link="route('carts.show', ['cart' => $cart->id])" label="Mirar Carrito" class="btn-secondary" />
-				</x-slot:actions>
-			</x-mary-card>
+				{{-- Card Body --}}
+				<div class="p-6">
+					<h3 class="text-xl font-black uppercase tracking-tighter truncate mb-1">
+						{{ $cart->name }}
+					</h3>
+
+					<div class="flex items-center gap-2 mb-6">
+						<div class="h-1 w-8 bg-red-600 rounded-full"></div>
+						<span class="text-[10px] font-bold uppercase tracking-widest text-base-content/40">
+							{{ $cart->products_count }} {{ __('Productos') }}
+						</span>
+					</div>
+
+					{{-- Actions Grid --}}
+					<div class="grid grid-cols-2 gap-3">
+						<x-mary-button icon="o-eye" label="{{ __('Ver') }}" :link="route('carts.show', ['cart' => $cart->id])"
+							class="btn-secondary btn-sm font-black text-[10px] uppercase tracking-widest rounded-xl flex-1" />
+						<x-mary-button icon="o-pencil" label="{{ __('Edit') }}"
+							@click="$wire.myModal1 = true; $wire.cart_id = '{{ $cart->id }}'; $wire.name = '{{ $cart->name }}'"
+							class="btn-ghost btn-sm font-black text-[10px] uppercase tracking-widest rounded-xl flex-1 bg-base-content/5 hover:bg-base-content/10" />
+						<x-mary-button icon="o-trash" label="{{ __('Vaciar') }}" :disabled="$cart->products_count === 0"
+							wire:click="void_cart('{{ $cart->id }}')" wire:confirm='¿Desea vaciar el carrito {{ $cart->name }}?'
+							class="col-span-2 btn-error btn-outline btn-sm font-black text-[10px] uppercase tracking-widest rounded-xl w-full border-red-600/20 hover:bg-red-600/10 hover:border-red-600/40 text-red-600" />
+					</div>
+				</div>
+
+				{{-- Glass Shine Effect --}}
+				<div class="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-transparent via-red-600/10 to-transparent"></div>
+			</div>
 		</div>
 	@endforeach
-
-
 
 </section>

@@ -4,7 +4,7 @@
 @endphp
 
 <x-mary-card
-	class="group overflow-hidden bg-base-100 border border-base-content/5 shadow-xl shadow-red-900/5 hover:shadow-2xl hover:shadow-red-900/10 transition-all duration-500 rounded-[2rem] hover:-translate-y-2">
+	class="h-full bg-base-100 rounded-4xl border border-base-content/5 shadow-xl transition-all duration-500 hover:shadow-2xl hover:shadow-red-600/5 hover:-translate-y-2 group overflow-hidden relative">
 	<x-slot:figure class="relative overflow-hidden aspect-square">
 		{{-- Product Image with Hover Zoom --}}
 		<img src="{{ asset("/storage/{$product->images[0]}") }}"
