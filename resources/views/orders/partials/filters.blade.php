@@ -1,20 +1,22 @@
-<div class="w-full flex justify-center mx-auto">
-    <ul class="flex gap-3 my-2 flex-wrap justify-center px-4 md:px-8 max-w-lg">
-        <li class="px-2 py-1 md:text-lg relative bg-gray-200 rounded-lg select-none hover:shadow-sm hover:shadow-teal-500 hover:outline-solid hover:outline-teal-600 hover:cursor-pointer
-        {{!request()->has('status') ? 'outline-solid outline-teal-600': '' }}
-        ">
-            <a href="{{route('orders.index')}}" wire:navigate>
-                Todos
-            </a>
-        </li>
-        @foreach ($orderStatus as $status)
-         <li class="px-2 py-1 md:text-lg relative bg-gray-200 rounded-lg select-none hover:shadow-sm hover:shadow-teal-500 hover:outline-solid hover:outline-teal-600 hover:cursor-pointer
-        {{request('status') === $status ? 'outline-solid outline-teal-600': '' }}
-        ">
-            <a href="{{route('orders.index', ['status'=> $status])}}" wire:navigate>
-                {{$status}}
-            </a>
-        </li>
-        @endforeach
-    </ul>
+<div class="w-full flex justify-center mx-auto mb-8 animate__animated animate__fadeIn">
+	<div class="flex flex-wrap items-center justify-center gap-2 p-1.5 bg-base-content/5 rounded-2xl backdrop-blur-md">
+		{{-- "All" Filter --}}
+		<a href="{{ route('orders.index') }}" wire:navigate
+			class="px-5 py-2 text-[10px] font-black uppercase tracking-widest rounded-xl transition-all duration-300 select-none
+           {{ !request()->has('status')
+											    ? 'bg-red-600 text-white shadow-lg shadow-red-600/20'
+											    : 'text-base-content/40 hover:bg-base-content/5 hover:text-base-content' }}">
+			{{ __('Todos') }}
+		</a>
+
+		@foreach ($orderStatus as $status)
+			<a href="{{ route('orders.index', ['status' => $status]) }}" wire:navigate
+				class="px-5 py-2 text-[10px] font-black uppercase tracking-widest rounded-xl transition-all duration-300 select-none
+               {{ request('status') === $status
+															    ? 'bg-red-600 text-white shadow-lg shadow-red-600/20'
+															    : 'text-base-content/40 hover:bg-base-content/5 hover:text-base-content' }}">
+				{{ __($status) }}
+			</a>
+		@endforeach
+	</div>
 </div>

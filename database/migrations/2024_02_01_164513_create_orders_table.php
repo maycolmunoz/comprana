@@ -30,10 +30,12 @@ return new class extends Migration
                 ->cascadeOnDelete();
 
             $table->foreignId('dispatcher_id')
+                ->nullable()
                 ->constrained('users')
                 ->cascadeOnDelete();
 
             $table->foreignId('delivery_id')
+                ->nullable()
                 ->constrained('users')
                 ->cascadeOnDelete();
 

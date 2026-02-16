@@ -51,16 +51,6 @@
 									class="font-bold uppercase tracking-widest text-base-content/40 text-[10px]">{{ __('Envío Premium') }}</span>
 								<span class="text-green-600 font-bold uppercase text-[10px] tracking-widest">{{ __('Gratis') }}</span>
 							</div>
-
-							{{-- Voucher Section (Visual only) --}}
-							<div class="pt-4 mt-4 border-t border-dashed border-base-content/10">
-								<div class="flex gap-2">
-									<input type="text" placeholder="CÓDIGO DE DESCUENTO"
-										class="flex-1 bg-base-content/5 border-none rounded-xl px-4 py-2 text-[10px] font-bold tracking-widest focus:ring-red-600/20 placeholder:text-base-content/20 uppercase" />
-									<x-mary-button label="Aplicar"
-										class="btn-ghost btn-sm font-black text-[10px] uppercase tracking-widest rounded-xl bg-base-content/5" />
-								</div>
-							</div>
 						</div>
 
 						{{-- Total --}}

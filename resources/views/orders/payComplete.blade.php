@@ -37,5 +37,4 @@
 
 </div>
 
-<x-commons.footer />
 </x-app-layout>

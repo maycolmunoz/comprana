@@ -10,7 +10,7 @@
 
 	{{-- Product Image --}}
 	<div class="w-full sm:w-48 h-48 rounded-2xl overflow-hidden bg-base-content/5 relative shrink-0">
-		<img src="/storage/images/{{ $product->images[0] }}" alt="{{ $product->name }}"
+		<img src="{{ asset('storage/' . $product->images[0]) }}" alt="{{ $product->name }}"
 			class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
 		<div class="absolute top-3 left-3">
 			<span

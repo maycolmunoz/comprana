@@ -1,22 +1,30 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="text-xl font-semibold leading-tight text-gray-800">
-            {{ __('Mis Pedidos') }}
-        </h2>
-    </x-slot>
+	<x-slot name="header">
+		<div class="flex items-center gap-3">
+			<div class="w-1.5 h-8 bg-red-600 rounded-full shadow-[0_0_10px_rgba(220,38,38,0.4)]"></div>
+			<h2 class="text-3xl font-black tracking-tighter uppercase text-base-content">
+				{{ __('Mis Pedidos') }}
+			</h2>
+		</div>
+	</x-slot>
 
-    <x-commons.info-list title="Información de Pedidos" :list="[
-       'Procesando: El pedido se está alistando para ser enviado.',
-       'En Camino: El pedido ha sido enviado y está en camino a su destino.',
-       'Entregado: El pedido ha sido entregado en el destino.',
-       'No Entregado: Nadie ha recibido el pedido. Puede reclamarlo en el punto físico.',
-   ]" />
+	<div class="py-12 animate__animated animate__fadeIn">
+		<div class="max-w-7xl mx-auto px-6 lg:px-8 space-y-10">
+			{{-- Info Card --}}
+			<x-commons.info-list title="Seguimiento de Pedidos" :list="[
+			    'Procesando: Tu selección premium está siendo preparada con los más altos estándares.',
+			    'En Camino: El pedido ha sido despachado y se encuentra en tránsito seguro.',
+			    'Entregado: Has recibido tu pedido satisfactoriamente.',
+			    'No Entregado: Intento de entrega fallido. El paquete está disponible en sucursal.',
+			]" />
 
+			{{-- Filter Tabs --}}
+			@include('orders.partials.filters')
 
-    @include('orders.partials.filters')
-
-    <livewire:order-list>
-
-
-    <x-commons.footer />
+			{{-- Livewire List --}}
+			<div class="pt-2">
+				<livewire:order-list />
+			</div>
+		</div>
+	</div>
 </x-app-layout>

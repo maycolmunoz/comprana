@@ -127,8 +127,6 @@
 
     </div>
 
-    <x-commons.footer />
-
     <script src="https://sdk.mercadopago.com/js/v2"></script>
 
     <script>

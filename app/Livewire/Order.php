@@ -32,7 +32,7 @@ class Order extends Component
     {
         $this->validate();
         $order = ModelsOrder::create([
-            'user_id' => $this->user->id,
+            'customer_id' => $this->user->id,
             'cart_id' => $this->cart->id,
             'phone' => $this->phone,
             'address' => $this->address,
