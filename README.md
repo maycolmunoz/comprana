@@ -19,8 +19,8 @@ video: https://youtu.be/ZDsoQOYZTCI
 | Paquete  | Versión |
 | -------- | ------- |
 | Laravel  | v12     |
-| Filament | v4      |
-| Livewire | v3      |
+| Filament | v5      |
+| Livewire | v4      |
 
 ## Instalación
 
