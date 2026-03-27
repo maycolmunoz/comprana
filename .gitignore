@@ -17,3 +17,15 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+
+# Laravel Boost
+/.agents/
+/.gemini/
+/AGENTS.md
+/GEMINI.md
+/boost.json
+/.mcp.json
+/opencode.json
+/.boost/
+/copilot-instructions.md
+/CLAUDE.md

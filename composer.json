@@ -30,6 +30,7 @@
         "fakerphp/faker": "^1.9.1",
         "filament/upgrade": "^5.0",
         "laravel-lang/common": "^6.1",
+        "laravel/boost": "^2.4",
         "laravel/pint": "^1.0",
         "laravel/sail": "^1.51",
         "mockery/mockery": "^1.4.4",
