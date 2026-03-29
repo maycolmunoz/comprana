@@ -70,4 +70,19 @@ class User extends Authenticatable implements FilamentUser
     {
         return $this->roles()->count('id') > 0;
     }
+
+    public function isDispatcher(): bool
+    {
+        return $this->hasRole('dispatcher');
+    }
+
+    public function isDelivery(): bool
+    {
+        return $this->hasRole('delivery');
+    }
+
+    public function isSuperAdmin(): bool
+    {
+        return $this->hasRole('super_admin');
+    }
 }

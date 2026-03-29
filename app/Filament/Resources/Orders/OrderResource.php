@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Orders;
 
+use App\Enums\OrderStatus;
 use App\Filament\Resources\Orders\Pages\ManageOrders;
 use App\Models\Order;
 use Filament\Actions\ActionGroup;
@@ -34,13 +35,7 @@ class OrderResource extends Resource
             ->components([
                 TextEntry::make('status')
                     ->label('Estado')
-                    ->badge()
-                    ->color(fn (string $state): string => match ($state) {
-                        'Procesando' => 'primary',
-                        'En Camino' => 'warning',
-                        'Entregado' => 'success',
-                        'No Entregado' => 'danger',
-                    }),
+                    ->badge(),
                 TextEntry::make('total')
                     ->label('Total')
                     ->prefix('$')
@@ -78,14 +73,7 @@ class OrderResource extends Resource
             ->components([
                 Select::make('status')
                     ->label('Estado')
-                    ->options(
-                        [
-                            'Procesando' => 'Procesando',
-                            'En Camino' => 'En Camino',
-                            'Entregado' => 'Entregado',
-                            'No Entregado' => 'No Entregado',
-                        ]
-                    )
+                    ->options(OrderStatus::class)
                     ->required(),
             ]);
     }
@@ -97,12 +85,6 @@ class OrderResource extends Resource
                 TextColumn::make('status')
                     ->label('Estado')
                     ->badge()
-                    ->color(fn (string $state): string => match ($state) {
-                        'Procesando' => 'primary',
-                        'En Camino' => 'warning',
-                        'Entregado' => 'success',
-                        'No Entregado' => 'danger',
-                    })
                     ->sortable(),
                 TextColumn::make('payment_id')
                     ->label('id de pago'),
@@ -112,6 +94,7 @@ class OrderResource extends Resource
                     ->color(fn (string $state): string => match ($state) {
                         'approved' => 'success',
                         'pending' => 'warning',
+                        default => 'gray',
                     }),
                 TextColumn::make('total')
                     ->prefix('$')
@@ -164,9 +147,9 @@ class OrderResource extends Resource
                         ->visible(function (Order $record) {
                             $user = Auth::user();
                             if ($user->isDispatcher()) {
-                                return $record->status === 'Procesando';
+                                return $record->status === OrderStatus::Processing;
                             } elseif ($user->isDelivery()) {
-                                return $record->status === 'En Camino';
+                                return $record->status === OrderStatus::InTransit;
                             }
 
                             return false;
@@ -184,11 +167,11 @@ class OrderResource extends Resource
 
     public static function getNavigationBadge(): ?string
     {
-        return static::getModel()::where('status', 'Procesando')->count();
+        return static::getModel()::where('status', OrderStatus::Processing)->count();
     }
 
     public static function getNavigationBadgeColor(): ?string
     {
-        return static::getModel()::where('status', 'Procesando')->count() == 0 ? 'gray' : 'primary';
+        return static::getModel()::where('status', OrderStatus::Processing)->count() == 0 ? 'gray' : 'primary';
     }
 }
