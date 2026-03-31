@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Filament\Tables\Table;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -17,5 +18,12 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      */
-    public function boot(): void {}
+    public function boot(): void
+    {
+        Table::configureUsing(function (Table $table): void {
+            $table
+                ->defaultSort('id', 'desc')
+                ->paginated([10, 25, 50, 100]);
+        });
+    }
 }

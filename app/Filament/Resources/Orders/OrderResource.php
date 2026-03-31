@@ -123,7 +123,6 @@ class OrderResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
 
             ])
-            ->defaultSort('id', 'desc')
             ->filters([
                 //
             ])
