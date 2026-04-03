@@ -19,7 +19,7 @@
 
 			{{-- Cart Products List Component --}}
 			<div>
-				<livewire:cart-products-list :$cart lazy />
+				<livewire:carts.products-list :$cart lazy />
 			</div>
 		</div>
 	</div>

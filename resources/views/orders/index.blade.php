@@ -23,7 +23,7 @@
 
 			{{-- Livewire List --}}
 			<div class="pt-2">
-				<livewire:order-list />
+				<livewire:orders.list />
 			</div>
 		</div>
 	</div>

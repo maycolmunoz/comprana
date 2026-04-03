@@ -1,5 +1,47 @@
+<?php
+
+use App\Models\Cart;
+use App\Models\Product;
+use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\On;
+use Livewire\Component;
+
+new class extends Component
+{
+    public ?Product $product;
+
+    public $stock = 0;
+
+    public $price = 0;
+
+    public $count = 1;
+
+    #[On('details')]
+    public function details(string $id)
+    {
+        $this->product = Product::find($id);
+        $this->stock = $this->product->stock;
+        $this->price = $this->product->price;
+    }
+
+    public function order(string $product_id)
+    {
+        if ($this->count > 0 && $this->count <= $this->stock) {
+            $cart = Cart::where('user_id', Auth::user()->id)->where('active', true)->first();
+            $cart->products()->syncWithoutDetaching([
+                $product_id => [
+                    'cant' => $this->count,
+                ],
+            ]);
+        }
+        $this->dispatch('notification',
+            "Se agrego {$this->count} de {$this->product->name} a tu carrito");
+        $this->reset();
+    }
+}; ?>
+
 <div class="animate__animated animate__fadeIn">
-	<x-commons.loading wire:loading class="items-center justify-center w-full min-h-[400px]" />
+	<x-commons.loading wire:loading class="items-center justify-center w-full min-h-100" />
 
 	@if ($product)
 		<div wire:loading.remove class="flex flex-col lg:flex-row gap-10">

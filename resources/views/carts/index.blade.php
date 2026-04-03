@@ -19,7 +19,7 @@
 
 			{{-- Cart List Component --}}
 			<div class="pt-4">
-				<livewire:cart-list />
+				<livewire:carts.list />
 			</div>
 		</div>
 	</div>

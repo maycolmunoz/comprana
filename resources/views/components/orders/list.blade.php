@@ -1,3 +1,33 @@
+<?php
+
+use App\Models\Order;
+use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\Computed;
+use Livewire\Attributes\Url;
+use Livewire\Component;
+use Livewire\WithPagination;
+
+new class extends Component
+{
+    use WithPagination;
+
+    #[Url()]
+    public $status = '';
+
+    #[Computed()]
+    public function orders()
+    {
+        $query = Order::where('customer_id', Auth::user()->id)->orderBy('id', 'desc');
+
+        if ($this->status != '') {
+            $query->where('status', $this->status);
+        }
+
+        return $query->paginate(5);
+    }
+};
+?>
+
 <div class="space-y-6 animate__animated animate__fadeIn">
 	@forelse ($this->orders as $order)
 		@php

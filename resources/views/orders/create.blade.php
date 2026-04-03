@@ -5,6 +5,6 @@
 		</h2>
 	</x-slot>
 
-	<livewire:order :$cart>
+	<livewire:orders.order :$cart>
 
 </x-app-layout>

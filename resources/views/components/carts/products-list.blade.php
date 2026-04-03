@@ -1,3 +1,27 @@
+<?php
+
+use Livewire\Attributes\On;
+use Livewire\Component;
+
+new class extends Component
+{
+    public $cart;
+
+    public function placeholder()
+    {
+        return <<<'HTML'
+        <div class="flex items-center justify-center my-40 space-x-2">
+            <div class="w-4 h-4 rounded-full animate-pulse dark:bg-violet-400"></div>
+            <div class="w-4 h-4 rounded-full animate-pulse dark:bg-violet-400"></div>
+            <div class="w-4 h-4 rounded-full animate-pulse dark:bg-violet-400"></div>
+        </div>
+        HTML;
+    }
+
+    #[On('refresh')]
+    public function refresh() {}
+}; ?>
+
 <div x-data="{ pay: 0 }" class="animate__animated animate__fadeIn">
 	{{-- Navigation & Header --}}
 	<div class="flex flex-col md:flex-row justify-between items-end gap-6 mb-10 pb-8 border-b border-base-content/5">
@@ -25,7 +49,7 @@
 			{{-- Products List --}}
 			<div class="lg:w-2/3 space-y-6">
 				@foreach ($cart->products as $product)
-					<livewire:cart-product :key='$product->id' :$product :cant="$product->pivot->cant" :$cart>
+					<livewire:carts.product :key='$product->id' :$product :cant="$product->pivot->cant" :$cart>
 				@endforeach
 			</div>
 
