@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\User;
-use App\Providers\RouteServiceProvider;
 
 uses(\Illuminate\Foundation\Testing\RefreshDatabase::class);
 
@@ -20,7 +19,7 @@ test('users can authenticate using the login screen', function () {
     ]);
 
     $this->assertAuthenticated();
-    $response->assertRedirect(RouteServiceProvider::HOME);
+    $response->assertRedirect('/tienda');
 });
 
 test('users can not authenticate with invalid password', function () {

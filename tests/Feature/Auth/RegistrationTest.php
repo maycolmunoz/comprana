@@ -1,7 +1,5 @@
 <?php
 
-use App\Providers\RouteServiceProvider;
-
 uses(\Illuminate\Foundation\Testing\RefreshDatabase::class);
 
 test('registration screen can be rendered', function () {
@@ -19,5 +17,5 @@ test('new users can register', function () {
     ]);
 
     $this->assertAuthenticated();
-    $response->assertRedirect(RouteServiceProvider::HOME);
+    $response->assertRedirect('/tienda');
 });

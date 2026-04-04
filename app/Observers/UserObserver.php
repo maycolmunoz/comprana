@@ -2,8 +2,8 @@
 
 namespace App\Observers;
 
+use App\Models\Cart;
 use App\Models\User;
-use Illuminate\Support\Facades\DB;
 
 class UserObserver
 {
@@ -12,48 +12,14 @@ class UserObserver
      */
     public function created(User $user): void
     {
-        $carts = [];
-
-        for ($i = 0; $i < 8; $i++) {
-            $carts[] = [
+        $carts = collect(range(1, 8))->map(function ($i) use ($user) {
+            return [
                 'user_id' => $user->id,
-                'name' => 'Carrito'.$i + 1,
-                'active' => $i === 0 ? true : false,
+                'name' => 'Carrito '.$i,
+                'active' => $i === 1,
             ];
-        }
+        })->toArray();
 
-        DB::table('carts')->insert($carts);
-    }
-
-    /**
-     * Handle the User "updated" event.
-     */
-    public function updated(User $user): void
-    {
-        //
-    }
-
-    /**
-     * Handle the User "deleted" event.
-     */
-    public function deleted(User $user): void
-    {
-        //
-    }
-
-    /**
-     * Handle the User "restored" event.
-     */
-    public function restored(User $user): void
-    {
-        //
-    }
-
-    /**
-     * Handle the User "force deleted" event.
-     */
-    public function forceDeleted(User $user): void
-    {
-        //
+        Cart::insert($carts);
     }
 }

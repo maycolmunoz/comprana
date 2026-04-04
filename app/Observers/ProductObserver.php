@@ -7,20 +7,9 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductObserver
 {
-    /**
-     * Handle the Product "created" event.
-     */
-    public function created(Product $product): void
+    public function updating(Product $product): void
     {
-        //
-    }
-
-    /**
-     * Handle the Product "updated" event.
-     */
-    public function updated(Product $product): void
-    {
-        //
+        Storage::disk('images')->delete($product->getOriginal('name'));
     }
 
     public function deleting(Product $product): void
@@ -28,26 +17,5 @@ class ProductObserver
         foreach ($product->images as $image) {
             Storage::disk('images')->delete($image->name);
         }
-    }
-
-    /**
-     * Handle the Product "deleted" event.
-     */
-    public function deleted(Product $product): void {}
-
-    /**
-     * Handle the Product "restored" event.
-     */
-    public function restored(Product $product): void
-    {
-        //
-    }
-
-    /**
-     * Handle the Product "force deleted" event.
-     */
-    public function forceDeleted(Product $product): void
-    {
-        //
     }
 }
