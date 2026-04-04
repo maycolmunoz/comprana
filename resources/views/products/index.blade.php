@@ -70,7 +70,7 @@
                                     <div
                                         class="px-6 py-4 border-t border-base-content/5 bg-base-100/80 backdrop-blur-md text-center">
                                         <div class="inline-flex items-center gap-2 opacity-20">
-                                            <x-ui.brand :logo="asset('srcs/favicon.ico')" class="h-4 w-auto grayscale" />
+                                            <x-⚡brand :logo="asset('srcs/favicon.ico')" class="h-4 w-auto grayscale" />
                                             <span class="text-[8px] font-bold uppercase tracking-[.4em]">COMPRANA</span>
                                         </div>
                                     </div>
