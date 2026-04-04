@@ -126,9 +126,9 @@ new class extends Component {
                 <x-mary-icon name="o-magnifying-glass" class="w-10 h-10 text-red-600/20" />
             </div>
             <h4 class="text-2xl font-black tracking-tighter uppercase mb-2">Sin coincidencias</h4>
-            <p class="text-base-content/40 max-w-xs font-medium">No pudimos encontrar lo que buscas. Intenta con otros
-                términos o
-                secciones.</p>
+            <p class="text-base-content/40 max-w-xs font-medium">
+                No pudimos encontrar lo que buscas. Intenta con otros términos o secciones.
+            </p>
             <x-mary-button link="{{ route('products.index') }}" label="Ver todos los productos"
                 class="mt-8 btn-primary btn-outline rounded-full font-bold px-8" />
         </div>
@@ -136,6 +136,6 @@ new class extends Component {
 
     {{-- Pagination --}}
     <div class="mt-20 py-10 border-t border-base-content/5 flex justify-center">
-        {{ $this->products->links() }}
+        {{ $this->products->links('pagination::tailwind') }}
     </div>
 </div>

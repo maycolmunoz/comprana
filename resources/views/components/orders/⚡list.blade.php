@@ -128,7 +128,7 @@ new class extends Component
 	@endforelse
 
 	{{-- Pagination Styled --}}
-	<div class="pt-10">
-		{{ $this->orders->links() }}
+	<div class="pt-10 flex justify-center">
+		{{ $this->orders->links('pagination::simple-tailwind') }}
 	</div>
 </div>
