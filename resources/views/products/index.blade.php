@@ -3,7 +3,7 @@
         <div class="flex items-center gap-3">
             <div class="w-1.5 h-8 bg-red-600 rounded-full shadow-[0_0_10px_rgba(220,38,38,0.4)]"></div>
             <h2 class="text-3xl font-black tracking-tighter uppercase text-base-content">
-                {{ __('Nuestra Tienda') }}
+                Nuestra Tienda
             </h2>
         </div>
     </x-slot>
@@ -47,7 +47,7 @@
                                                 class="text-2xl font-black tracking-tighter uppercase flex items-center gap-3">
                                                 <x-mary-icon name="o-magnifying-glass-plus"
                                                     class="w-6 h-6 text-red-600" />
-                                                {{ __('Detalles del Producto') }}
+                                                Detalles del Producto
                                             </h2>
                                             <p
                                                 class="text-[10px] uppercase font-bold tracking-widest text-base-content/40 mt-1">
@@ -70,7 +70,7 @@
                                     <div
                                         class="px-6 py-4 border-t border-base-content/5 bg-base-100/80 backdrop-blur-md text-center">
                                         <div class="inline-flex items-center gap-2 opacity-20">
-                                            <x-⚡brand :logo="asset('srcs/favicon.ico')" class="h-4 w-auto grayscale" />
+                                            <x-base.brand :logo="asset('srcs/favicon.ico')" class="h-4 w-auto grayscale" />
                                             <span class="text-[8px] font-bold uppercase tracking-[.4em]">COMPRANA</span>
                                         </div>
                                     </div>

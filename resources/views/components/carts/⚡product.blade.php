@@ -66,7 +66,7 @@ new class extends Component
 			<div class="flex flex-wrap gap-4 mt-4">
 				<div class="flex items-center gap-1.5">
 					<x-mary-icon name="o-cube" class="w-3.5 h-3.5 text-base-content/30" />
-					<span class="text-[10px] font-bold uppercase tracking-widest text-base-content/40">{{ __('Stock:') }}
+					<span class="text-[10px] font-bold uppercase tracking-widest text-base-content/40">Stock:
 						{{ $product->stock }}</span>
 				</div>
 			</div>
@@ -88,7 +88,7 @@ new class extends Component
 
 			{{-- Actions --}}
 			<div class="flex items-center gap-2">
-				<x-mary-button wire:click='edit()' icon="o-arrow-path" label="{{ __('Actualizar') }}"
+				<x-mary-button wire:click='edit()' icon="o-arrow-path" label="Actualizar"
 					class="btn-ghost btn-sm font-black text-[10px] uppercase tracking-widest rounded-xl bg-base-content/5 hover:bg-red-600/10 hover:text-red-600" />
 				<x-mary-button
 					@click="if(confirm('¿Seguro desea eliminar {{ $product->name }} de su carrito?')){ $wire.delete(); pay -= total; }"

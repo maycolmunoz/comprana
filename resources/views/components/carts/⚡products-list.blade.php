@@ -29,17 +29,17 @@ new class extends Component
 			<a href="{{ route('carts.index') }}"
 				class="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-base-content/40 hover:text-red-600 transition-colors mb-4 group">
 				<x-mary-icon name="o-arrow-left" class="w-3 h-3 group-hover:-translate-x-1 transition-transform" />
-				{{ __('Volver a mis carritos') }}
+				Volver a mis carritos
 			</a>
 			<h3 class="text-3xl font-black uppercase tracking-tighter leading-none">
-				{{ __('Productos en') }} <span class="text-red-600">{{ $cart->name }}</span>
+				Productos en <span class="text-red-600">{{ $cart->name }}</span>
 			</h3>
 			<p class="text-[10px] font-bold uppercase tracking-widest text-base-content/40 mt-2">
-				{{ __('Gestiona tu selección exclusiva de Comprana') }}
+				Gestiona tu selección exclusiva de Comprana
 			</p>
 		</div>
 		<div class="hidden md:block">
-			<x-mary-badge value="{{ $cart->products->count() }} {{ __('Items') }}"
+			<x-mary-badge value="{{ $cart->products->count() }} Items"
 				class="badge-neutral font-black uppercase tracking-widest text-[10px] py-3 px-4 rounded-xl" />
 		</div>
 	</div>
@@ -62,35 +62,35 @@ new class extends Component
 						{{-- Decorative Accent --}}
 						<div class="absolute top-0 left-0 w-full h-1.5 bg-linear-to-r from-red-600 to-red-400"></div>
 
-						<h4 class="text-xl font-black uppercase tracking-tighter mb-8">{{ __('Resumen del Pedido') }}</h4>
+						<h4 class="text-xl font-black uppercase tracking-tighter mb-8">Resumen del Pedido</h4>
 
 						{{-- Details --}}
 						<div class="space-y-4 mb-8">
 							<div class="flex justify-between items-center text-sm">
-								<span class="font-bold uppercase tracking-widest text-base-content/40 text-[10px]">{{ __('Subtotal') }}</span>
+								<span class="font-bold uppercase tracking-widest text-base-content/40 text-[10px]">Subtotal</span>
 								<span class="font-black tabular-nums">$<span x-text="pay.toLocaleString()"></span></span>
 							</div>
 							<div class="flex justify-between items-center text-sm">
-								<span
-									class="font-bold uppercase tracking-widest text-base-content/40 text-[10px]">{{ __('Envío Premium') }}</span>
-								<span class="text-green-600 font-bold uppercase text-[10px] tracking-widest">{{ __('Gratis') }}</span>
+							<span
+								class="font-bold uppercase tracking-widest text-base-content/40 text-[10px]">Envío Premium</span>
+								<span class="text-green-600 font-bold uppercase text-[10px] tracking-widest">Gratis</span>
 							</div>
 						</div>
 
 						{{-- Total --}}
 						<div class="pt-6 border-t border-base-content/5 mb-8">
 							<div class="flex justify-between items-end">
-								<span class="text-sm font-black uppercase tracking-tighter">{{ __('Total Final') }}</span>
+								<span class="text-sm font-black uppercase tracking-tighter">Total Final</span>
 								<div class="text-right">
 									<span class="text-4xl font-black tracking-tighter text-red-600">$<span
 											x-text="pay.toLocaleString()"></span></span>
 									<p class="text-[8px] font-bold uppercase tracking-widest text-base-content/30 mt-1">
-										{{ __('IVA e Impuestos incluidos') }}</p>
+										IVA e Impuestos incluidos</p>
 								</div>
 							</div>
 						</div>
 
-						<x-mary-button link="{{ route('orders.create', ['id' => $cart->id]) }}" label="{{ __('Finalizar Compra') }}"
+						<x-mary-button link="{{ route('orders.create', ['id' => $cart->id]) }}" label="Finalizar Compra"
 							icon-right="o-arrow-right"
 							class="btn-primary w-full py-4 h-auto font-black text-sm uppercase tracking-widest shadow-xl shadow-red-600/20 rounded-2xl group" />
 					</div>
@@ -98,7 +98,7 @@ new class extends Component
 					{{-- Trust Badges --}}
 					<div class="bg-base-content/5 rounded-4xl p-6 text-center">
 						<p class="text-[8px] font-black uppercase tracking-[0.3em] text-base-content/30 mb-4">
-							{{ __('Transacción 100% Protegida') }}</p>
+							Transacción 100% Protegida</p>
 						<div
 							class="flex justify-center items-center gap-6 opacity-40 grayscale hover:grayscale-0 transition-all duration-500">
 							<x-mary-icon name="o-shield-check" class="w-6 h-6" />
@@ -112,7 +112,7 @@ new class extends Component
 	@else
 		<div class="py-24 text-center animate__animated animate__zoomIn">
 			<div class="mt-10">
-				<x-mary-button link="/" label="{{ __('Explorar Catálogo Premium') }}"
+				<x-mary-button link="/" label="Explorar Catálogo Premium"
 					class="btn-outline font-black text-xs uppercase tracking-widest rounded-2xl px-12 hover:bg-red-600 hover:text-white hover:border-red-600 transition-all" />
 			</div>
 		</div>

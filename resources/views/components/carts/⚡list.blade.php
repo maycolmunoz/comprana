@@ -5,7 +5,8 @@ use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
-new class extends Component {
+new class extends Component
+{
     public bool $myModal1 = false;
 
     public $carts;
@@ -66,19 +67,15 @@ new class extends Component {
     {{-- Edit Cart Name Modal --}}
     <x-mary-modal wire:model="myModal1" class="backdrop-blur-xl">
         <div class="p-4 text-center">
-            <h3 class="text-2xl font-black uppercase tracking-tighter mb-2">{{ __('Renombrar Carrito') }}</h3>
-            <p class="text-[10px] font-bold uppercase tracking-widest text-base-content/40 mb-8">
-                {{ __('Asigna un nombre distintivo a tu colección premium') }}</p>
-
+            <h3 class="text-2xl font-black uppercase tracking-tighter mb-2">Renombrar Carrito</h3>
             <form wire:submit.prevent='edit_cart()' class="space-y-6">
-                <x-mary-input label="{{ __('Nuevo Nombre') }}" wire:model='name' icon="o-pencil-square"
+                <x-mary-input label="Nuevo Nombre" wire:model='name' icon="o-pencil-square"
                     class="bg-base-content/5 border-none focus:ring-red-600/20" />
-                <x-input-error :messages="$errors->get('name')" class="" />
 
                 <div class="flex gap-3 pt-4">
-                    <x-mary-button label="{{ __('Cancelar') }}" @click="$wire.myModal1 = false"
+                    <x-mary-button label="Cancelar" @click="$wire.myModal1 = false"
                         class="btn-ghost flex-1 font-black text-xs uppercase tracking-widest rounded-xl" />
-                    <x-mary-button type="submit" label="{{ __('Actualizar') }}"
+                    <x-mary-button type="submit" label="Actualizar"
                         class="btn-primary flex-1 font-black text-xs uppercase tracking-widest rounded-xl shadow-lg shadow-red-600/20" />
                 </div>
             </form>
@@ -108,7 +105,7 @@ new class extends Component {
                     <div class="flex items-center gap-2">
                         @if ($cart->active)
                             <span
-                                class="text-[8px] font-black uppercase tracking-[0.2em] text-red-600 animate__animated animate__pulse animate__infinite">{{ __('Activo') }}</span>
+                                class="text-[8px] font-black uppercase tracking-[0.2em] text-red-600 animate__animated animate__pulse animate__infinite">Activo</span>
                         @endif
                         <div class="form-control">
                             <label class="label cursor-pointer p-0">
@@ -130,18 +127,18 @@ new class extends Component {
                     <div class="flex items-center gap-2 mb-6">
                         <div class="h-1 w-8 bg-red-600 rounded-full"></div>
                         <span class="text-[10px] font-bold uppercase tracking-widest text-base-content/40">
-                            {{ $cart->products_count }} {{ __('Productos') }}
+                            {{ $cart->products_count }} Productos
                         </span>
                     </div>
 
                     {{-- Actions Grid --}}
                     <div class="grid grid-cols-2 gap-3">
-                        <x-mary-button icon="o-eye" label="{{ __('Ver') }}" :link="route('carts.show', ['cart' => $cart->id])"
+                        <x-mary-button icon="o-eye" label="Ver" :link="route('carts.show', ['cart' => $cart->id])"
                             class="btn-secondary btn-sm font-black text-[10px] uppercase tracking-widest rounded-xl flex-1" />
-                        <x-mary-button icon="o-pencil" label="{{ __('Edit') }}"
+                        <x-mary-button icon="o-pencil" label="Editar"
                             @click="$wire.myModal1 = true; $wire.cart_id = '{{ $cart->id }}'; $wire.name = '{{ $cart->name }}'"
                             class="btn-ghost btn-sm font-black text-[10px] uppercase tracking-widest rounded-xl flex-1 bg-base-content/5 hover:bg-base-content/10" />
-                        <x-mary-button icon="o-trash" label="{{ __('Vaciar') }}" :disabled="$cart->products_count === 0"
+                        <x-mary-button icon="o-trash" label="Vaciar" :disabled="$cart->products_count === 0"
                             wire:click="void_cart('{{ $cart->id }}')"
                             wire:confirm='¿Desea vaciar el carrito {{ $cart->name }}?'
                             class="col-span-2 btn-error btn-outline btn-sm font-black text-[10px] uppercase tracking-widest rounded-xl w-full border-red-600/20 hover:bg-red-600/10 hover:border-red-600/40 text-red-600" />

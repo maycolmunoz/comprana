@@ -41,7 +41,7 @@ new class extends Component
 }; ?>
 
 <div class="animate__animated animate__fadeIn">
-	<x-commons.loading wire:loading class="items-center justify-center w-full min-h-100" />
+	<x-base.loading wire:loading class="items-center justify-center w-full min-h-100" />
 
 	@if ($product)
 		<div wire:loading.remove class="flex flex-col lg:flex-row gap-10">

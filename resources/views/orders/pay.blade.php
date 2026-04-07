@@ -1,46 +1,44 @@
  <?php
-    
-        use MercadoPago\MercadoPagoConfig;
+
         use MercadoPago\Client\Preference\PreferenceClient;
-       
-        MercadoPagoConfig::setAccessToken(config('services.mercadopago.token'));
-    
-        $client = new PreferenceClient();
-    
-    
-        foreach($cart->products as $product){
-            $item = new stdClass();
-            $item->title = $product->name;
-            $item->quantity = $product->pivot->cant;
-            $item->unit_price = $product->price;
+use MercadoPago\MercadoPagoConfig;
 
-            $products[] = $item;
-        }
+MercadoPagoConfig::setAccessToken(config('services.mercadopago.token'));
 
-        $preference = $client->create([
-            "items"=> $products,
-            "back_urls" =>array(
-            "success" => route('orders.complete', ['order'=>$order]),
-            "failure" => route('orders.pay', [$cart, $order]),
-            "pending" => route('orders.complete', ['order'=>$order]),
-            ),
-            "auto_return"=> "approved",
-            "payment_methods" => array(
-                "excluded_payment_types" => array(
-                array("id" => "ticket")
-            ),
-             "installments" => 1
-            ),
-            "notification_url"=> route('webhooks', ['order'=>$order])
-            ,
-        ]);
+$client = new PreferenceClient;
 
-        $total = 0;
+    foreach ($cart->products as $product) {
+    $item = new stdClass;
+    $item->title = $product->name;
+    $item->quantity = $product->pivot->cant;
+    $item->unit_price = $product->price;
+
+    $products[] = $item;
+}
+
+$preference = $client->create([
+    'items' => $products,
+    'back_urls' => [
+        'success' => route('orders.complete', ['order' => $order]),
+        'failure' => route('orders.pay', [$cart, $order]),
+        'pending' => route('orders.complete', ['order' => $order]),
+    ],
+    'auto_return' => 'approved',
+    'payment_methods' => [
+        'excluded_payment_types' => [
+            ['id' => 'ticket'],
+        ],
+        'installments' => 1,
+    ],
+    'notification_url' => route('webhooks', ['order' => $order]),
+]);
+
+$total = 0;
 ?>
         <x-app-layout>
     <x-slot name="header">
         <h2 class="text-xl font-semibold leading-tight text-gray-800">
-            {{ __('Pagar Pedido') }}
+            Pagar Pedido
         </h2>
     </x-slot>
 

@@ -5,7 +5,7 @@
 			{{-- Brand Section --}}
 			<div class="md:col-span-4 flex flex-col space-y-6">
 				<div class="flex items-center gap-3">
-					<x-⚡brand href="/" :logo="asset('srcs/favicon.ico')" alt="comprana" class="!justify-start h-8 w-auto" />
+					<x-base.brand href="/" :logo="asset('srcs/favicon.ico')" alt="comprana" class="!justify-start h-8 w-auto" />
 					<span class="text-2xl font-black tracking-tighter">COMPRA<span class="text-red-600">NA</span></span>
 				</div>
 				<p class="text-base-content/60 text-sm leading-relaxed max-w-sm">

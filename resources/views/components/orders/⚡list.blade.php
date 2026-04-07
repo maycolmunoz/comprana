@@ -73,7 +73,7 @@ new class extends Component
 					</div>
 
 					<div>
-						<h4 class="text-2xl font-black uppercase tracking-tighter">{{ __('Pedido Realizado') }}</h4>
+						<h4 class="text-2xl font-black uppercase tracking-tighter">Pedido Realizado</h4>
 						<p class="text-[10px] font-bold uppercase tracking-widest text-base-content/40 mt-1">
 							{{ $order->created_at->translatedFormat('d M, Y • g:i A') }}
 						</p>
@@ -84,13 +84,13 @@ new class extends Component
 				<div
 					class="flex-[1.5] grid grid-cols-1 md:grid-cols-2 gap-6 py-6 lg:py-0 border-y lg:border-y-0 lg:border-x border-base-content/5 lg:px-10">
 					<div class="space-y-1">
-						<span class="text-[9px] font-black uppercase tracking-widest text-base-content/30">{{ __('Entrega en') }}</span>
+						<span class="text-[9px] font-black uppercase tracking-widest text-base-content/30">Entrega en</span>
 						<p class="text-xs font-bold leading-relaxed line-clamp-2">{{ $order->address }}</p>
 						<p class="text-[10px] font-medium text-base-content/40">{{ $order->phone }}</p>
 					</div>
 					<div class="space-y-1">
 						<span
-							class="text-[9px] font-black uppercase tracking-widest text-base-content/30">{{ __('Total del Pedido') }}</span>
+							class="text-[9px] font-black uppercase tracking-widest text-base-content/30">Total del Pedido</span>
 						<p class="text-2xl font-black tracking-tighter text-red-600">${{ number_format($order->total, 0) }}</p>
 					</div>
 				</div>
@@ -99,11 +99,11 @@ new class extends Component
 				<div class="flex flex-wrap items-center gap-3 shrink-0">
 					@if ($order->invoice)
 						<x-mary-button link="{{ route('orders.invoice', ['name' => $order->invoice]) }}" external
-							label="{{ __('Factura PDF') }}" icon="o-document-text"
+							label="Factura PDF" icon="o-document-text"
 							class="btn-ghost btn-sm font-black text-[10px] uppercase tracking-widest rounded-xl bg-base-content/5 hover:bg-red-600/10 hover:text-red-600" />
 					@endif
 
-					<x-mary-button label="{{ __('Ver Detalles') }}" icon-right="o-chevron-right"
+					<x-mary-button label="Ver Detalles" icon-right="o-chevron-right"
 						class="btn-outline btn-sm font-black text-[10px] uppercase tracking-widest rounded-xl px-6" />
 				</div>
 			</div>
@@ -118,11 +118,11 @@ new class extends Component
 			<div class="w-24 h-24 bg-base-content/5 rounded-full flex items-center justify-center mx-auto mb-6">
 				<x-mary-icon name="o-archive-box-x-mark" class="w-10 h-10 text-base-content/20" />
 			</div>
-			<h4 class="text-xl font-black uppercase tracking-tighter mb-2">{{ __('No tienes pedidos aún') }}</h4>
+			<h4 class="text-xl font-black uppercase tracking-tighter mb-2">No tienes pedidos aún</h4>
 			<p class="text-[10px] font-bold uppercase tracking-widest text-base-content/30 mb-8 max-w-xs mx-auto">
-				{{ __('Explora nuestra tienda premium y comienza tu primera experiencia Comprana.') }}
+				Explora nuestra tienda premium y comienza tu primera experiencia Comprana.
 			</p>
-			<x-mary-button link="/tienda" label="{{ __('Ir a la Tienda') }}"
+			<x-mary-button link="/tienda" label="Ir a la Tienda"
 				class="btn-primary rounded-2xl px-10 font-black text-xs uppercase tracking-widest shadow-xl shadow-red-600/20" />
 		</div>
 	@endforelse

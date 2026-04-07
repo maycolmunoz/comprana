@@ -6,7 +6,7 @@
            {{ !request()->has('status')
 											    ? 'bg-red-600 text-white shadow-lg shadow-red-600/20'
 											    : 'text-base-content/40 hover:bg-base-content/5 hover:text-base-content' }}">
-			{{ __('Todos') }}
+			Todos
 		</a>
 
 		@foreach ($orderStatus as $status)
@@ -15,7 +15,7 @@
                {{ request('status') === $status
 															    ? 'bg-red-600 text-white shadow-lg shadow-red-600/20'
 															    : 'text-base-content/40 hover:bg-base-content/5 hover:text-base-content' }}">
-				{{ __($status) }}
+				{{ $status }}
 			</a>
 		@endforeach
 	</div>

@@ -36,7 +36,7 @@
 			<a href="/" class="flex flex-col items-center gap-4 group">
 				<div
 					class="p-4 bg-base-100 rounded-3xl shadow-xl border border-base-content/5 group-hover:scale-110 transition-transform duration-500">
-					<x-⚡brand :logo="asset('srcs/favicon.ico')" alt="comprana" class="h-12 w-auto" />
+					<x-base.brand :logo="asset('srcs/favicon.ico')" alt="comprana" class="h-12 w-auto" />
 				</div>
 				<h1 class="text-3xl font-black tracking-tighter uppercase">
 					COMPRA<span class="text-red-600">NA</span>

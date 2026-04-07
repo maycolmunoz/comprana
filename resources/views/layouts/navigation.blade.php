@@ -5,7 +5,7 @@
 			<div class="flex items-center gap-10">
 				<!-- Logo -->
 				<div class="shrink flex items-center gap-2 group">
-					<x-⚡brand href="{{ route('products.index') }}" :logo="asset('srcs/favicon.ico')" alt="comprana" class="justify-start! h-9 w-auto" />
+					<x-base.brand href="{{ route('products.index') }}" :logo="asset('srcs/favicon.ico')" alt="comprana" class="justify-start! h-9 w-auto" />
 					<span class="text-xl font-black tracking-tighter uppercase group-hover:scale-105 transition-transform duration-300">
 						COMPRA<span class="text-red-600">NA</span>
 					</span>
