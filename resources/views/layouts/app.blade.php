@@ -26,7 +26,7 @@
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-    @livewireStyles
+    @livewireStyles()
 </head>
 
 <body class="antialiased bg-base-200/50 text-base-content min-h-screen flex flex-col">
@@ -90,7 +90,7 @@
         </div>
     </div>
 
-    @livewireScripts
+    @livewireScriptConfig()
 </body>
 
 </html>
