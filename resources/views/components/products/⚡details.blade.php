@@ -33,10 +33,12 @@ new class extends Component
                     'cant' => $this->count,
                 ],
             ]);
+
+            $this->dispatch('notification',
+                "Se agrego {$this->count} de {$this->product->name} a tu carrito");
+            $this->dispatch('slider-close');
+            $this->reset('count');
         }
-        $this->dispatch('notification',
-            "Se agrego {$this->count} de {$this->product->name} a tu carrito");
-        $this->reset();
     }
 }; ?>
 
@@ -166,7 +168,7 @@ new class extends Component
 							{{-- Submit Button --}}
 							<x-mary-button type="submit" label="Agregar al Carrito" icon="o-shopping-bag"
 								class="btn-primary w-full py-4 h-auto font-black text-sm uppercase tracking-widest rounded-2xl group active:scale-[0.98] transition-all"
-								::disabled="!available" @click.prevent="$dispatch('slider-close')">
+								::disabled="!available">
 								<x-slot:append>
 									<x-mary-icon name="o-chevron-right"
 										class="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
