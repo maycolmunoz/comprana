@@ -41,14 +41,14 @@
 			style="display: none;">
 			<div class="grid grid-cols-1 gap-1">
 				<a href="{{ route('products.index') }}"
-					class="flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-bold transition-all {{ !request('section') ? 'bg-red-600 text-white shadow-lg shadow-red-600/20' : 'hover:bg-red-50 text-base-content/60 hover:text-red-700' }}">
+					class="flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-bold transition-all {{ !request('section') ? 'bg-red-600 text-white shadow-md shadow-red-600/10' : 'hover:bg-red-50 text-base-content/60 hover:text-red-700' }}">
 					<x-mary-icon name="o-squares-2x2" class="w-4 h-4" />
 					Ver Todo
 				</a>
 
 				@foreach ($sections as $section)
 					<a wire:navigation href="{{ route('products.index', ['section' => $section->name]) }}"
-						class="flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-bold transition-all {{ request('section') == $section->name ? 'bg-red-600 text-white shadow-lg shadow-red-600/20' : 'hover:bg-red-50 text-base-content/60 hover:text-red-700' }}">
+						class="flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-bold transition-all {{ request('section') == $section->name ? 'bg-red-600 text-white shadow-md shadow-red-600/10' : 'hover:bg-red-50 text-base-content/60 hover:text-red-700' }}">
 						<div
 							class="w-1.5 h-1.5 rounded-full {{ request('section') == $section->name ? 'bg-white' : 'bg-red-600/30 group-hover:bg-red-600' }} transition-colors">
 						</div>

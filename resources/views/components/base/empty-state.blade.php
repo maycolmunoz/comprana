@@ -10,6 +10,6 @@
     </p>
     @if ($link)
         <x-mary-button :link="$link" :label="$linkLabel"
-            class="btn-primary rounded-2xl px-10 font-black text-xs uppercase tracking-widest shadow-xl shadow-red-600/20" />
+            class="btn-primary rounded-2xl px-10 font-black text-xs uppercase tracking-widest" />
     @endif
 </div>

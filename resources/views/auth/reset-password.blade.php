@@ -2,7 +2,7 @@
 	<div class="mb-8 text-center">
 		<h2 class="text-2xl font-black uppercase tracking-tighter">Nueva contraseña</h2>
 		<p class="text-[10px] font-bold uppercase tracking-widest text-base-content/40 mt-1">
-			Establece tus credenciales premium
+			Establece tus credenciales
 		</p>
 	</div>
 
@@ -28,7 +28,7 @@
 
 		<div class="pt-4">
 			<x-mary-button type="submit" label="Restablecer Contraseña"
-				class="btn-primary w-full font-black text-sm uppercase tracking-widest shadow-xl shadow-red-600/20 rounded-2xl" />
+				class="btn-primary w-full font-black text-sm uppercase tracking-widest rounded-2xl" />
 		</div>
 	</form>
 </x-guest-layout>

@@ -48,7 +48,7 @@
 						class="btn-ghost font-black text-xs uppercase tracking-widest rounded-xl" />
 
 					<x-mary-button type="submit" label="Sí, Eliminar Definitivamente" icon="o-exclamation-triangle"
-						class="btn-error font-black text-xs uppercase tracking-widest shadow-xl shadow-red-600/20 rounded-xl px-6" />
+						class="btn-error font-black text-xs uppercase tracking-widest rounded-xl px-6" />
 				</div>
 			</form>
 		</div>

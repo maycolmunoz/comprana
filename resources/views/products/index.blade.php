@@ -46,7 +46,7 @@
                                             </h2>
                                             <p
                                                 class="text-[10px] uppercase font-bold tracking-widest text-base-content/40 mt-1">
-                                                Comprana Premium Experience
+                                                Comprana
                                             </p>
                                         </div>
 
@@ -90,8 +90,7 @@
                         Explora Nuestras <span class="italic text-base-content/40">Colecciones</span>
                     </h1>
                     <p class="text-base text-base-content/50 font-medium">
-                        Calidad garantizada y entregas seguras. Encuentra lo que necesitas con la mejor experiencia de
-                        compra.
+                        Calidad garantizada y entregas seguras. Encuentra lo que necesitas con la mejor experiencia de compra.
                     </p>
                 </div>
 

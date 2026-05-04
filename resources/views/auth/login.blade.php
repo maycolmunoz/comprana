@@ -2,7 +2,7 @@
 	<div class="mb-8 text-center">
 		<h2 class="text-2xl font-black uppercase tracking-tighter">Bienvenido de nuevo</h2>
 		<p class="text-[10px] font-bold uppercase tracking-widest text-base-content/40 mt-1">
-			Ingresa a tu cuenta premium
+			Ingresa a tu cuenta
 		</p>
 	</div>
 
@@ -39,7 +39,7 @@
 
 		<div class="pt-4">
 			<x-mary-button type="submit" label="Iniciar Sesión"
-				class="btn-primary w-full font-black text-sm uppercase tracking-widest shadow-xl shadow-red-600/20 rounded-2xl" />
+				class="btn-primary w-full font-black text-sm uppercase tracking-widest rounded-2xl" />
 		</div>
 
 		<div class="text-center pt-2">

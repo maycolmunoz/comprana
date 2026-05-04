@@ -76,7 +76,7 @@ new class extends Component
                     <x-mary-button label="Cancelar" @click="$wire.myModal1 = false"
                         class="btn-ghost flex-1 font-black text-xs uppercase tracking-widest rounded-xl" />
                     <x-mary-button type="submit" label="Actualizar"
-                        class="btn-primary flex-1 font-black text-xs uppercase tracking-widest rounded-xl shadow-lg shadow-red-600/20" />
+                        class="btn-primary flex-1 font-black text-xs uppercase tracking-widest rounded-xl" />
                 </div>
             </form>
         </div>

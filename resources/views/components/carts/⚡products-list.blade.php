@@ -72,7 +72,7 @@ new class extends Component
 							</div>
 							<div class="flex justify-between items-center text-sm">
 							<span
-								class="font-bold uppercase tracking-widest text-base-content/40 text-[10px]">Envío Premium</span>
+								class="font-bold uppercase tracking-widest text-base-content/40 text-[10px]">Envío</span>
 								<span class="text-green-600 font-bold uppercase text-[10px] tracking-widest">Gratis</span>
 							</div>
 						</div>
@@ -92,7 +92,7 @@ new class extends Component
 
 						<x-mary-button link="{{ route('orders.create', ['id' => $cart->id]) }}" label="Finalizar Compra"
 							icon-right="o-arrow-right"
-							class="btn-primary w-full py-4 h-auto font-black text-sm uppercase tracking-widest shadow-xl shadow-red-600/20 rounded-2xl group" />
+							class="btn-primary w-full py-4 h-auto font-black text-sm uppercase tracking-widest rounded-2xl group" />
 					</div>
 
 					{{-- Trust Badges --}}
@@ -112,7 +112,7 @@ new class extends Component
 	@else
 		<div class="py-24 text-center animate__animated animate__zoomIn">
 			<div class="mt-10">
-				<x-mary-button link="/" label="Explorar Catálogo Premium"
+				<x-mary-button link="/" label="Explorar Catálogo"
 					class="btn-outline font-black text-xs uppercase tracking-widest rounded-2xl px-12 hover:bg-red-600 hover:text-white hover:border-red-600 transition-all" />
 			</div>
 		</div>

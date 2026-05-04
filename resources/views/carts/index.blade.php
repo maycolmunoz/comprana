@@ -6,10 +6,10 @@
 	<div class="py-12 animate__animated animate__fadeIn">
 		<div class="max-w-7xl mx-auto px-6 lg:px-8 space-y-8">
 			{{-- Info List --}}
-			<x-base.info-list title="Gestión de Carritos" :list="[
+ 			<x-base.info-list title="Gestión de Carritos" :list="[
 			    'Puedes gestionar hasta 8 carritos personalizados simultáneamente.',
 			    'El carrito activo es el destino predeterminado de tus nuevas selecciones.',
-			    'Organiza, renombra o vacía tus carritos para una experiencia de compra a medida.',
+			    'Organiza, renombra o vacía tus carritos para una experiencia de compra personalizada.',
 			]" />
 
 			{{-- Cart List Component --}}

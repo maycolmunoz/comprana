@@ -17,7 +17,7 @@
 		<form method="POST" action="{{ route('verification.send') }}">
 			@csrf
 			<x-mary-button type="submit" label="Reenviar Email de Verificación" icon="o-paper-airplane"
-				class="btn-primary w-full font-black text-sm uppercase tracking-widest shadow-xl shadow-red-600/20 rounded-2xl" />
+				class="btn-primary w-full font-black text-sm uppercase tracking-widest rounded-2xl" />
 		</form>
 
 		<form method="POST" action="{{ route('logout') }}" class="text-center">

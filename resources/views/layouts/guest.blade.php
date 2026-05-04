@@ -54,7 +54,7 @@
 			<div class="mt-8 text-center animate__animated animate__fadeIn animate__delay-1s">
 				<p
 					class="text-[10px] font-bold uppercase tracking-[0.3em] opacity-30 py-2 border-t border-base-content/5 inline-block px-8">
-					&copy; {{ date('Y') }} Comprana Premium Service
+					&copy; {{ date('Y') }} Comprana
 				</p>
 			</div>
 		</div>

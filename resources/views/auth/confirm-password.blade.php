@@ -15,7 +15,7 @@
 
 		<div class="pt-4 text-center">
 			<x-mary-button type="submit" label="Confirmar Acceso"
-				class="btn-primary w-full font-black text-sm uppercase tracking-widest shadow-xl shadow-red-600/20 rounded-2xl" />
+				class="btn-primary w-full font-black text-sm uppercase tracking-widest rounded-2xl" />
 		</div>
 	</form>
 </x-guest-layout>

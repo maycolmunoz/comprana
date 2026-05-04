@@ -72,7 +72,7 @@
 
 		<div class="flex items-center gap-4 pt-4 border-t border-base-content/5">
 			<x-mary-button type="submit" label="Guardar Cambios" icon="o-check"
-				class="btn-primary px-8 font-black text-xs uppercase tracking-widest shadow-xl shadow-red-600/20 rounded-2xl" />
+				class="btn-primary px-8 font-black text-xs uppercase tracking-widest rounded-2xl" />
 
 			@if (session('status') === 'profile-updated')
 				<div x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 3000)"

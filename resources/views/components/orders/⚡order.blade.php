@@ -50,7 +50,7 @@ new class extends Component
 			Datos de <span class="text-red-600">Contacto</span>
 		</h3>
 		<p class="text-[10px] font-bold uppercase tracking-widest text-base-content/40 mt-2">
-			Confirma dónde quieres recibir tu pedido premium de Comprana
+			Confirma dónde quieres recibir tu pedido de Comprana
 		</p>
 	</div>
 
@@ -78,7 +78,7 @@ new class extends Component
 					<div class="flex items-start gap-4 p-4 bg-base-content/5 rounded-2xl mb-2">
 						<x-mary-icon name="o-information-circle" class="w-5 h-5 text-red-600 shrink-0" />
 						<p class="text-[10px] font-bold uppercase tracking-widest text-base-content/60 leading-relaxed">
-							Por favor, verifica que tu número de teléfono y dirección sean correctos para garantizar una entrega premium sin contratiempos.
+							Por favor, verifica que tu número de teléfono y dirección sean correctos para garantizar una entrega sin contratiempos.
 						</p>
 					</div>
 
@@ -105,7 +105,7 @@ new class extends Component
 						</a>
 
 						<x-mary-button type="submit" label="Continuar al Pago" icon-right="o-credit-card"
-							class="btn-primary px-8 py-4 h-auto font-black text-xs uppercase tracking-widest shadow-xl shadow-red-600/20 rounded-2xl group">
+							class="btn-primary px-8 py-4 h-auto font-black text-xs uppercase tracking-widest rounded-2xl group">
 							<x-slot:append>
 								<x-mary-icon name="o-chevron-right" class="w-3 h-3 group-hover:translate-x-1 transition-transform" />
 							</x-slot:append>

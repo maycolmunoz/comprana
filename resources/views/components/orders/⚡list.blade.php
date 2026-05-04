@@ -93,7 +93,7 @@ new class extends Component
 		</div>
 	@empty
 		<x-base.empty-state icon="o-archive-box-x-mark" title="No tienes pedidos aún"
-			description="Explora nuestra tienda premium y comienza tu primera experiencia Comprana."
+			description="Explora nuestra tienda y comienza tu experiencia en Comprana."
 			link="/tienda" />
 	@endforelse
 

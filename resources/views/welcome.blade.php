@@ -45,7 +45,7 @@
         <!-- Content Area -->
         <div class="w-full lg:w-3/5 flex items-center justify-center p-8 lg:p-20 order-2 lg:order-1 h-full">
             <div class="max-w-2xl animate__animated animate__fadeInLeft">
-                <x-mary-badge value="Experiencia Premium" class="badge-primary badge-soft text-xl p-4" />
+                <x-mary-badge value="Comprana" class="badge-primary badge-soft text-xl p-4" />
 
                 <h1 class="text-6xl lg:text-8xl font-black leading-[0.9] mb-8 tracking-tighter">
                     COMPRA<span class="text-red-700 text-glow">NA</span>

@@ -72,7 +72,7 @@ new class extends Component
 						@foreach ($product->images as $image)
 							<button type="button" @click="currentImage = '{{ $image }}'"
 								class="w-20 h-20 rounded-2xl overflow-hidden border-2 transition-all duration-300 relative group"
-								:class="currentImage === '{{ $image }}' ? 'border-red-600 shadow-lg shadow-red-600/20 scale-105' :
+								:class="currentImage === '{{ $image }}' ? 'border-red-600 shadow-md shadow-red-600/10 scale-105' :
 								    'border-transparent opacity-60 hover:opacity-100'">
 								<img src="/storage/{{ $image }}" class="w-full h-full object-cover" alt="thumbnail">
 								<div class="absolute inset-0 bg-red-600/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
@@ -97,7 +97,7 @@ new class extends Component
 					{{-- Price & Stock --}}
 					<div class="flex items-end gap-6">
 						<div class="flex flex-col">
-							<span class="text-[10px] font-black uppercase tracking-widest text-base-content/30">Precio Premium</span>
+							<span class="text-[10px] font-black uppercase tracking-widest text-base-content/30">Precio</span>
 							<span class="text-4xl font-black text-base-content italic tracking-tighter">
 								<span class="text-red-600 font-normal mr-1">$</span>{{ number_format($product->price, 0, ',', '.') }}
 							</span>
@@ -142,14 +142,14 @@ new class extends Component
 								<div
 									class="flex items-center bg-base-content/5 rounded-2xl p-1.5 gap-2 w-fit border border-base-content/5 shadow-inner">
 									<button type="button" @click="count = count <= 1 ? 1 : parseInt(count) - 1"
-										class="w-12 h-12 flex items-center justify-center rounded-xl bg-base-100 text-base-content/60 hover:bg-red-600 hover:text-white hover:shadow-lg hover:shadow-red-600/20 transition-all duration-300">
+										class="w-12 h-12 flex items-center justify-center rounded-xl bg-base-100 text-base-content/60 hover:bg-red-600 hover:text-white hover:shadow-md hover:shadow-red-600/10 transition-all duration-300">
 										<x-mary-icon name="o-minus" class="w-4 h-4" />
 									</button>
 
 									<span class="w-16 text-center text-xl font-black tabular-nums text-base-content" x-text="count"></span>
 
 									<button type="button" @click="count = count >= {{ $product->stock }} ? count : parseInt(count) + 1"
-										class="w-12 h-12 flex items-center justify-center rounded-xl bg-base-100 text-base-content/60 hover:bg-red-600 hover:text-white hover:shadow-lg hover:shadow-red-600/20 transition-all duration-300">
+										class="w-12 h-12 flex items-center justify-center rounded-xl bg-base-100 text-base-content/60 hover:bg-red-600 hover:text-white hover:shadow-md hover:shadow-red-600/10 transition-all duration-300">
 										<x-mary-icon name="o-plus" class="w-4 h-4" />
 									</button>
 								</div>
@@ -165,7 +165,7 @@ new class extends Component
 
 							{{-- Submit Button --}}
 							<x-mary-button type="submit" label="Agregar al Carrito" icon="o-shopping-bag"
-								class="btn-primary w-full py-4 h-auto font-black text-sm uppercase tracking-widest shadow-2xl shadow-red-600/20 rounded-2xl group active:scale-[0.98] transition-all"
+								class="btn-primary w-full py-4 h-auto font-black text-sm uppercase tracking-widest rounded-2xl group active:scale-[0.98] transition-all"
 								::disabled="!available" @click.prevent="$dispatch('slider-close')">
 								<x-slot:append>
 									<x-mary-icon name="o-chevron-right"
