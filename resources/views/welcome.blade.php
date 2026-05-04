@@ -14,31 +14,6 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
-    <style>
-        body {
-            font-family: 'Outfit', sans-serif;
-        }
-
-        .hero-gradient {
-            background: radial-gradient(circle at 0% 0%, rgba(185, 28, 28, 0.03) 0%, transparent 50%),
-                radial-gradient(circle at 100% 100%, rgba(185, 28, 28, 0.03) 0%, transparent 50%);
-        }
-
-        .text-glow {
-            text-shadow: 0 0 20px rgba(185, 28, 28, 0.15);
-        }
-
-        .clip-path-custom {
-            clip-path: polygon(15% 0, 100% 0%, 100% 100%, 0% 100%);
-        }
-
-        @media (max-width: 1024px) {
-            .clip-path-custom {
-                clip-path: none;
-            }
-        }
-    </style>
-
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 

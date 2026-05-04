@@ -30,27 +30,6 @@ new class extends Component
 
 <div class="space-y-6 animate__animated animate__fadeIn">
 	@forelse ($this->orders as $order)
-		@php
-			$badgeConfig = match ($order->status) {
-			    \App\Enums\OrderStatus::Processing => [
-			        'class' => 'badge-info bg-blue-500/10 text-blue-600 border-blue-500/20',
-			        'icon' => 'o-arrow-path',
-			    ],
-			    \App\Enums\OrderStatus::InTransit => [
-			        'class' => 'badge-warning bg-amber-500/10 text-amber-600 border-amber-500/20',
-			        'icon' => 'o-truck',
-			    ],
-			    \App\Enums\OrderStatus::Delivered => [
-			        'class' => 'badge-success bg-emerald-500/10 text-emerald-600 border-emerald-500/20',
-			        'icon' => 'o-check-circle',
-			    ],
-			    \App\Enums\OrderStatus::NotDelivered => [
-			        'class' => 'badge-error bg-rose-500/10 text-rose-600 border-rose-500/20',
-			        'icon' => 'o-x-circle',
-			    ],
-			};
-		@endphp
-
 		<div
 			class="group relative bg-base-100 border border-base-content/5 rounded-3xl p-6 lg:p-8 transition-all duration-500 hover:shadow-2xl hover:shadow-red-900/5 hover:-translate-y-1 overflow-hidden">
 			{{-- Decorative Side Accent --}}
@@ -64,8 +43,7 @@ new class extends Component
 					<div class="flex flex-wrap items-center gap-4">
 						<span
 							class="text-xs font-black uppercase tracking-widest text-red-600">#ORD-{{ str_pad($order->id, 5, '0', STR_PAD_LEFT) }}</span>
-						<x-mary-badge :label="$order->status->getLabel()" :icon="$badgeConfig['icon']"
-							class="font-black uppercase tracking-widest text-[9px] py-3 px-4 rounded-xl border {{ $badgeConfig['class'] }}" />
+						<x-base.status-badge :status="$order->status" :icon="$order->status->getIcon()" />
 						@if ($order->payment_id)
 							<x-mary-badge label="Pagado" icon="o-credit-card"
 								class="badge-neutral bg-base-content/5 text-base-content/60 border-none font-bold uppercase tracking-widest text-[9px] py-3 px-4 rounded-xl" />
@@ -114,17 +92,9 @@ new class extends Component
 			</div>
 		</div>
 	@empty
-		<div class="py-20 text-center animate__animated animate__zoomIn">
-			<div class="w-24 h-24 bg-base-content/5 rounded-full flex items-center justify-center mx-auto mb-6">
-				<x-mary-icon name="o-archive-box-x-mark" class="w-10 h-10 text-base-content/20" />
-			</div>
-			<h4 class="text-xl font-black uppercase tracking-tighter mb-2">No tienes pedidos aún</h4>
-			<p class="text-[10px] font-bold uppercase tracking-widest text-base-content/30 mb-8 max-w-xs mx-auto">
-				Explora nuestra tienda premium y comienza tu primera experiencia Comprana.
-			</p>
-			<x-mary-button link="/tienda" label="Ir a la Tienda"
-				class="btn-primary rounded-2xl px-10 font-black text-xs uppercase tracking-widest shadow-xl shadow-red-600/20" />
-		</div>
+		<x-base.empty-state icon="o-archive-box-x-mark" title="No tienes pedidos aún"
+			description="Explora nuestra tienda premium y comienza tu primera experiencia Comprana."
+			link="/tienda" />
 	@endforelse
 
 	{{-- Pagination Styled --}}

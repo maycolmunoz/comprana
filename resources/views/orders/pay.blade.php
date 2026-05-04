@@ -37,9 +37,7 @@ $total = 0;
 ?>
         <x-app-layout>
     <x-slot name="header">
-        <h2 class="text-xl font-semibold leading-tight text-gray-800">
-            Pagar Pedido
-        </h2>
+        <x-base.page-header title="Pagar Pedido" />
     </x-slot>
 
     <div class="container px-6 mx-auto">  
