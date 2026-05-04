@@ -5,8 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
-new class extends Component
-{
+new class extends Component {
     public bool $myModal1 = false;
 
     public $carts;
@@ -92,7 +91,7 @@ new class extends Component
                 </div>
             @endif
 
-            <div
+            <div wire:key="cart-{{ $cart->id }}"
                 class="relative bg-base-100 border {{ $cart->active ? 'border-red-600/30 shadow-2xl shadow-red-900/10' : 'border-base-content/5 shadow-xl shadow-base-content/5' }} rounded-[2.5rem] overflow-hidden transition-all duration-500 hover:-translate-y-2">
 
                 {{-- Header with Icon & Active Toggle --}}
@@ -143,11 +142,6 @@ new class extends Component
                             wire:confirm='¿Desea vaciar el carrito {{ $cart->name }}?'
                             class="col-span-2 btn-error btn-outline btn-sm font-black text-[10px] uppercase tracking-widest rounded-xl w-full border-red-600/20 hover:bg-red-600/10 hover:border-red-600/40 text-red-600" />
                     </div>
-                </div>
-
-                {{-- Glass Shine Effect --}}
-                <div
-                    class="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-transparent via-red-600/10 to-transparent">
                 </div>
             </div>
         </div>
