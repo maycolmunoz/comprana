@@ -7,7 +7,6 @@
     <title>Comprana | Donde la comodidad se encuentra</title>
     <link rel="shortcut icon" href="{{ asset('srcs/favicon.ico') }}" type="image/x-icon">
 
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -19,7 +18,6 @@
 
 <body class="antialiased bg-base-100 h-screen overflow-hidden hero-gradient text-base-content">
 
-    <!-- Navbar -->
     <nav class="absolute top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-6 lg:px-12">
         <div class="animate__animated animate__fadeInDown">
             <x-base.brand href="/" :logo="asset('srcs/favicon.ico')" alt="comprana" class="justify-start!" />
@@ -42,8 +40,7 @@
     </nav>
 
     <main class="flex flex-col lg:flex-row h-full">
-        <!-- Content Area -->
-        <div class="w-full lg:w-3/5 flex items-center justify-center p-8 lg:p-20 order-2 lg:order-1 h-full">
+    <div class="w-full lg:w-3/5 flex items-center justify-center p-8 lg:p-20 order-2 lg:order-1 h-full">
             <div class="max-w-2xl animate__animated animate__fadeInLeft">
                 <x-mary-badge value="Comprana" class="badge-primary badge-soft text-xl p-4" />
 
@@ -73,7 +70,6 @@
                     </div>
                 </div>
 
-                <!-- Subtle stats or footer info -->
                 <div
                     class="mt-20 flex gap-10 items-center border-t border-base-200 pt-10 animate__animated animate__fadeInUp animate__delay-1s opacity-50">
                     <div class="flex flex-col">
@@ -92,7 +88,6 @@
             </div>
         </div>
 
-        <!-- Image Area -->
         <div class="w-full lg:w-2/5 h-full relative overflow-hidden order-1 lg:order-2">
             <div class="absolute inset-0 bg-linear-to-t lg:bg-linear-to-l from-transparent to-base-100 z-10"></div>
             <div class="h-full w-full clip-path-custom overflow-hidden">

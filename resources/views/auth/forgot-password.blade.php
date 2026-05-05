@@ -6,7 +6,6 @@
 		</p>
 	</div>
 
-	<!-- Session Status -->
 	<x-base.auth-session-status class="mb-6" :status="session('status')" />
 
 	<form method="POST" action="{{ route('password.email') }}" class="space-y-6">

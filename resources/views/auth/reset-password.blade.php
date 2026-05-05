@@ -9,8 +9,7 @@
 	<form method="POST" action="{{ route('password.store') }}" class="space-y-6">
 		@csrf
 
-		<!-- Password Reset Token -->
-		<input type="hidden" name="token" value="{{ $request->route('token') }}">
+	<input type="hidden" name="token" value="{{ $request->route('token') }}">
 
 		<x-mary-input label="Email" name="email" type="email" icon="o-envelope"
 			value="{{ old('email', $request->email) }}" required autocomplete="username"

@@ -13,7 +13,6 @@
 		@csrf
 		@method('put')
 
-		{{-- Current Password --}}
 		<div>
 			<x-mary-input label="Contraseña Actual" name="current_password" type="password" icon="o-lock-closed"
 				autocomplete="current-password" class="bg-base-content/5 border-none focus:ring-red-600/20" />
@@ -21,14 +20,12 @@
 		</div>
 
 		<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-			{{-- New Password --}}
 			<div>
 				<x-mary-input label="Nueva Contraseña" name="password" type="password" icon="o-key"
 					autocomplete="new-password" class="bg-base-content/5 border-none focus:ring-red-600/20" />
 				<x-base.input-error :messages="$errors->updatePassword->get('password')" class="" />
 			</div>
 
-			{{-- Confirm Password --}}
 			<div>
 				<x-mary-input label="Confirmar Nueva Contraseña" name="password_confirmation" type="password"
 					icon="o-check-badge" autocomplete="new-password" class="bg-base-content/5 border-none focus:ring-red-600/20" />

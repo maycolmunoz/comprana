@@ -8,22 +8,18 @@
     <title>{{ config('app.name', 'Comprana') }}</title>
     <link rel="shortcut icon" href="{{ asset('srcs/favicon.ico') }}" type="image/x-icon">
 
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     @livewireStyles()
 </head>
 
 <body class="antialiased bg-base-200/50 text-base-content min-h-screen flex flex-col">
-    {{-- Navigation --}}
     @include('layouts.navigation')
 
-    {{-- Page Heading --}}
     @if (isset($header))
         <header class="bg-base-100/50 backdrop-blur-md border-b border-base-content/5 py-6">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -34,17 +30,14 @@
         </header>
     @endif
 
-    {{-- Main Content --}}
     <main class="grow">
         {{ $slot }}
     </main>
 
-    {{-- Footer --}}
     <x-base.footer />
 
 
 
-    {{-- Notification Toast --}}
     <x-base.notification-toast />
 
     @livewireScriptConfig()

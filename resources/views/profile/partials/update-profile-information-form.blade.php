@@ -18,7 +18,6 @@
 		@method('patch')
 
 		<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-			{{-- Name --}}
 			<div>
 				<x-mary-input label="Nombre" name="name" type="text" icon="o-user"
 					value="{{ old('name', $user->name) }}" required autofocus autocomplete="name"
@@ -26,8 +25,7 @@
 				<x-base.input-error :messages="$errors->get('name')" class="" />
 			</div>
 
-			{{-- Email --}}
-			<div class="space-y-2">
+		<div class="space-y-2">
 				<x-mary-input label="Email" name="email" type="email" icon="o-envelope"
 					value="{{ old('email', $user->email) }}" required autocomplete="username"
 					class="bg-base-content/5 border-none focus:ring-red-600/20" />
@@ -53,7 +51,6 @@
 		</div>
 
 		<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-			{{-- Phone --}}
 			<div>
 				<x-mary-input label="Teléfono" name="phone" type="text" icon="o-phone"
 					value="{{ old('phone', $user->phone) }}" placeholder="Ej: +34 600 000 000"
@@ -61,7 +58,6 @@
 				<x-base.input-error :messages="$errors->get('phone')" class="" />
 			</div>
 
-			{{-- Address --}}
 			<div>
 				<x-mary-input label="Dirección" name="address" type="text" icon="o-map-pin"
 					value="{{ old('address', $user->address) }}" placeholder="Ej: Calle Real 123, Barrio Centro"

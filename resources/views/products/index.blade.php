@@ -3,14 +3,12 @@
         <x-base.page-header title="Nuestra Tienda" />
     </x-slot>
 
-    {{-- Product Details Drawer (Slide-over) --}}
     <div x-data="{ slideOverOpen: false }" @slider.window="slideOverOpen = true" @slider-close.window="slideOverOpen = false"
         class="relative z-100">
 
         <template x-teleport="body">
             <div x-show="slideOverOpen" @keydown.window.escape="slideOverOpen = false" class="relative z-100" x-cloak>
 
-                {{-- Backdrop --}}
                 <div x-show="slideOverOpen" x-transition:enter="transition-opacity ease-out duration-500"
                     x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
                     x-transition:leave="transition-opacity ease-in duration-400" x-transition:leave-start="opacity-100"
@@ -21,7 +19,6 @@
                     <div class="absolute inset-0 overflow-hidden">
                         <div class="fixed inset-y-0 right-0 flex max-w-full pl-0 sm:pl-10">
 
-                            {{-- Panel --}}
                             <div x-show="slideOverOpen" @click.away="slideOverOpen = false"
                                 x-transition:enter="transform transition ease-out duration-500 sm:duration-700"
                                 x-transition:enter-start="translate-x-full" x-transition:enter-end="translate-x-0"
@@ -31,10 +28,8 @@
 
                                 <div
                                     class="flex flex-col h-full bg-base-100 border-l border-base-content/5 shadow-[-20px_0_50px_-15px_rgba(0,0,0,0.1)] relative overflow-hidden">
-                                    {{-- Accent Top Line --}}
                                     <div class="h-1.5 w-full bg-linear-to-r from-red-600 to-red-400"></div>
 
-                                    {{-- Header --}}
                                     <div
                                         class="px-6 py-8 sm:px-10 border-b border-base-content/5 flex items-center justify-between bg-base-100/50 backdrop-blur-sm sticky top-0 z-20">
                                         <div>
@@ -54,14 +49,12 @@
                                             class="btn-ghost btn-circle btn-sm hover:rotate-90 transition-transform duration-300" />
                                     </div>
 
-                                    {{-- Content area --}}
                                     <div class="relative flex-1 overflow-y-auto px-6 py-8 sm:px-10 bg-base-200/30">
                                         <div class="animate__animated animate__fadeIn animate__delay-1s">
                                             <livewire:products.details />
                                         </div>
                                     </div>
 
-                                    {{-- Bottom Decoration --}}
                                     <div
                                         class="px-6 py-4 border-t border-base-content/5 bg-base-100/80 backdrop-blur-md text-center">
                                         <div class="inline-flex items-center gap-2 opacity-20">
@@ -78,7 +71,6 @@
         </template>
     </div>
 
-    {{-- Filters & Search Section --}}
     <section class="bg-base-100 border-b border-base-content/5 mb-12">
         <div class="max-w-7xl mx-auto px-6 py-10 lg:py-16">
             <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-8">
@@ -101,7 +93,6 @@
         </div>
     </section>
 
-    {{-- Products Grid --}}
     <div class="max-w-7xl mx-auto px-6 pb-24 min-h-[60vh]">
         <livewire:products.list lazy />
     </div>

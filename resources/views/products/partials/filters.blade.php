@@ -1,5 +1,4 @@
 <section class="flex flex-col md:flex-row items-center gap-6 mb-10 animate__animated animate__fadeIn">
-	{{-- -----Search Box---- --}}
 	<div class="w-full md:w-auto grow max-w-md" x-data="{ query: '{{ request('search' ?? '') }}' }">
 		<div class="relative group">
 			<div
@@ -19,9 +18,7 @@
 		</div>
 	</div>
 
-	{{-- ---Section Selector--- --}}
 	<div class="relative w-full md:w-64 group" x-data="{ open: false }" @click.away="open = false">
-		{{-- Trigger Button --}}
 		<button @click="open = !open"
 			class="w-full flex items-center justify-between px-6 py-4 bg-base-100 border border-base-content/10 rounded-2xl font-bold text-sm tracking-wide uppercase hover:bg-base-200/50 hover:border-red-600/30 transition-all shadow-sm group">
 			<div class="flex items-center gap-3">
@@ -32,7 +29,6 @@
 				::class="open ? 'rotate-180 text-red-600' : ''" />
 		</button>
 
-		{{-- Dropdown Options --}}
 		<div x-show="open" x-transition:enter="transition ease-out duration-200"
 			x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0"
 			x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0"

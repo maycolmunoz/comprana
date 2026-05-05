@@ -6,7 +6,6 @@
 		</p>
 	</div>
 
-	<!-- Session Status -->
 	<x-base.auth-session-status class="mb-6" :status="session('status')" />
 
 	<form method="POST" action="{{ route('login') }}" class="space-y-6">
@@ -20,8 +19,7 @@
 			autocomplete="current-password" class="bg-base-content/5 border-none focus:ring-red-600/20" />
 		<x-base.input-error :messages="$errors->get('password')" class="mt-2" />
 
-		<!-- Remember Me & Forgot Password -->
-		<div class="flex items-center justify-between">
+	<div class="flex items-center justify-between">
 			<label for="remember_me" class="inline-flex items-center group cursor-pointer">
 				<input id="remember_me" type="checkbox"
 					class="rounded-lg border-base-content/10 text-red-600 shadow-sm focus:ring-red-600/20" name="remember">

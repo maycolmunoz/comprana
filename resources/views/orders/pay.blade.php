@@ -45,7 +45,6 @@ $total = 0;
             <div class="order-2 w-full lg:w-1/2">
 
 
-                {{-- left --}}
                 <div class="flex flex-col my-5">
                     <div class="overflow-x-auto ">
                         <div class="inline-block min-w-full py-2 sm:px-1 lg:px-2">
@@ -101,7 +100,6 @@ $total = 0;
 
             </div>
 
-            {{-- Right --}}
             <div class="shrink-0 order-1 w-full mb-8 lg:w-1/2 lg:mb-0 lg:order-2">
                 <div class="flex justify-center lg:justify-end">
                     <div class="w-full max-w-md px-4 py-3 bg-white border rounded-md">

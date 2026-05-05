@@ -17,7 +17,6 @@
 
 	<x-base.modal name="confirm-user-deletion" :show="$errors->userDeletion->isNotEmpty()" focusable>
 		<div class="p-8 bg-base-100 rounded-4xl border border-base-content/5 shadow-2xl relative overflow-hidden">
-			{{-- Warning Accent --}}
 			<div class="absolute top-0 left-0 w-full h-1.5 bg-red-600"></div>
 
 			<form method="post" action="{{ route('profile.destroy') }}">
