@@ -39,7 +39,7 @@
 
             @if (session('status') === 'password-updated')
                 <div x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 3000)"
-                    class="flex items-center gap-2 text-green-600 animate__animated animate__fadeIn">
+                    class="flex items-center gap-2 text-success animate__animated animate__fadeIn">
                     <x-mary-icon name="o-check-circle" class="w-4 h-4" />
                     <span class="text-[10px] font-black uppercase tracking-widest">Guardado</span>
                 </div>

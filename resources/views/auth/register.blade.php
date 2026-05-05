@@ -1,7 +1,7 @@
 <x-guest-layout>
     <div class="mb-8 text-center">
         <h2 class="text-2xl font-black uppercase tracking-tighter">Crea tu cuenta</h2>
-        <p class="text-[10px] font-bold uppercase tracking-widest text-base-content/40 mt-1">
+        <p class="text-[10px] font-bold uppercase tracking-widest text-base-content/60 mt-1">
             Únete a la mejor experiencia
         </p>
     </div>
@@ -61,7 +61,7 @@
 
         <div class="text-center pt-2">
             <span
-                class="text-[10px] font-bold uppercase tracking-widest text-base-content/30">
+                class="text-[10px] font-bold uppercase tracking-widest text-base-content/60">
                 ¿Ya tienes cuenta?
             </span>
             <a

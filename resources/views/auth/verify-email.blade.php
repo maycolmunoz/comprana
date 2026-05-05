@@ -1,7 +1,7 @@
 <x-guest-layout>
     <div class="mb-8 text-center">
         <h2 class="text-2xl font-black uppercase tracking-tighter">Verifica tu cuenta</h2>
-        <p class="text-[10px] font-bold uppercase tracking-widest text-base-content/40 mt-2 leading-relaxed px-4">
+        <p class="text-[10px] font-bold uppercase tracking-widest text-base-content/60 mt-2 leading-relaxed px-4">
             ¡Gracias por unirte! Antes de comenzar, por favor verifica tu correo pulsando el enlace que te acabamos de enviar. Si no lo recibiste, con gusto te enviaremos otro.
         </p>
     </div>
@@ -27,7 +27,7 @@
             @csrf
             <button
                 type="submit"
-                class="text-[10px] font-black uppercase tracking-widest text-base-content/40 hover:text-red-600 transition-colors">
+                class="text-[10px] font-black uppercase tracking-widest text-base-content/60 hover:text-red-600 transition-colors">
                 Cerrar Sesión
             </button>
         </form>

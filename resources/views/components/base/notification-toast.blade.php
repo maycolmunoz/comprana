@@ -14,12 +14,12 @@
 
     <div
         class="bg-base-100 border border-base-content/10 shadow-2xl rounded-3xl p-4 flex items-center gap-4 backdrop-blur-xl">
-        <div class="w-10 h-10 rounded-2xl flex items-center justify-center shrink-0"
-            :class="{
-                'bg-green-500/10 text-green-600': type === 'success',
-                'bg-red-500/10 text-red-600': type === 'error',
-                'bg-amber-500/10 text-amber-600': type === 'warning'
-            }">
+            <div class="w-10 h-10 rounded-2xl flex items-center justify-center shrink-0"
+                :class="{
+                    'bg-success/10 text-success': type === 'success',
+                    'bg-error/10 text-error': type === 'error',
+                    'bg-warning/10 text-warning': type === 'warning'
+                }">
             <x-mary-icon name="o-check-circle" class="w-6 h-6" x-show="type === 'success'" />
             <x-mary-icon name="o-x-circle" class="w-6 h-6" x-show="type === 'error'" />
             <x-mary-icon name="o-exclamation-triangle" class="w-6 h-6" x-show="type === 'warning'" />

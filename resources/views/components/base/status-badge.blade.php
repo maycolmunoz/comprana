@@ -2,10 +2,10 @@
 
 @php
     $badgeClass = match ($status) {
-        \App\Enums\OrderStatus::Processing => 'badge-info bg-blue-500/10 text-blue-600 border-blue-500/20',
-        \App\Enums\OrderStatus::InTransit => 'badge-warning bg-amber-500/10 text-amber-600 border-amber-500/20',
-        \App\Enums\OrderStatus::Delivered => 'badge-success bg-emerald-500/10 text-emerald-600 border-emerald-500/20',
-        \App\Enums\OrderStatus::NotDelivered => 'badge-error bg-rose-500/10 text-rose-600 border-rose-500/20',
+        \App\Enums\OrderStatus::Processing => 'badge-info bg-info/10 text-info border-info/20',
+        \App\Enums\OrderStatus::InTransit => 'badge-warning bg-warning/10 text-warning border-warning/20',
+        \App\Enums\OrderStatus::Delivered => 'badge-success bg-success/10 text-success border-success/20',
+        \App\Enums\OrderStatus::NotDelivered => 'badge-error bg-error/10 text-error border-error/20',
         default => 'badge-ghost',
     };
 @endphp

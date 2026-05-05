@@ -1,7 +1,7 @@
 <x-guest-layout>
     <div class="mb-8 text-center">
         <h2 class="text-2xl font-black uppercase tracking-tighter">¿Contraseña olvidada?</h2>
-        <p class="text-[10px] font-bold uppercase tracking-widest text-base-content/40 mt-2 leading-relaxed">
+        <p class="text-[10px] font-bold uppercase tracking-widest text-base-content/60 mt-2 leading-relaxed">
             No hay problema. Ingresa tu correo y te enviaremos un enlace para restablecerla.
         </p>
     </div>
@@ -32,7 +32,7 @@
         <div class="text-center pt-2">
             <a
                 href="{{ route('login') }}"
-                class="text-[10px] font-black uppercase tracking-widest text-base-content/40 hover:text-red-600 transition-colors">
+                class="text-[10px] font-black uppercase tracking-widest text-base-content/60 hover:text-red-600 transition-colors">
                 ← Volver al inicio de sesión
             </a>
         </div>

@@ -11,7 +11,7 @@
         <x-mary-icon :name="$icon" class="w-10 h-10 text-base-content/20" />
     </div>
     <h4 class="text-xl font-black uppercase tracking-tighter mb-2">{{ $title }}</h4>
-    <p class="text-[10px] font-bold uppercase tracking-widest text-base-content/30 mb-8 max-w-xs mx-auto">
+    <p class="text-[10px] font-bold uppercase tracking-widest text-base-content/60 mb-8 max-w-xs mx-auto">
         {{ $description }}
     </p>
     @if ($link)

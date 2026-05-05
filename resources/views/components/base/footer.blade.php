@@ -59,7 +59,7 @@
                             <x-mary-icon name="o-envelope" class="w-5 h-5" />
                         </div>
                         <div>
-                            <p class="text-[10px] uppercase font-bold text-base-content/40 mb-0.5">Escríbenos</p>
+                            <p class="text-[10px] uppercase font-bold text-base-content/60 mb-0.5">Escríbenos</p>
                             <a href="mailto:hola@comprana.com" class="text-sm font-bold truncate">hola@comprana.com</a>
                         </div>
                     </div>
@@ -70,7 +70,7 @@
                             <x-mary-icon name="o-phone" class="w-5 h-5" />
                         </div>
                         <div>
-                            <p class="text-[10px] uppercase font-bold text-base-content/40 mb-0.5">Llámanos</p>
+                            <p class="text-[10px] uppercase font-bold text-base-content/60 mb-0.5">Llámanos</p>
                             <a href="tel:+573000000000" class="text-sm font-bold">+57 300 000 0000</a>
                         </div>
                     </div>
@@ -82,8 +82,8 @@
             <p class="text-[10px] font-bold uppercase tracking-widest text-base-content/40">
                 &copy; {{ date('Y') }} COMPRANA. TODOS LOS DERECHOS RESERVADOS.
             </p>
-            <div
-                class="flex items-center gap-6 opacity-30 hover:opacity-100 transition-opacity duration-500 italic font-medium text-[10px]">
+        <div
+            class="flex items-center gap-6 opacity-60 hover:opacity-100 transition-opacity duration-500 italic font-medium text-[10px]">
                 <span>Visa</span>
                 <span>Mastercard</span>
                 <span>American Express</span>

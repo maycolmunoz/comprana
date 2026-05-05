@@ -17,8 +17,8 @@
                     class="text-sm uppercase tracking-widest text-base-content/80 group-open:text-red-700 transition-colors">{{ $title }}</span>
             </div>
 
-            <x-mary-icon name="o-chevron-right"
-                class="w-4 h-4 text-base-content/30 transition-transform duration-300 group-open:rotate-90" />
+                <x-mary-icon name="o-chevron-right"
+                    class="w-4 h-4 text-base-content/50 transition-transform duration-300 group-open:rotate-90" />
         </summary>
 
         <article class="px-8 pb-6 animate__animated animate__fadeInDown animate__faster">

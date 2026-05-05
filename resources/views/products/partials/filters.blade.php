@@ -2,7 +2,7 @@
     <div class="w-full md:w-auto grow max-w-md" x-data="{ query: '{{ request('search' ?? '') }}' }">
         <div class="relative group">
             <div
-                class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-base-content/30 group-focus-within:text-red-600 transition-colors">
+                class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-base-content/50 group-focus-within:text-red-600 transition-colors">
                 <x-mary-icon name="o-magnifying-glass" class="w-5 h-5" />
             </div>
 
@@ -32,7 +32,7 @@
             </div>
             <x-mary-icon
                 name="o-chevron-down"
-                class="w-4 h-4 text-base-content/30 transition-transform duration-300"
+                class="w-4 h-4 text-base-content/50 transition-transform duration-300"
                 ::class="open ? 'rotate-180 text-red-600' : ''" />
         </button>
 

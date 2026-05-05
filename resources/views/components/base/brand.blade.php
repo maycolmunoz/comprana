@@ -8,7 +8,7 @@
 ])
 
 <a href="{{ $href }}" target="{{ $target }}"
-    {{ $attributes->merge(['class' => 'flex items-center justify-center gap-x-3 text-decoration-none hover:opacity-80 transition-opacity text-black dark:text-white']) }}>
+    {{ $attributes->merge(['class' => 'flex items-center justify-center gap-x-3 text-decoration-none hover:opacity-80 transition-opacity text-base-content']) }}>
     @if ($logo || isset($logo))
         <div class="shrink-0">
             @if (isset($logo) && is_string($logo))

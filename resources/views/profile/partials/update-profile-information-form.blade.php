@@ -31,17 +31,17 @@
                     class="bg-base-content/5 border-none focus:ring-red-600/20" />
                 <x-base.input-error :messages="$errors->get('email')" class="" />
 
-                @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && !$user->hasVerifiedEmail())
-                    <div class="px-4 py-2 bg-amber-500/10 rounded-xl border border-amber-500/20">
-                        <p class="text-[10px] font-black uppercase tracking-widest text-amber-700">
+            @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && !$user->hasVerifiedEmail())
+                <div class="px-4 py-2 bg-warning/10 rounded-xl border border-warning/20">
+                    <p class="text-[10px] font-black uppercase tracking-widest text-warning">
                             Tu correo no está verificado.
                             <button form="send-verification" class="ml-2 underline hover:text-amber-900 transition-colors uppercase">
                                 Reenviar verificación
                             </button>
                         </p>
 
-                        @if (session('status') === 'verification-link-sent')
-                            <p class="mt-1 text-[8px] font-bold uppercase tracking-widest text-green-600">
+                    @if (session('status') === 'verification-link-sent')
+                        <p class="mt-1 text-[8px] font-bold uppercase tracking-widest text-success">
                                 Se ha enviado un nuevo enlace a tu correo.
                             </p>
                         @endif
