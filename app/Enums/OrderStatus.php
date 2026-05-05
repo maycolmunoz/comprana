@@ -30,4 +30,14 @@ enum OrderStatus: string implements HasLabel
             self::NotDelivered => 'gray',
         };
     }
+
+    public function getIcon(): string
+    {
+        return match ($this) {
+            self::Processing => 'o-arrow-path',
+            self::InTransit => 'o-truck',
+            self::Delivered => 'o-check-circle',
+            self::NotDelivered => 'o-x-circle',
+        };
+    }
 }

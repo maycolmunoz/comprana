@@ -29,19 +29,20 @@ new class extends Component {
     #[Computed]
     public function products()
     {
-        $query = Product::search($this->search);
+        $query = Product::search($this->search)->with('section:id,name');
 
-        if ($this->search != '') {
-            $this->order = $this->order === 'asc' || $this->order === 'desc' ? $this->order : 'asc';
-            $query->search($this->search)->orderBy('price', $this->order);
-        }
-
-        if ($this->section === '') {
-            $query->with('section:id,name')->orderBy('id', 'desc');
-        } else {
+        if ($this->section !== '') {
             $query->whereHas('section', function ($query) {
                 $query->whereName($this->section);
             });
+        }
+
+        $this->order = in_array($this->order, ['asc', 'desc']) ? $this->order : 'asc';
+
+        if ($this->search !== '' || $this->section !== '') {
+            $query->orderBy('price', $this->order);
+        } else {
+            $query->orderBy('id', 'desc');
         }
 
         return $query->paginate(12);
