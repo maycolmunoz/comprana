@@ -49,7 +49,7 @@ new class extends Component
 			{{-- Products List --}}
 			<div class="lg:w-2/3 space-y-6">
 				@foreach ($cart->products as $product)
-					<livewire:carts.product :key='$product->id' :$product :cant="$product->pivot->cant" :$cart>
+					<livewire:carts.product :key="$product->id" :$product :cant="$product->pivot->cant" :$cart />
 				@endforeach
 			</div>
 
@@ -95,17 +95,6 @@ new class extends Component
 							class="btn-primary w-full py-4 h-auto font-black text-sm uppercase tracking-widest rounded-2xl group" />
 					</div>
 
-					{{-- Trust Badges --}}
-					<div class="bg-base-content/5 rounded-4xl p-6 text-center">
-						<p class="text-[8px] font-black uppercase tracking-[0.3em] text-base-content/30 mb-4">
-							Transacción 100% Protegida</p>
-						<div
-							class="flex justify-center items-center gap-6 opacity-40 grayscale hover:grayscale-0 transition-all duration-500">
-							<x-mary-icon name="o-shield-check" class="w-6 h-6" />
-							<x-mary-icon name="o-credit-card" class="w-6 h-6" />
-							<x-mary-icon name="o-lock-closed" class="w-6 h-6" />
-						</div>
-					</div>
 				</div>
 			</div>
 		</div>
