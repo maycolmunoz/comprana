@@ -36,8 +36,6 @@
 
     <x-base.footer />
 
-
-
     <x-base.notification-toast />
 
     @livewireScriptConfig()

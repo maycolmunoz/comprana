@@ -1,13 +1,13 @@
- <?php
+<?php
 
-        use MercadoPago\Client\Preference\PreferenceClient;
+use MercadoPago\Client\Preference\PreferenceClient;
 use MercadoPago\MercadoPagoConfig;
 
 MercadoPagoConfig::setAccessToken(config('services.mercadopago.token'));
 
 $client = new PreferenceClient;
 
-    foreach ($cart->products as $product) {
+foreach ($cart->products as $product) {
     $item = new stdClass;
     $item->title = $product->name;
     $item->quantity = $product->pivot->cant;
@@ -40,31 +40,33 @@ $total = 0;
         <x-base.page-header title="Pagar Pedido" />
     </x-slot>
 
-    <div class="container px-6 mx-auto">  
+    <div class="container px-6 mx-auto">
         <div class="flex flex-col my-10 lg:flex-row">
             <div class="order-2 w-full lg:w-1/2">
-
-
                 <div class="flex flex-col my-5">
-                    <div class="overflow-x-auto ">
+                    <div class="overflow-x-auto">
                         <div class="inline-block min-w-full py-2 sm:px-1 lg:px-2">
                             <div class="overflow-hidden">
                                 <table class="min-w-full">
                                     <thead class="bg-white border-b">
                                         <tr>
-                                            <th scope="col"
+                                            <th
+                                                scope="col"
                                                 class="px-6 py-4 text-sm font-medium text-left text-gray-900">
                                                 Nombre
                                             </th>
-                                            <th scope="col"
+                                            <th
+                                                scope="col"
                                                 class="px-6 py-4 text-sm font-medium text-left text-gray-900">
                                                 Precio
                                             </th>
-                                            <th scope="col"
+                                            <th
+                                                scope="col"
                                                 class="px-6 py-4 text-sm font-medium text-left text-gray-900">
                                                 Cantidad
                                             </th>
-                                            <th scope="col"
+                                            <th
+                                                scope="col"
                                                 class="px-6 py-4 text-sm font-medium text-left text-gray-900">
                                                 Total
                                             </th>
@@ -72,28 +74,44 @@ $total = 0;
                                     </thead>
                                     <tbody>
                                         @foreach ($cart->products as $product)
-                                        @php
-                                            $total += $product->pivot->cant * $product->price;
-                                        @endphp
-                                        <tr class="bg-gray-100 border-b">
-                                            <td class="px-6 py-2 text-sm font-medium text-gray-900 whitespace-nowrap">
-                                                {{ $product->name }}
-                                            </td>
-                                            <td class="px-6 py-2 text-sm font-light text-gray-900 whitespace-nowrap">
-                                                {{ $product->price }}
-                                            </td>
-                                            <td
-                                                class="px-6 py-2 text-sm font-light text-center text-gray-900 whitespace-nowrap">
-                                                {{ $product->pivot->cant }}
-                                            </td>
-                                            <td class="px-6 py-2 text-sm font-light text-gray-900 whitespace-nowrap">
-                                                {{ $product->pivot->cant * $product->price }}
-                                            </td>
-                                        </tr>
+                                            @php
+                                                $total += $product->pivot->cant * $product->price;
+                                            @endphp
+                                            <tr class="bg-gray-100 border-b">
+                                                <td class="px-6 py-2 text-sm font-medium text-gray-900 whitespace-nowrap">
+                                                    {{ $product->name }}
+                                                </td>
+                                                <td class="px-6 py-2 text-sm font-light text-gray-900 whitespace-nowrap">
+                                                    {{ $product->price }}
+                                                </td>
+                                                <td class="px-6 py-2 text-sm font-light text-center text-gray-900 whitespace-nowrap">
+                                                    {{ $product->pivot->cant }}
+                                                </td>
+                                                <td class="px-6 py-2 text-sm font-light text-gray-900 whitespace-nowrap">
+                                                    {{ $product->pivot->cant * $product->price }}
+                                                </td>
+                                            </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="shrink-0 order-1 w-full mb-8 lg:w-1/2 lg:mb-0 lg:order-2">
+                <div class="flex justify-center lg:justify-end">
+                    <div class="w-full max-w-md px-4 py-3 bg-white border rounded-md">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-medium text-gray-700">Total a Pagar: $ {{$total}} </h3>
+                        </div>
+                        <div id="wallet_container"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
                         </div>
                     </div>
                 </div>

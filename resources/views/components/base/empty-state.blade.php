@@ -1,4 +1,10 @@
-@props(['icon' => 'o-archive-box-x-mark', 'title', 'description', 'link' => null, 'linkLabel' => 'Ir a la Tienda'])
+@props([
+    'icon' => 'o-archive-box-x-mark',
+    'title',
+    'description',
+    'link' => null,
+    'linkLabel' => 'Ir a la Tienda',
+])
 
 <div class="py-20 text-center animate__animated animate__zoomIn">
     <div class="w-24 h-24 bg-base-content/5 rounded-full flex items-center justify-center mx-auto mb-6">

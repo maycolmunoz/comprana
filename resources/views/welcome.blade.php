@@ -26,12 +26,20 @@
         <div class="flex items-center gap-2 lg:gap-4 animate__animated animate__fadeInDown">
             @if (Route::has('login'))
                 @auth
-                    <x-mary-button :link="url('tienda')" class="btn-ghost btn-sm lg:btn-md font-bold" label="Tienda"
+                    <x-mary-button
+                        :link="url('tienda')"
+                        class="btn-ghost btn-sm lg:btn-md font-bold"
+                        label="Tienda"
                         icon="o-shopping-bag" />
                 @else
-                    <x-mary-button :link="route('login')" class="btn-ghost btn-sm lg:btn-md font-bold" label="Entrar" />
+                    <x-mary-button
+                        :link="route('login')"
+                        class="btn-ghost btn-sm lg:btn-md font-bold"
+                        label="Entrar" />
                     @if (Route::has('register'))
-                        <x-mary-button :link="route('register')" class="btn-primary btn-sm lg:btn-md font-bold shadow-lg"
+                        <x-mary-button
+                            :link="route('register')"
+                            class="btn-primary btn-sm lg:btn-md font-bold shadow-lg"
                             label="Unirse" />
                     @endif
                 @endauth
@@ -40,7 +48,7 @@
     </nav>
 
     <main class="flex flex-col lg:flex-row h-full">
-    <div class="w-full lg:w-3/5 flex items-center justify-center p-8 lg:p-20 order-2 lg:order-1 h-full">
+        <div class="w-full lg:w-3/5 flex items-center justify-center p-8 lg:p-20 order-2 lg:order-1 h-full">
             <div class="max-w-2xl animate__animated animate__fadeInLeft">
                 <x-mary-badge value="Comprana" class="badge-primary badge-soft text-xl p-4" />
 
@@ -54,7 +62,9 @@
                 </p>
 
                 <div class="flex flex-col sm:flex-row gap-5 items-start sm:items-center">
-                    <x-mary-button link="{{ route('products.index') }}" icon="o-arrow-right-circle"
+                    <x-mary-button
+                        link="{{ route('products.index') }}"
+                        icon="o-arrow-right-circle"
                         class="btn-primary btn-lg px-12 font-black text-lg shadow-2xl shadow-primary/20 hover:scale-105 transition-all group"
                         label="IR A LA TIENDA" />
 

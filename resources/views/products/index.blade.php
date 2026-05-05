@@ -3,28 +3,45 @@
         <x-base.page-header title="Nuestra Tienda" />
     </x-slot>
 
-    <div x-data="{ slideOverOpen: false }" @slider.window="slideOverOpen = true" @slider-close.window="slideOverOpen = false"
+    <div
+        x-data="{ slideOverOpen: false }"
+        @slider.window="slideOverOpen = true"
+        @slider-close.window="slideOverOpen = false"
         class="relative z-100">
 
         <template x-teleport="body">
-            <div x-show="slideOverOpen" @keydown.window.escape="slideOverOpen = false" class="relative z-100" x-cloak>
+            <div
+                x-show="slideOverOpen"
+                @keydown.window.escape="slideOverOpen = false"
+                class="relative z-100"
+                x-cloak>
 
-                <div x-show="slideOverOpen" x-transition:enter="transition-opacity ease-out duration-500"
-                    x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
-                    x-transition:leave="transition-opacity ease-in duration-400" x-transition:leave-start="opacity-100"
-                    x-transition:leave-end="opacity-0" @click="slideOverOpen = false"
-                    class="fixed inset-0 bg-base-300/40 backdrop-blur-md"></div>
+                <div
+                    x-show="slideOverOpen"
+                    x-transition:enter="transition-opacity ease-out duration-500"
+                    x-transition:enter-start="opacity-0"
+                    x-transition:enter-end="opacity-100"
+                    x-transition:leave="transition-opacity ease-in duration-400"
+                    x-transition:leave-start="opacity-100"
+                    x-transition:leave-end="opacity-0"
+                    @click="slideOverOpen = false"
+                    class="fixed inset-0 bg-base-300/40 backdrop-blur-md">
+                </div>
 
                 <div class="fixed inset-0 overflow-hidden pointer-events-none">
                     <div class="absolute inset-0 overflow-hidden">
                         <div class="fixed inset-y-0 right-0 flex max-w-full pl-0 sm:pl-10">
 
-                            <div x-show="slideOverOpen" @click.away="slideOverOpen = false"
-                                x-transition:enter="transform transition ease-out duration-500 sm:duration-700"
-                                x-transition:enter-start="translate-x-full" x-transition:enter-end="translate-x-0"
-                                x-transition:leave="transform transition ease-in duration-400 sm:duration-700"
-                                x-transition:leave-start="translate-x-0" x-transition:leave-end="translate-x-full"
-                                class="w-screen max-w-2xl pointer-events-auto">
+                             <div
+                                 x-show="slideOverOpen"
+                                 @click.away="slideOverOpen = false"
+                                 x-transition:enter="transform transition ease-out duration-500 sm:duration-700"
+                                 x-transition:enter-start="translate-x-full"
+                                 x-transition:enter-end="translate-x-0"
+                                 x-transition:leave="transform transition ease-in duration-400 sm:duration-700"
+                                 x-transition:leave-start="translate-x-0"
+                                 x-transition:leave-end="translate-x-full"
+                                 class="w-screen max-w-2xl pointer-events-auto">
 
                                 <div
                                     class="flex flex-col h-full bg-base-100 border-l border-base-content/5 shadow-[-20px_0_50px_-15px_rgba(0,0,0,0.1)] relative overflow-hidden">
@@ -75,7 +92,8 @@
         <div class="max-w-7xl mx-auto px-6 py-10 lg:py-16">
             <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-8">
                 <div class="max-w-xl animate__animated animate__fadeInLeft">
-                    <span class="text-[10px] font-black uppercase tracking-widest text-red-600 mb-2 block">
+                    <span
+                        class="text-[10px] font-black uppercase tracking-widest text-red-600 mb-2 block">
                         Catálogo Selecto
                     </span>
                     <h1 class="text-4xl lg:text-6xl font-black tracking-tighter uppercase leading-none mb-6">
