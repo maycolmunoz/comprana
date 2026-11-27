@@ -100,7 +100,7 @@ class UserResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                SelectFilter::make('Filtrar por Role')
+                SelectFilter::make('Filtrar por rol')
                     ->relationship('roles', 'name')
                     ->multiple(),
             ])

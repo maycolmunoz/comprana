@@ -18,17 +18,17 @@ class StatsOverview extends BaseWidget
     {
         return [
             Stat::make('Pedidos', Order::count())
-                ->description('Total Pedidos')
+                ->description('Total de pedidos')
                 ->descriptionIcon('heroicon-m-document')
                 ->color('primary'),
 
             Stat::make('Productos', Product::count())
-                ->description('Total de Productos')
+                ->description('Total de productos')
                 ->descriptionIcon('heroicon-m-circle-stack')
                 ->color('primary'),
 
             Stat::make('Usuarios', User::count())
-                ->description('Total de Usuarios')
+                ->description('Total de usuarios')
                 ->descriptionIcon('heroicon-m-user-group')
                 ->color('primary'),
         ];
