@@ -40,19 +40,20 @@
         <div class="flex items-center justify-between gap-2">
             <div class="flex flex-col">
                 <span class="text-[10px] font-bold uppercase opacity-30 tracking-widest">Precio</span>
-                <span class="text-2xl font-black text-base-content italic tracking-tighter">
-                    <span class="text-red-600 font-normal mr-0.5">$</span>{{ number_format($product->price, 0, ',', '.') }}
-                </span>
+                <x-base.price :value="$product->price"
+                    class="text-2xl font-black text-base-content italic tracking-tighter" />
             </div>
 
             <div class="flex items-center gap-1.5">
                 @if ($inStock)
                     @guest
                         <x-mary-button :link="route('login')" icon="o-shopping-cart"
-                            class="btn-primary btn-circle shadow-lg shadow-primary/20 hover:scale-110" />
+                            class="btn-primary btn-circle shadow-lg shadow-primary/20 hover:scale-110"
+                            aria-label="Inicia sesión para comprar {{ $product->name }}" />
                     @else
                         <x-mary-button icon="o-shopping-cart"
                             class="btn-primary btn-circle shadow-lg shadow-primary/20 hover:scale-110 active:scale-95 transition-all"
+                            aria-label="Ver detalles de {{ $product->name }}"
                             x-data="{
         realizarAccion(id) {
             $dispatch('slider');

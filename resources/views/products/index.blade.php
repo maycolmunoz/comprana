@@ -1,8 +1,4 @@
 <x-app-layout>
-    <x-slot name="header">
-        <x-base.page-header title="Nuestra tienda" />
-    </x-slot>
-
     <div
         x-data="{ slideOverOpen: false }"
         @slider.window="slideOverOpen = true"

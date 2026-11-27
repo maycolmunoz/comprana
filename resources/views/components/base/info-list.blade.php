@@ -26,8 +26,9 @@
 
             <ul class="space-y-4">
                 @foreach ($list as $li)
-                    <li class="flex items-start gap-4 group/item">
-                        <x-mary-icon name="o-check" class="w-3 h-3" :label="$li" />
+                    <li class="flex items-start gap-4">
+                        <x-mary-icon name="o-check" class="w-3.5 h-3.5 text-red-600 mt-0.5 shrink-0" />
+                        <span class="text-xs text-base-content/70 leading-relaxed">{{ $li }}</span>
                     </li>
                 @endforeach
             </ul>

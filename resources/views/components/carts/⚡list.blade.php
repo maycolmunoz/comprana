@@ -108,6 +108,14 @@ new class extends Component
         </form>
     </x-mary-modal>
 
+    @if ($carts->isEmpty())
+        <div class="col-span-full">
+            <x-base.empty-state icon="o-shopping-cart" title="No tienes carritos"
+                description="Explora la tienda y comienza a agregar productos."
+                :link="route('products.index')" link-label="Explorar catálogo" />
+        </div>
+    @endif
+
     {{-- Cart Cards Grid --}}
     @foreach ($carts as $cart)
         <div class="group relative">
@@ -145,7 +153,7 @@ new class extends Component
 
                 {{-- Card Body --}}
                 <div class="p-6">
-                    <h3 class="text-xl font-black uppercase tracking-tighter truncate mb-1">
+                    <h2 class="text-xl font-black uppercase tracking-tighter truncate mb-1">
                         {{ $cart->name }}
                     </h3>
 

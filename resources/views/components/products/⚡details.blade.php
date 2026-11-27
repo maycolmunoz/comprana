@@ -151,10 +151,8 @@ new class extends Component
                         <span class="text-[10px] font-black uppercase tracking-widest text-base-content/30">
                             Precio
                         </span>
-                        <span class="text-4xl font-black text-base-content italic tracking-tighter">
-                            <span
-                                class="text-red-600 font-normal mr-1">$</span>{{ number_format($product->price, 0, ',', '.') }}
-                        </span>
+                        <x-base.price :value="$product->price"
+                            class="text-4xl font-black text-base-content italic tracking-tighter" />
                     </div>
 
                     <div class="flex flex-col pb-1">
@@ -194,13 +192,13 @@ new class extends Component
 
                                     <div
                                         class="flex items-center bg-base-content/5 rounded-2xl p-1.5 gap-2 w-fit border border-base-content/5 shadow-inner">
-                                        <x-mary-button icon="o-minus" class="btn-circle btn-sm btn-ghost"
+                                        <x-mary-button icon="o-minus" class="btn-circle btn-sm btn-ghost" aria-label="Disminuir cantidad"
                                             @click="quantity = quantity <= 1 ? 1 : parseInt(quantity) - 1" />
 
                                         <span class="w-16 text-center text-xl font-black tabular-nums text-base-content"
                                             x-text="quantity"></span>
 
-                                        <x-mary-button icon="o-plus" class="btn-circle btn-sm btn-ghost"
+                                        <x-mary-button icon="o-plus" class="btn-circle btn-sm btn-ghost" aria-label="Aumentar cantidad"
                                             @click="quantity = quantity >= {{ $product->stock }} ? quantity : parseInt(quantity) + 1" />
                                     </div>
 

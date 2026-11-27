@@ -46,7 +46,7 @@ new class extends Component
         <div class="absolute top-3 left-3">
             <span
                 class="bg-base-100/80 backdrop-blur-md px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest border border-white/20 shadow-sm transition-colors group-hover:bg-red-600 group-hover:text-white group-hover:border-red-600 font-outfit">
-                ${{ number_format($product->price, 0, ',', '.') }}
+                <x-base.price :value="$product->price" class="font-black" />
             </span>
         </div>
     </div>
@@ -54,7 +54,7 @@ new class extends Component
     <div class="flex-1 flex flex-col justify-between py-1">
         <div>
             <div class="flex justify-between items-start gap-4 mb-2">
-                <h4 class="text-xl font-black uppercase tracking-tighter truncate leading-none">{{ $product->name }}</h4>
+                <h3 class="text-xl font-black uppercase tracking-tighter truncate leading-none">{{ $product->name }}</h3>
                 <div class="text-right shrink-0">
                     <span class="text-xs font-black uppercase tracking-widest text-red-600">$<span
                             x-text="(price * quantity).toLocaleString('es-CO')"></span></span>
@@ -73,10 +73,10 @@ new class extends Component
         <div class="flex flex-wrap items-center justify-between gap-6 mt-6 pt-6 border-t border-base-content/5">
             {{-- Quantity Controls --}}
             <div class="flex items-center bg-base-content/5 rounded-xl p-1 gap-1">
-                <x-mary-button icon="o-minus" class="btn-ghost btn-circle btn-sm"
+                <x-mary-button icon="o-minus" class="btn-ghost btn-circle btn-sm" aria-label="Disminuir cantidad"
                     @click="quantity = quantity <= 1 ? 1 : parseInt(quantity) - 1" />
                 <span class="w-10 text-center text-xs font-black tabular-nums" x-text="quantity"></span>
-                <x-mary-button icon="o-plus" class="btn-ghost btn-circle btn-sm"
+                <x-mary-button icon="o-plus" class="btn-ghost btn-circle btn-sm" aria-label="Aumentar cantidad"
                     @click="quantity = quantity >= {{ $product->stock }} ? quantity : parseInt(quantity) + 1" />
             </div>
 

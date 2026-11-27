@@ -21,7 +21,7 @@ it('shows the order details when the details button is pressed', function () {
         ->call('showDetails', $order->id)
         ->assertSet('myModal', true)
         ->assertSee('Calle 99 #1-23')
-        ->assertSee('5,000');
+        ->assertSee('5.000');
 });
 
 it('shows translated order status labels in the filters', function () {

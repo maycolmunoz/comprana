@@ -50,9 +50,9 @@ new class extends Component
 <div class="max-w-5xl mx-auto py-12 px-6">
     {{-- Process Header --}}
     <div class="mb-12 text-center">
-        <h3 class="text-3xl font-black uppercase tracking-tighter">
-            Datos de <span class="text-red-600">Contacto</span>
-        </h3>
+        <h2 class="text-3xl font-black uppercase tracking-tighter">
+            Datos de <span class="text-red-600">contacto</span>
+        </h2>
         <p class="text-[10px] font-bold uppercase tracking-widest text-base-content/40 mt-2">
             Confirma dónde quieres recibir tu pedido de Comprana
         </p>

@@ -122,17 +122,9 @@ new class extends Component {
             @endforeach
         </div>
     @else
-        <div class="py-20 flex flex-col items-center text-center">
-            <div class="w-24 h-24 bg-red-600/5 rounded-full flex items-center justify-center mb-6">
-                <x-mary-icon name="o-magnifying-glass" class="w-10 h-10 text-red-600/20" />
-            </div>
-            <h4 class="text-2xl font-black tracking-tighter uppercase mb-2">Sin coincidencias</h4>
-            <p class="text-base-content/40 max-w-xs font-normal">
-                No pudimos encontrar lo que buscas. Intenta con otros términos o secciones.
-            </p>
-            <x-mary-button link="{{ route('products.index') }}" label="Ver todos los productos"
-                class="mt-8 btn-primary btn-outline rounded-full font-bold px-8" />
-        </div>
+        <x-base.empty-state icon="o-magnifying-glass" title="Sin coincidencias"
+            description="No pudimos encontrar lo que buscas. Intenta con otros términos o secciones."
+            :link="route('products.index')" link-label="Ver todos los productos" />
     @endif
 
     {{-- Pagination --}}

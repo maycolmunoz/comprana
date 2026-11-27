@@ -1,5 +1,5 @@
 <section class="flex flex-col md:flex-row items-center gap-6 mb-10">
-    <div class="w-full md:w-auto grow max-w-md" x-data="{ query: '{{ request('search' ?? '') }}' }">
+    <div class="w-full md:w-auto grow max-w-md" x-data="{ query: @js(request('search', '')) }">
         <div class="relative group">
             <div
                 class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-base-content/50 group-focus-within:text-red-600 transition-colors">
@@ -44,11 +44,12 @@
             x-transition:leave="transition ease-in duration-150"
             x-transition:leave-start="opacity-100 translate-y-0"
             x-transition:leave-end="opacity-0 translate-y-4"
-            class="absolute left-0 right-0 mt-3 p-2 bg-base-100/90 backdrop-blur-xl border border-white/50 shadow-2xl rounded-3xl z-50 max-h-[60vh] overflow-y-auto"
+            class="absolute left-0 right-0 mt-3 p-2 bg-base-100/90 backdrop-blur-xl border border-base-content/10 shadow-2xl rounded-3xl z-50 max-h-[60vh] overflow-y-auto"
             style="display: none;">
             <div class="grid grid-cols-1 gap-1">
                 <a
                     href="{{ route('products.index') }}"
+                    wire:navigate
                     class="flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-bold transition-all {{ !request('section') ? 'bg-red-600 text-white shadow-md shadow-red-600/10' : 'hover:bg-base-content/5 text-base-content/60 hover:text-red-600' }}">
                     <x-mary-icon name="o-squares-2x2" class="w-4 h-4" />
                     Ver todo
@@ -56,7 +57,7 @@
 
                 @foreach ($sections as $section)
                     <a
-                        wire:navigation
+                        wire:navigate
                         href="{{ route('products.index', ['section' => $section->name]) }}"
                         class="flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-bold transition-all {{ request('section') == $section->name ? 'bg-red-600 text-white shadow-md shadow-red-600/10' : 'hover:bg-base-content/5 text-base-content/60 hover:text-red-600' }}">
                         <div

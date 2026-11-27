@@ -72,7 +72,7 @@ new class extends Component
                         <div class="space-y-4 mb-8">
                             <div class="flex justify-between items-center text-sm">
                                 <span class="font-bold uppercase tracking-widest text-base-content/40 text-[10px]">Subtotal</span>
-                                <span class="font-black tabular-nums">${{ number_format($cart->total(), 0, ',', '.') }}</span>
+                                <x-base.price :value="$cart->total()" class="font-black tabular-nums" />
                             </div>
                             <div class="flex justify-between items-center text-sm">
                                 <span class="font-bold uppercase tracking-widest text-base-content/40 text-[10px]">Envío</span>
@@ -85,7 +85,7 @@ new class extends Component
                             <div class="flex justify-between items-end">
                                 <span class="text-sm font-black uppercase tracking-tighter">Total final</span>
                                 <div class="text-right">
-                                    <span class="text-4xl font-black tracking-tighter text-red-600">${{ number_format($cart->total(), 0, ',', '.') }}</span>
+                                    <x-base.price :value="$cart->total()" class="text-4xl font-black tracking-tighter text-red-600" />
                                     <p class="text-[8px] font-bold uppercase tracking-widest text-base-content/30 mt-1">
                                         IVA e impuestos incluidos</p>
                                 </div>

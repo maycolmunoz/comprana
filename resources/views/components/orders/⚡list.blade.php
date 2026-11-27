@@ -75,7 +75,7 @@ new class extends Component
                     </div>
                     <div>
                         <span class="block text-[9px] font-black uppercase tracking-widest text-base-content/30">Total del pedido</span>
-                        <p class="text-2xl font-black tracking-tighter text-red-600">${{ number_format($this->order->total ?? 0, 0) }}</p>
+                        <x-base.price :value="$this->order->total ?? 0" />
                     </div>
                 </div>
             </div>
@@ -119,7 +119,7 @@ new class extends Component
                     </div>
 
                     <div>
-                        <h4 class="text-2xl font-black uppercase tracking-tighter">Pedido realizado</h4>
+                        <h2 class="text-2xl font-black uppercase tracking-tighter">Pedido realizado</h2>
                         <p class="text-[10px] font-bold uppercase tracking-widest text-base-content/40 mt-1">
                             {{ $order->created_at->format('d/m/Y h:i A') }}
                         </p>
@@ -137,7 +137,7 @@ new class extends Component
                     <div class="space-y-1">
                         <span
                             class="text-[9px] font-black uppercase tracking-widest text-base-content/30">Total del pedido</span>
-                        <p class="text-2xl font-black tracking-tighter text-red-600">${{ number_format($order->total ?? 0, 0) }}</p>
+                        <x-base.price :value="$order->total ?? 0" />
                     </div>
                 </div>
 
