@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <x-base.page-header title="Mi Perfil" />
+        <x-base.page-header title="Mi perfil" />
     </x-slot>
 
     <div class="py-12">

@@ -52,7 +52,7 @@
                                 </div>
                             </x-slot:trigger>
 
-                            <x-mary-menu-item icon="o-identification" label="Mi Perfil" link="{{ route('profile.edit') }}" />
+                            <x-mary-menu-item icon="o-identification" label="Mi perfil" link="{{ route('profile.edit') }}" />
 
                             <x-mary-menu-separator />
 

@@ -68,7 +68,7 @@ new class extends Component {
                 class="text-3xl lg:text-4xl font-black tracking-tighter uppercase text-base-content flex items-center gap-3">
                 @if ($sectionNull)
                     <x-mary-icon name="o-squares-2x2" class="w-8 h-8 text-red-600" />
-                    Todos los Productos
+                    Todos los productos
                 @else
                     <x-mary-icon name="o-tag" class="w-8 h-8 text-red-600" />
                     {{ $section }}

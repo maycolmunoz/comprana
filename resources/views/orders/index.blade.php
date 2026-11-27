@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <x-base.page-header title="Mis Pedidos" />
+        <x-base.page-header title="Mis pedidos" />
     </x-slot>
 
     <div class="py-12">

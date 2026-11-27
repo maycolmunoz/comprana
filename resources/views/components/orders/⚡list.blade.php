@@ -49,7 +49,7 @@ new class extends Component
 ?>
 
 <div class="space-y-6">
-    <x-mary-modal wire:model="myModal" title="Detalles del Pedido" class="backdrop-blur-xl">
+    <x-mary-modal wire:model="myModal" title="Detalles del pedido" class="backdrop-blur-xl">
         @if ($this->order)
             <div class="space-y-4">
                 <div class="flex flex-wrap items-center gap-3">
@@ -62,19 +62,19 @@ new class extends Component
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
                     <div>
                         <span class="block text-[9px] font-black uppercase tracking-widest text-base-content/30">Fecha</span>
-                        <p class="font-bold">{{ $this->order->created_at->translatedFormat('d M, Y • g:i A') }}</p>
+                        <p class="font-bold">{{ $this->order->created_at->format('d/m/Y h:i A') }}</p>
                     </div>
                     <div>
                         <span class="block text-[9px] font-black uppercase tracking-widest text-base-content/30">Pago</span>
-                        <p class="font-bold">{{ $this->order->payment_status === 'approved' ? 'Pagado' : 'Pendiente' }}</p>
+                        <p class="font-bold">{{ $this->order->paymentStatusLabel() }}</p>
                     </div>
                     <div class="sm:col-span-2">
-                        <span class="block text-[9px] font-black uppercase tracking-widest text-base-content/30">Entrega en</span>
+                        <span class="block text-[9px] font-black uppercase tracking-widest text-base-content/30">Dirección de entrega</span>
                         <p class="font-bold">{{ $this->order->address }}</p>
                         <p class="text-base-content/60">{{ $this->order->phone }}</p>
                     </div>
                     <div>
-                        <span class="block text-[9px] font-black uppercase tracking-widest text-base-content/30">Total del Pedido</span>
+                        <span class="block text-[9px] font-black uppercase tracking-widest text-base-content/30">Total del pedido</span>
                         <p class="text-2xl font-black tracking-tighter text-red-600">${{ number_format($this->order->total ?? 0, 0) }}</p>
                     </div>
                 </div>
@@ -106,16 +106,22 @@ new class extends Component
                         <span
                             class="text-xs font-black uppercase tracking-widest text-red-600">#ORD-{{ str_pad($order->id, 5, '0', STR_PAD_LEFT) }}</span>
                         <x-base.status-badge :status="$order->status" :icon="$order->status->getIcon()" />
-                        @if ($order->payment_id)
-                            <x-mary-badge label="Pagado" icon="o-credit-card"
-                                class="badge-neutral bg-base-content/5 text-base-content/60 border-none font-bold uppercase tracking-widest text-[9px] py-3 px-4 rounded-xl" />
-                        @endif
+                        @php
+                            $paymentBadgeClasses = match ($order->payment_status) {
+                                'approved' => 'badge-success bg-success/10 text-success border-success/20',
+                                'pending', 'in_process' => 'badge-warning bg-warning/10 text-warning border-warning/20',
+                                'rejected', 'cancelled' => 'badge-error bg-error/10 text-error border-error/20',
+                                default => 'badge-neutral bg-base-content/5 text-base-content/60 border-base-content/10',
+                            };
+                        @endphp
+                        <x-mary-badge :label="$order->paymentStatusLabel()" icon="o-credit-card"
+                            class="font-bold uppercase tracking-widest text-[9px] py-3 px-4 rounded-xl border {{ $paymentBadgeClasses }}" />
                     </div>
 
                     <div>
-                        <h4 class="text-2xl font-black uppercase tracking-tighter">Pedido Realizado</h4>
+                        <h4 class="text-2xl font-black uppercase tracking-tighter">Pedido realizado</h4>
                         <p class="text-[10px] font-bold uppercase tracking-widest text-base-content/40 mt-1">
-                            {{ $order->created_at->translatedFormat('d M, Y • g:i A') }}
+                            {{ $order->created_at->format('d/m/Y h:i A') }}
                         </p>
                     </div>
                 </div>
@@ -124,13 +130,13 @@ new class extends Component
                 <div
                     class="flex-[1.5] grid grid-cols-1 md:grid-cols-2 gap-6 py-6 lg:py-0 border-y lg:border-y-0 lg:border-x border-base-content/5 lg:px-10">
                     <div class="space-y-1">
-                        <span class="text-[9px] font-black uppercase tracking-widest text-base-content/30">Entrega en</span>
+                        <span class="text-[9px] font-black uppercase tracking-widest text-base-content/30">Dirección de entrega</span>
                         <p class="text-xs font-bold leading-relaxed line-clamp-2">{{ $order->address }}</p>
                         <p class="text-[10px] font-normal text-base-content/40">{{ $order->phone }}</p>
                     </div>
                     <div class="space-y-1">
                         <span
-                            class="text-[9px] font-black uppercase tracking-widest text-base-content/30">Total del Pedido</span>
+                            class="text-[9px] font-black uppercase tracking-widest text-base-content/30">Total del pedido</span>
                         <p class="text-2xl font-black tracking-tighter text-red-600">${{ number_format($order->total ?? 0, 0) }}</p>
                     </div>
                 </div>
@@ -143,7 +149,7 @@ new class extends Component
                             class="btn-ghost btn-sm font-black text-[10px] uppercase tracking-widest rounded-xl bg-base-content/5 hover:bg-red-600/10 hover:text-red-600" />
                     @endif
 
-                    <x-mary-button label="Ver Detalles" icon-right="o-chevron-right" wire:click="showDetails({{ $order->id }})"
+                    <x-mary-button label="Ver detalles" icon-right="o-chevron-right" wire:click="showDetails({{ $order->id }})"
                         class="btn-outline btn-sm font-black text-[10px] uppercase tracking-widest rounded-xl px-6" />
                 </div>
             </div>
@@ -151,7 +157,7 @@ new class extends Component
     @empty
         <x-base.empty-state icon="o-archive-box-x-mark" title="No tienes pedidos aún"
             description="Explora nuestra tienda y comienza tu experiencia en Comprana."
-            link="/tienda" />
+            link="{{ route('products.index') }}" />
     @endforelse
 
     {{-- Pagination Styled --}}

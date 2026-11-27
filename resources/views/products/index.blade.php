@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <x-base.page-header title="Nuestra Tienda" />
+        <x-base.page-header title="Nuestra tienda" />
     </x-slot>
 
     <div
@@ -54,7 +54,7 @@
                                                 class="text-2xl font-black tracking-tighter uppercase flex items-center gap-3">
                                                 <x-mary-icon name="o-magnifying-glass-plus"
                                                     class="w-6 h-6 text-red-600" />
-                                                Detalles del Producto
+                                                Detalles del producto
                                             </h2>
                                             <p
                                                 class="text-[10px] uppercase font-bold tracking-widest text-base-content/40 mt-1">

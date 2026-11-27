@@ -1,6 +1,6 @@
 <x-guest-layout>
     <div class="mb-8 text-center">
-        <h2 class="text-2xl font-black uppercase tracking-tighter">¿Contraseña olvidada?</h2>
+        <h2 class="text-2xl font-black uppercase tracking-tighter">¿Olvidaste tu contraseña?</h2>
         <p class="text-[10px] font-bold uppercase tracking-widest text-base-content/60 mt-2 leading-relaxed">
             No hay problema. Ingresa tu correo y te enviaremos un enlace para restablecerla.
         </p>
@@ -12,7 +12,7 @@
         @csrf
 
         <x-mary-input
-            label="Email de recuperación"
+            label="Correo de recuperación"
             name="email"
             type="email"
             icon="o-envelope"

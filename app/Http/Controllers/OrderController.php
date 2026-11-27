@@ -19,7 +19,7 @@ class OrderController extends Controller
     public function index()
     {
         return view('orders.index', [
-            'orderStatus' => array_column(OrderStatus::cases(), 'value'),
+            'orderStatuses' => OrderStatus::cases(),
         ]);
     }
 

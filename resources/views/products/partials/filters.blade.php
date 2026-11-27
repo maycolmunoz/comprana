@@ -28,7 +28,7 @@
             class="w-full flex items-center justify-between px-6 py-4 bg-base-100 border border-base-content/10 rounded-2xl font-bold text-sm tracking-wide uppercase hover:bg-base-200/50 hover:border-red-600/30 transition-all shadow-sm group">
             <div class="flex items-center gap-3">
                 <div class="w-2 h-2 rounded-full bg-red-600 shadow-[0_0_8px_rgba(220,38,38,0.5)]"></div>
-                <span class="truncate">{{ request('section', 'Todas las Secciones') }}</span>
+                <span class="truncate">{{ request('section', 'Todas las secciones') }}</span>
             </div>
             <x-mary-icon
                 name="o-chevron-down"
@@ -51,7 +51,7 @@
                     href="{{ route('products.index') }}"
                     class="flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-bold transition-all {{ !request('section') ? 'bg-red-600 text-white shadow-md shadow-red-600/10' : 'hover:bg-base-content/5 text-base-content/60 hover:text-red-600' }}">
                     <x-mary-icon name="o-squares-2x2" class="w-4 h-4" />
-                    Ver Todo
+                    Ver todo
                 </a>
 
                 @foreach ($sections as $section)

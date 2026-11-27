@@ -1,7 +1,7 @@
 <section class="space-y-6">
     <header>
         <h2 class="text-2xl font-black uppercase tracking-tighter text-red-600">
-            Eliminar Cuenta
+            Eliminar cuenta
         </h2>
 
         <p class="text-[10px] font-bold uppercase tracking-widest text-base-content/40 mt-1 leading-relaxed">
@@ -10,7 +10,7 @@
     </header>
 
     <div class="pt-4">
-        <x-mary-button label="Eliminar mi Cuenta" icon="o-trash"
+        <x-mary-button label="Eliminar mi cuenta" icon="o-trash"
             class="btn-error btn-outline font-black text-xs uppercase tracking-widest rounded-2xl px-8" x-data=""
             x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')" />
     </div>
@@ -35,7 +35,7 @@
 
                 <div class="space-y-6">
                     <div>
-                        <x-mary-input label="Tu Contraseña" name="password" type="password" icon="o-lock-closed"
+                        <x-mary-input label="Tu contraseña" name="password" type="password" icon="o-lock-closed"
                             placeholder="Ingresa tu contraseña para confirmar"
                             class="bg-base-content/5 border-none focus:ring-red-600/20" />
                         <x-base.input-error :messages="$errors->userDeletion->get('password')" />
@@ -46,7 +46,7 @@
                     <x-mary-button label="Cancelar" x-on:click="$dispatch('close')"
                         class="btn-ghost font-black text-xs uppercase tracking-widest rounded-xl" />
 
-                    <x-mary-button type="submit" label="Sí, Eliminar Definitivamente" icon="o-exclamation-triangle"
+                    <x-mary-button type="submit" label="Sí, eliminar definitivamente" icon="o-exclamation-triangle"
                         class="btn-error font-black text-xs uppercase tracking-widest rounded-xl px-6" />
                 </div>
             </form>

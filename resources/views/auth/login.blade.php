@@ -12,7 +12,7 @@
         @csrf
 
         <x-mary-input
-            label="Email"
+            label="Correo"
             name="email"
             type="email"
             icon="o-envelope"
@@ -58,7 +58,7 @@
         <div class="pt-4">
             <x-mary-button
                 type="submit"
-                label="Iniciar Sesión"
+                label="Iniciar sesión"
                 class="btn-primary w-full font-black text-sm uppercase tracking-widest rounded-2xl" />
         </div>
 

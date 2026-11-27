@@ -37,7 +37,7 @@ class OrderEmailNotification extends Notification
         return (new MailMessage)
             ->line('Pedido #'.$this->order->id)
             ->action('Ver pedidos', url('/pedidos'))
-            ->line('Gracias por su compra su pedido esta en proceso!');
+            ->line('Gracias por su compra. Su pedido está en proceso.');
     }
 
     /**

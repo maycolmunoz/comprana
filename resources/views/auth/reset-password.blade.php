@@ -12,7 +12,7 @@
         <input type="hidden" name="token" value="{{ $request->route('token') }}">
 
         <x-mary-input
-            label="Email"
+            label="Correo"
             name="email"
             type="email"
             icon="o-envelope"
@@ -23,7 +23,7 @@
         <x-base.input-error :messages="$errors->get('email')" class="mt-2" />
 
         <x-mary-input
-            label="Nueva Contraseña"
+            label="Nueva contraseña"
             name="password"
             type="password"
             icon="o-key"
@@ -46,7 +46,7 @@
         <div class="pt-4">
             <x-mary-button
                 type="submit"
-                label="Restablecer Contraseña"
+                label="Restablecer contraseña"
                 class="btn-primary w-full font-black text-sm uppercase tracking-widest rounded-2xl" />
         </div>
     </form>

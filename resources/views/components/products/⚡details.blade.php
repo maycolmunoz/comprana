@@ -36,7 +36,7 @@ new class extends Component {
                 ],
             ]);
 
-            $this->dispatch('notification', "Se agrego {$this->count} de {$this->product->name} a tu carrito");
+            $this->dispatch('notification', "Se agregó {$this->count} de {$this->product->name} a tu carrito");
             $this->dispatch('slider-close');
             $this->reset('count');
         }
@@ -145,7 +145,7 @@ new class extends Component {
                         <div class="flex items-center gap-1.5 pt-1">
                             <div class="{{ $product->stock > 0 ? 'bg-success ' : 'bg-base-content/50' }} w-2 h-2 rounded-full"></div>
                             <span class="{{ $product->stock > 0 ? 'text-success' : 'text-red-600' }} text-xs font-bold uppercase tracking-widest">
-                                {{ $product->stock > 0 ? $product->stock . ' Unidades' : 'Sin Stock' }}
+                                {{ $product->stock > 0 ? $product->stock . ' Unidades' : 'Sin existencias' }}
                             </span>
                         </div>
                     </div>
@@ -169,9 +169,9 @@ new class extends Component {
                                         class="text-[10px] font-black uppercase tracking-widest text-base-content/40"
                                         for="count"
                                     >
-                                        Seleccionar Cantidad
+                                        Seleccionar cantidad
                                         <span class="text-red-600 ml-2 animate-pulse" x-show="!available">
-                                            Excede el stock disponible
+                                            La cantidad supera las existencias
                                         </span>
                                     </label>
 
@@ -211,7 +211,7 @@ new class extends Component {
                             {{-- Submit Button --}}
                             <x-mary-button
                                 type="submit"
-                                label="Agregar al Carrito"
+                                label="Agregar al carrito"
                                 icon="o-shopping-bag"
                                 class="btn-primary w-full py-4 h-auto font-black text-sm uppercase tracking-widest rounded-2xl group active:scale-[0.98] transition-all"
                                 ::disabled="!available"

@@ -233,9 +233,38 @@ it('applies the payment on the success redirect', function () {
     actingAs($buyer)
         ->get(route('orders.complete', ['order' => $order, 'payment_id' => '123']))
         ->assertOk()
-        ->assertSee('Compra realizada correctamente');
+        ->assertSee('Pago aprobado');
 
     expect($order->fresh()->payment_status)->toBe('approved');
+});
+
+it('shows a rejected payment as not approved', function () {
+    Storage::fake('invoices');
+
+    $buyer = User::factory()->create();
+    $cart = cartWithProduct($buyer, 2, 1000);
+    $product = $cart->products->first();
+    $order = Order::factory()->create([
+        'customer_id' => $buyer->id,
+        'total' => 2000,
+        'invoice' => null,
+    ]);
+
+    Http::preventStrayRequests();
+    Http::fake([
+        'api.mercadopago.com/v1/payments/123' => Http::response([
+            ...approvedPayment($order, $product),
+            'status' => 'rejected',
+        ]),
+    ]);
+
+    $this->withoutVite();
+
+    actingAs($buyer)
+        ->get(route('orders.complete', ['order' => $order, 'payment_id' => '123']))
+        ->assertOk()
+        ->assertSeeText('Pago rechazado')
+        ->assertDontSeeText('Pago pendiente');
 });
 
 it('forbids showing the completion page for another user order', function () {

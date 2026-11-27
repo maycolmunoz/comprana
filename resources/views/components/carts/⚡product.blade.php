@@ -18,7 +18,7 @@ new class extends Component
     public function edit()
     {
         $this->cart->products()->updateExistingPivot($this->product->id, ['cant' => $this->cant]);
-        $this->dispatch('notification', 'Se actualizo la cantidad el producto');
+        $this->dispatch('notification', 'Se actualizó la cantidad del producto');
         $this->dispatch('refresh');
 
     }
@@ -26,7 +26,7 @@ new class extends Component
     public function delete()
     {
         $this->cart->products()->detach($this->product->id);
-        $this->dispatch('notification', 'Se Elimino el producto');
+        $this->dispatch('notification', 'Se eliminó el producto');
         $this->dispatch('refresh');
     }
 }; ?>
@@ -63,7 +63,7 @@ new class extends Component
             <div class="flex flex-wrap gap-4 mt-4">
                 <div class="flex items-center gap-1.5">
                     <x-mary-icon name="o-cube" class="w-3.5 h-3.5 text-base-content/30" />
-                    <span class="text-[10px] font-bold uppercase tracking-widest text-base-content/40">Stock:
+                    <span class="text-[10px] font-bold uppercase tracking-widest text-base-content/40">Existencias:
                         {{ $product->stock }}</span>
                 </div>
             </div>

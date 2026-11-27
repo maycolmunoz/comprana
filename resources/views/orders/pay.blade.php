@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <x-base.page-header title="Pagar Pedido" />
+        <x-base.page-header title="Pagar pedido" />
     </x-slot>
 
     <div class="container px-6 mx-auto">
@@ -67,7 +67,7 @@
                 <div class="flex justify-center lg:justify-end">
                     <div class="w-full max-w-md px-4 py-3 bg-base-100 border border-base-content/10 rounded-2xl">
                         <div class="flex items-center justify-between">
-                            <h3 class="font-normal text-base-content">Total a Pagar: $ {{ $order->total }}</h3>
+                            <h3 class="font-normal text-base-content">Total a pagar: $ {{ $order->total }}</h3>
                         </div>
 
                         <div id="wallet_container"></div>

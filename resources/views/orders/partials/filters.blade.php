@@ -10,15 +10,15 @@
             Todos
         </a>
 
-        @foreach ($orderStatus as $status)
+        @foreach ($orderStatuses as $status)
             <a
-                href="{{ route('orders.index', ['status' => $status]) }}"
+                href="{{ route('orders.index', ['status' => $status->value]) }}"
                 wire:navigate
                 class="px-5 py-2 text-[10px] font-black uppercase tracking-widest rounded-xl transition-all duration-300 select-none
-                    {{ request('status') === $status
+                    {{ request('status') === $status->value
                         ? 'bg-red-600 text-white shadow-md shadow-red-600/10'
                         : 'text-base-content/40 hover:bg-base-content/5 hover:text-base-content' }}">
-                {{ $status }}
+                {{ $status->getLabel() }}
             </a>
         @endforeach
     </div>

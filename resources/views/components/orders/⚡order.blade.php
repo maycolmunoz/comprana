@@ -88,14 +88,14 @@ new class extends Component
 
                     {{-- Phone Input --}}
                     <div class="space-y-2">
-                        <x-mary-input label="Número de Teléfono" wire:model='phone' type="number" icon="o-phone"
+                        <x-mary-input label="Número de teléfono" wire:model='phone' type="number" icon="o-phone"
                             placeholder="Tu teléfono de contacto" class="bg-base-content/5 border-none focus:ring-red-600/20" />
                         <x-base.input-error :messages="$errors->get('phone')" />
                     </div>
 
                     {{-- Address Input --}}
                     <div class="space-y-2">
-                        <x-mary-input label="Dirección de Entrega" wire:model='address' icon="o-map-pin"
+                        <x-mary-input label="Dirección de entrega" wire:model='address' icon="o-map-pin"
                             placeholder="Calle, número, ciudad y detalles adicionales"
                             class="bg-base-content/5 border-none focus:ring-red-600/20" />
                         <x-base.input-error :messages="$errors->get('address')" />
@@ -108,7 +108,7 @@ new class extends Component
                             ← Cancelar
                         </a>
 
-                        <x-mary-button type="submit" label="Continuar al Pago" icon-right="o-credit-card"
+                        <x-mary-button type="submit" label="Continuar al pago" icon-right="o-credit-card"
                             class="btn-primary px-8 py-4 h-auto font-black text-xs uppercase tracking-widest rounded-2xl group">
                             <x-slot:append>
                                 <x-mary-icon name="o-chevron-right" class="w-3 h-3 group-hover:translate-x-1 transition-transform" />
@@ -119,7 +119,7 @@ new class extends Component
 
                 {{-- Trust Footer --}}
                 <div class="mt-10 text-center opacity-30">
-                    <p class="text-[8px] font-bold uppercase tracking-[0.4em]">Garantía de Privacidad Comprana</p>
+                    <p class="text-[8px] font-bold uppercase tracking-[0.4em]">Garantía de privacidad Comprana</p>
                 </div>
             </div>
         </div>

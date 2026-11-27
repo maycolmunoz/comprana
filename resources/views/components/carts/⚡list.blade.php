@@ -47,7 +47,7 @@ new class extends Component {
         $this->validate();
         Cart::whereId($this->cart_id)->update(['name' => $this->name]);
 
-        $this->dispatch('notification', 'Se edito el carrito');
+        $this->dispatch('notification', 'Se editó el carrito');
         $this->myModal1 = false;
         $this->reset('name');
     }
@@ -66,9 +66,9 @@ new class extends Component {
     {{-- Edit Cart Name Modal --}}
     <x-mary-modal wire:model="myModal1" class="backdrop-blur-xl">
         <div class="p-4 text-center">
-            <h3 class="text-2xl font-black uppercase tracking-tighter mb-2">Renombrar Carrito</h3>
+            <h3 class="text-2xl font-black uppercase tracking-tighter mb-2">Renombrar carrito</h3>
             <form wire:submit.prevent='edit_cart()' class="space-y-6">
-                <x-mary-input label="Nuevo Nombre" wire:model='name' icon="o-pencil-square"
+                <x-mary-input label="Nuevo nombre" wire:model='name' icon="o-pencil-square"
                     class="bg-base-content/5 border-none focus:ring-red-600/20" />
 
                 <div class="flex gap-3 pt-4">

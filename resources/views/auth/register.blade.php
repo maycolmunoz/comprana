@@ -10,7 +10,7 @@
         @csrf
 
         <x-mary-input
-            label="Nombre Completo"
+            label="Nombre completo"
             name="name"
             type="text"
             icon="o-user"
@@ -22,7 +22,7 @@
         <x-base.input-error :messages="$errors->get('name')" class="mt-2" />
 
         <x-mary-input
-            label="Email"
+            label="Correo"
             name="email"
             type="email"
             icon="o-envelope"
@@ -55,7 +55,7 @@
         <div class="pt-4">
             <x-mary-button
                 type="submit"
-                label="Crear mi Cuenta"
+                label="Crear mi cuenta"
                 class="btn-primary w-full font-black text-sm uppercase tracking-widest rounded-2xl" />
         </div>
 

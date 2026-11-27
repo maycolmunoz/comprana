@@ -40,7 +40,7 @@ class GenerateInvoiceListener
         $this->pdf->SetTextColor(0, 0, 0);
         $this->pdf->MultiCell(0, 5, iconv('UTF-8', 'ISO-8859-1', strtoupper('COMPRANA')), 0, 'C', false);
         $this->pdf->SetFont('Arial', '', 9);
-        $this->pdf->MultiCell(0, 5, iconv('UTF-8', 'ISO-8859-1', 'Direccion comprana'), 0, 'C', false);
+        $this->pdf->MultiCell(0, 5, iconv('UTF-8', 'ISO-8859-1', 'Dirección Comprana'), 0, 'C', false);
         $this->pdf->MultiCell(0, 5, iconv('UTF-8', 'ISO-8859-1', 'Teléfono: 00000000'), 0, 'C', false);
 
         $this->pdf->Ln(1);
@@ -50,7 +50,7 @@ class GenerateInvoiceListener
         $orderDate = ($event->order->created_at ?? now())->format('d/m/Y h:i A');
         $this->pdf->MultiCell(0, 5, iconv('UTF-8', 'ISO-8859-1', 'Fecha: '.$orderDate), 0, 'C', false);
         $this->pdf->SetFont('Arial', 'B', 10);
-        $this->pdf->MultiCell(0, 5, iconv('UTF-8', 'ISO-8859-1', strtoupper("Ticket order{$event->order->id}")), 0, 'C', false);
+        $this->pdf->MultiCell(0, 5, iconv('UTF-8', 'ISO-8859-1', strtoupper("Pedido #{$event->order->id}")), 0, 'C', false);
         $this->pdf->SetFont('Arial', '', 9);
 
         $this->pdf->Ln(1);

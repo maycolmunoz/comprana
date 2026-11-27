@@ -18,7 +18,7 @@
             @csrf
             <x-mary-button
                 type="submit"
-                label="Reenviar Email de Verificación"
+                label="Reenviar correo de verificación"
                 icon="o-paper-airplane"
                 class="btn-primary w-full font-black text-sm uppercase tracking-widest rounded-2xl" />
         </form>

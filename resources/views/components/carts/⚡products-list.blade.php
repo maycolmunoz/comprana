@@ -37,7 +37,7 @@ new class extends Component
             </p>
         </div>
         <div class="hidden md:block">
-            <x-mary-badge value="{{ $cart->products->count() }} Items"
+            <x-mary-badge value="{{ $cart->products->count() }} artículos"
                 class="badge-neutral font-black uppercase tracking-widest text-[10px] py-3 px-4 rounded-xl" />
         </div>
     </div>
@@ -60,7 +60,7 @@ new class extends Component
                         {{-- Decorative Accent --}}
                         <div class="absolute top-0 left-0 w-full h-1.5 bg-linear-to-r from-red-600 to-red-400"></div>
 
-                        <h4 class="text-xl font-black uppercase tracking-tighter mb-8">Resumen del Pedido</h4>
+                        <h4 class="text-xl font-black uppercase tracking-tighter mb-8">Resumen del pedido</h4>
 
                         {{-- Details --}}
                         <div class="space-y-4 mb-8">
@@ -78,17 +78,17 @@ new class extends Component
                         {{-- Total --}}
                         <div class="pt-6 border-t border-base-content/5 mb-8">
                             <div class="flex justify-between items-end">
-                                <span class="text-sm font-black uppercase tracking-tighter">Total Final</span>
+                                <span class="text-sm font-black uppercase tracking-tighter">Total final</span>
                                 <div class="text-right">
                                     <span class="text-4xl font-black tracking-tighter text-red-600">$<span
                                             x-text="pay.toLocaleString()"></span></span>
                                     <p class="text-[8px] font-bold uppercase tracking-widest text-base-content/30 mt-1">
-                                        IVA e Impuestos incluidos</p>
+                                        IVA e impuestos incluidos</p>
                                 </div>
                             </div>
                         </div>
 
-                        <x-mary-button link="{{ route('orders.create', ['id' => $cart->id]) }}" label="Finalizar Compra"
+                        <x-mary-button link="{{ route('orders.create', ['id' => $cart->id]) }}" label="Finalizar compra"
                             icon-right="o-arrow-right"
                             class="btn-primary w-full py-4 h-auto font-black text-sm uppercase tracking-widest rounded-2xl group" />
                     </div>

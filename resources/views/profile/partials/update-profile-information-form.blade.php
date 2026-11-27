@@ -1,7 +1,7 @@
 <section>
     <header class="mb-8">
         <h2 class="text-2xl font-black uppercase tracking-tighter text-base-content">
-            Información del Perfil
+            Información del perfil
         </h2>
 
         <p class="text-[10px] font-bold uppercase tracking-widest text-base-content/40 mt-1">
@@ -26,7 +26,7 @@
             </div>
 
         <div class="space-y-2">
-                <x-mary-input label="Email" name="email" type="email" icon="o-envelope"
+                <x-mary-input label="Correo" name="email" type="email" icon="o-envelope"
                     value="{{ old('email', $user->email) }}" required autocomplete="username"
                     class="bg-base-content/5 border-none focus:ring-red-600/20" />
                 <x-base.input-error :messages="$errors->get('email')" />
@@ -67,7 +67,7 @@
         </div>
 
         <div class="flex items-center gap-4 pt-4 border-t border-base-content/5">
-            <x-mary-button type="submit" label="Guardar Cambios" icon="o-check"
+            <x-mary-button type="submit" label="Guardar cambios" icon="o-check"
                 class="btn-primary px-8 font-black text-xs uppercase tracking-widest rounded-2xl" />
 
             @if (session('status') === 'profile-updated')
