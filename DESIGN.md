@@ -272,13 +272,13 @@ The diagonal clip-path on the landing page hero image (`clip-path: polygon(15% 0
 
 ### Footer
 - **Background:** base-200/50 with backdrop-blur-md, border-t border-base-content/5.
-- **Grid:** 12-column grid with 4/2/2/4 column distribution.
+- **Grid:** 12-column grid with 5/3/4 column distribution.
 - **Section headers:** text-[10px] uppercase tracking-[0.2em] text-red-600.
 - **Links:** Hover transitions to red-600 with translate-x-1.
 
 ## Component Architecture
 
-The storefront follows a three-layer contract:
+The storefront follows a four-layer contract:
 
 | Layer | Responsibility | Examples |
 | --- | --- | --- |

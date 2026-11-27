@@ -46,7 +46,7 @@ new class extends Component
         <div class="absolute top-3 left-3">
             <span
                 class="bg-base-100/80 backdrop-blur-md px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest border border-white/20 shadow-sm transition-colors group-hover:bg-red-600 group-hover:text-white group-hover:border-red-600 font-outfit">
-                <x-base.price :value="$product->price" class="font-black" />
+                <x-base.price :value="$product->price" class="font-black" symbol-class="text-current" />
             </span>
         </div>
     </div>

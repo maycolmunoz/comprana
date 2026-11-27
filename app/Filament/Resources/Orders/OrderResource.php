@@ -118,11 +118,11 @@ class OrderResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('dispatcher.name')
                     ->label('Despachador')
-                    ->default('XXXXX')
+                    ->default('Sin asignar')
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('delivery.name')
                     ->label('Repartidor')
-                    ->default('XXXXX')
+                    ->default('Sin asignar')
                     ->toggleable(isToggledHiddenByDefault: true),
 
             ])

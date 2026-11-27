@@ -34,6 +34,7 @@ it('shows translated order status labels in the filters', function () {
     $this->get(route('orders.index'))
         ->assertOk()
         ->assertSeeText('En Camino')
+        ->assertSee('status=en_camino', false)
         ->assertDontSeeText('en_camino');
 });
 

@@ -72,6 +72,35 @@ it('keeps only one active cart', function () {
         ->and($carts[1]->fresh()->active)->toBeTrue();
 });
 
+it('does not activate another user cart', function () {
+    $owner = User::factory()->create();
+    $other = User::factory()->create();
+    $ownerCart = $owner->carts()->orderBy('id')->get()[1];
+
+    actingAs($other);
+
+    Livewire::test('carts.list')->call('activateCart', $ownerCart->id);
+
+    expect($ownerCart->fresh()->active)->toBeFalse()
+        ->and($other->activeCart->id)->not->toBe($ownerCart->id);
+});
+
+it('rejects a quantity over the real stock even if the client tampers with the stock property', function () {
+    $user = User::factory()->create();
+    $product = Product::factory()->create(['name' => 'Producto D', 'stock' => 3]);
+
+    actingAs($user);
+
+    Livewire::test('products.details')
+        ->call('loadProduct', $product->id)
+        ->set('stock', 999)
+        ->set('quantity', 10)
+        ->call('addToCart')
+        ->assertHasErrors(['quantity']);
+
+    expect($user->activeCart->products()->whereKey($product->id)->exists())->toBeFalse();
+});
+
 it('rejects a quantity greater than stock', function () {
     $user = User::factory()->create();
     $cart = $user->carts()->first();
@@ -82,6 +111,20 @@ it('rejects a quantity greater than stock', function () {
 
     Livewire::test('carts.product', ['product' => $product, 'cart' => $cart, 'quantity' => 1])
         ->set('quantity', 4)
+        ->call('updateQuantity')
+        ->assertHasErrors(['quantity']);
+});
+
+it('rejects a quantity below one', function () {
+    $user = User::factory()->create();
+    $cart = $user->carts()->first();
+    $product = Product::factory()->create(['name' => 'Producto E', 'stock' => 3]);
+    $cart->products()->attach($product, ['cant' => 1]);
+
+    actingAs($user);
+
+    Livewire::test('carts.product', ['product' => $product, 'cart' => $cart, 'quantity' => 1])
+        ->set('quantity', 0)
         ->call('updateQuantity')
         ->assertHasErrors(['quantity']);
 });

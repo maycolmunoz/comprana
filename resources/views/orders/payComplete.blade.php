@@ -6,28 +6,33 @@
     @php
         $isApproved = $status === 'approved';
         $isPending = in_array($status, ['pending', 'in_process'], true);
+        $isRefunded = $status === 'refunded';
 
         $title = match (true) {
             $isApproved => 'Pago aprobado',
             $isPending => 'Pago pendiente',
+            $isRefunded => 'Pago reembolsado',
             default => 'Pago rechazado',
         };
 
         $description = match (true) {
             $isApproved => 'Tu compra se realizó correctamente. Ya puedes consultar el estado de tu pedido.',
             $isPending => 'Tu pago está pendiente de aprobación. Te avisaremos cuando se confirme.',
+            $isRefunded => 'El pago fue reembolsado. Si tienes dudas, contacta con nuestro equipo de soporte.',
             default => 'El pago no se completó. Puedes intentarlo de nuevo desde tus pedidos.',
         };
 
         $icon = match (true) {
             $isApproved => 'o-check-circle',
             $isPending => 'o-clock',
+            $isRefunded => 'o-arrow-uturn-left',
             default => 'o-x-circle',
         };
 
         $statusClasses = match (true) {
             $isApproved => 'bg-success/10 text-success',
             $isPending => 'bg-warning/10 text-warning',
+            $isRefunded => 'bg-info/10 text-info',
             default => 'bg-error/10 text-error',
         };
     @endphp

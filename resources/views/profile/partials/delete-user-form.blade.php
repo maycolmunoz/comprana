@@ -16,7 +16,7 @@
             onclick="document.getElementById('confirm-user-deletion').showModal()" />
     </div>
 
-    <x-mary-modal id="confirm-user-deletion" title="Eliminar cuenta" class="backdrop-blur-xl">
+    <x-mary-modal id="confirm-user-deletion" title="Eliminar cuenta" class="backdrop-blur-xl" without-trap-focus>
         <form method="post" action="{{ route('profile.destroy') }}" class="space-y-6">
             @csrf
             @method('delete')

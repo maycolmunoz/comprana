@@ -4,7 +4,7 @@
             <div class="md:col-span-5 flex flex-col space-y-6">
                 <div class="flex items-center gap-3">
                     <x-base.brand href="{{ route('products.index') }}" :logo="asset('srcs/favicon.ico')" alt="Comprana"
-                        class="!justify-start h-8 w-auto" />
+                        class="!justify-start h-8 w-auto" wire:navigate />
                     <span class="text-2xl font-black tracking-tighter">COMPRA<span class="text-red-600">NA</span></span>
                 </div>
                 <p class="text-base-content/60 text-sm leading-relaxed max-w-sm">
@@ -16,30 +16,30 @@
             <div class="md:col-span-3 space-y-6">
                 <h2 class="text-[10px] uppercase font-bold tracking-[0.2em] text-red-600">Navegación</h2>
                 <nav class="flex flex-col space-y-3">
-                    <a href="{{ route('products.index') }}"
+                    <a href="{{ route('products.index') }}" wire:navigate
                         class="text-sm font-normal text-base-content/70 hover:text-red-600 hover:translate-x-1 transition-all duration-300">
                         Tienda
                     </a>
 
                     @auth
-                        <a href="{{ route('carts.index') }}"
+                        <a href="{{ route('carts.index') }}" wire:navigate
                             class="text-sm font-normal text-base-content/70 hover:text-red-600 hover:translate-x-1 transition-all duration-300">
                             Mis carritos
                         </a>
-                        <a href="{{ route('orders.index') }}"
+                        <a href="{{ route('orders.index') }}" wire:navigate
                             class="text-sm font-normal text-base-content/70 hover:text-red-600 hover:translate-x-1 transition-all duration-300">
                             Mis pedidos
                         </a>
-                        <a href="{{ route('profile.edit') }}"
+                        <a href="{{ route('profile.edit') }}" wire:navigate
                             class="text-sm font-normal text-base-content/70 hover:text-red-600 hover:translate-x-1 transition-all duration-300">
                             Mi perfil
                         </a>
                     @else
-                        <a href="{{ route('login') }}"
+                        <a href="{{ route('login') }}" wire:navigate
                             class="text-sm font-normal text-base-content/70 hover:text-red-600 hover:translate-x-1 transition-all duration-300">
                             Entrar
                         </a>
-                        <a href="{{ route('register') }}"
+                        <a href="{{ route('register') }}" wire:navigate
                             class="text-sm font-normal text-base-content/70 hover:text-red-600 hover:translate-x-1 transition-all duration-300">
                             Crear cuenta
                         </a>

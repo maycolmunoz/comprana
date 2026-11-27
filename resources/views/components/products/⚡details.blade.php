@@ -11,6 +11,7 @@ new class extends Component
     #[Locked]
     public ?Product $product = null;
 
+    /** Snapshot for display; re-synced from the product before validation. */
     public int $stock = 0;
 
     public int $price = 0;
@@ -38,6 +39,9 @@ new class extends Component
         if (! $this->product) {
             return;
         }
+
+        $this->stock = $this->product->stock;
+        $this->price = $this->product->price;
 
         if ($this->quantity < 1 || $this->quantity > $this->stock) {
             $this->addError('quantity', 'La cantidad supera las existencias disponibles.');
@@ -88,7 +92,7 @@ new class extends Component
                 <div class="w-full lg:w-3/4">
                     <div
                         class="bg-base-100 rounded-3xl overflow-hidden border border-base-content/5 shadow-2xl shadow-red-900/5 aspect-square relative group">
-                        <img :src="'/storage/' + currentImage"
+                        <img :src="@js(asset('storage')) + '/' + currentImage"
                             class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                             alt="{{ $product->name }}">
 
@@ -222,7 +226,7 @@ new class extends Component
                             {{-- Submit Button --}}
                             <x-mary-button type="submit" label="Agregar al carrito" icon="o-shopping-bag"
                                 class="btn-primary w-full py-4 h-auto font-black text-sm uppercase tracking-widest rounded-2xl group active:scale-[0.98] transition-all"
-                                ::disabled="!available">
+                                x-bind:disabled="!available">
                                 <x-slot:append>
                                     <x-mary-icon name="o-chevron-right"
                                         class="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />

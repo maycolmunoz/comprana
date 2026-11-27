@@ -171,7 +171,7 @@ new class extends Component
                 <div class="p-6">
                     <h2 class="text-xl font-black uppercase tracking-tighter truncate mb-1">
                         {{ $cart->name }}
-                    </h3>
+                    </h2>
 
                     <div class="flex items-center gap-2 mb-6">
                         <div class="h-1 w-8 bg-red-600 rounded-full"></div>
