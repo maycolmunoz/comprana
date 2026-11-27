@@ -47,71 +47,91 @@ new class extends Component
     }
 }; ?>
 
-<div class="max-w-5xl mx-auto py-12 px-6">
+<div class="mx-auto max-w-5xl px-6 py-12">
     {{-- Process Header --}}
     <div class="mb-12 text-center">
-        <h2 class="text-3xl font-black uppercase tracking-tighter">
+        <h2 class="text-3xl font-black tracking-tighter uppercase">
             Datos de <span class="text-red-600">contacto</span>
         </h2>
-        <p class="text-[10px] font-bold uppercase tracking-widest text-base-content/40 mt-2">
+        <p class="text-base-content/40 mt-2 text-[10px] font-bold tracking-widest uppercase">
             Confirma dónde quieres recibir tu pedido de Comprana
         </p>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+    <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
         {{-- Left Section: Illustration --}}
         <div class="hidden lg:block">
-            <div class="relative group">
-                <div
-                    class="absolute -inset-4 bg-red-600/5 rounded-[3rem] blur-2xl group-hover:bg-red-600/10 transition-all duration-700">
-                </div>
-                <img src="{{ asset('srcs/contact.png') }}" alt="Información de Contacto"
-                    class="relative w-3/4 mx-auto rounded-[2.5rem] transform group-hover:scale-105 transition-transform duration-700 drop-shadow-2xl">
+            <div class="group relative">
+                <div class="absolute -inset-4 rounded-[3rem] bg-red-600/5 blur-2xl transition-all duration-700 group-hover:bg-red-600/10"></div>
+                <img
+                    src="{{ asset('srcs/contact.png') }}"
+                    alt="Información de Contacto"
+                    class="relative mx-auto w-3/4 transform rounded-[2.5rem] drop-shadow-2xl transition-transform duration-700 group-hover:scale-105"
+                />
             </div>
         </div>
 
         {{-- Right Section: Form Card --}}
         <div>
-            <div
-                class="bg-base-100 border border-base-content/5 shadow-2xl shadow-red-900/5 rounded-[2.5rem] p-8 lg:p-10 relative overflow-hidden">
+            <div class="bg-base-100 border-base-content/5 relative overflow-hidden rounded-[2.5rem] border p-8 shadow-2xl shadow-red-900/5 lg:p-10">
                 {{-- Decorative Accent --}}
-                <div class="absolute top-0 left-0 w-full h-1.5 bg-linear-to-r from-red-600 to-red-400"></div>
+                <div class="absolute top-0 left-0 h-1.5 w-full bg-linear-to-r from-red-600 to-red-400"></div>
 
-                <form wire:submit.prevent='placeOrder' class="space-y-8">
+                <form wire:submit.prevent="placeOrder" class="space-y-8">
                     {{-- Instructions --}}
-                    <div class="flex items-start gap-4 p-4 bg-base-content/5 rounded-2xl mb-2">
-                        <x-mary-icon name="o-information-circle" class="w-5 h-5 text-red-600 shrink-0" />
-                        <p class="text-[10px] font-bold uppercase tracking-widest text-base-content/60 leading-relaxed">
-                            Por favor, verifica que tu número de teléfono y dirección sean correctos para garantizar una entrega sin contratiempos.
+                    <div class="bg-base-content/5 mb-2 flex items-start gap-4 rounded-2xl p-4">
+                        <x-mary-icon name="o-information-circle" class="h-5 w-5 shrink-0 text-red-600" />
+                        <p class="text-base-content/60 text-[10px] leading-relaxed font-bold tracking-widest uppercase">
+                            Por favor, verifica que tu número de teléfono y dirección sean correctos para garantizar una
+                            entrega sin contratiempos.
                         </p>
                     </div>
 
                     {{-- Phone Input --}}
                     <div class="space-y-2">
-                        <x-mary-input label="Número de teléfono" wire:model='phone' type="number" icon="o-phone"
-                            placeholder="Tu teléfono de contacto" class="bg-base-content/5 border-none focus:ring-red-600/20" />
+                        <x-mary-input
+                            label="Número de teléfono"
+                            wire:model="phone"
+                            type="number"
+                            icon="o-phone"
+                            placeholder="Tu teléfono de contacto"
+                            class="bg-base-content/5 border-none focus:ring-red-600/20"
+                        />
                         <x-base.input-error :messages="$errors->get('phone')" />
                     </div>
 
                     {{-- Address Input --}}
                     <div class="space-y-2">
-                        <x-mary-input label="Dirección de entrega" wire:model='address' icon="o-map-pin"
+                        <x-mary-input
+                            label="Dirección de entrega"
+                            wire:model="address"
+                            icon="o-map-pin"
                             placeholder="Calle, número, ciudad y detalles adicionales"
-                            class="bg-base-content/5 border-none focus:ring-red-600/20" />
+                            class="bg-base-content/5 border-none focus:ring-red-600/20"
+                        />
                         <x-base.input-error :messages="$errors->get('address')" />
                     </div>
 
                     {{-- Actions --}}
-                    <div class="pt-6 border-t border-base-content/5 flex items-center justify-between gap-4">
-                        <a href="{{ route('carts.show', $cart->id) }}"
-                            class="text-[10px] font-black uppercase tracking-widest text-base-content/30 hover:text-base-content transition-colors">
+                    <div class="border-base-content/5 flex items-center justify-between gap-4 border-t pt-6">
+                        <a
+                            href="{{ route('carts.show', $cart->id) }}"
+                            class="text-base-content/30 hover:text-base-content text-[10px] font-black tracking-widest uppercase transition-colors"
+                        >
                             ← Cancelar
                         </a>
 
-                        <x-mary-button type="submit" label="Continuar al pago" icon-right="o-credit-card"
-                            class="btn-primary px-8 py-4 h-auto font-black text-xs uppercase tracking-widest rounded-2xl group">
+                        <x-mary-button
+                            type="submit"
+                            label="Continuar al pago"
+                            icon-right="o-credit-card"
+                            class="btn-primary group h-auto rounded-2xl px-8 py-4 text-xs font-black tracking-widest uppercase"
+                        >
                             <x-slot:append>
-                                <x-mary-icon name="o-chevron-right" class="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                                <x-mary-icon
+                                    name="o-chevron-right"
+                                    class="h-3 w-3 transition-transform group-hover:translate-x-1"
+                                />
                             </x-slot:append>
                         </x-mary-button>
                     </div>
@@ -119,7 +139,7 @@ new class extends Component
 
                 {{-- Trust Footer --}}
                 <div class="mt-10 text-center opacity-30">
-                    <p class="text-[8px] font-bold uppercase tracking-[0.4em]">Garantía de privacidad Comprana</p>
+                    <p class="text-[8px] font-bold tracking-[0.4em] uppercase">Garantía de privacidad Comprana</p>
                 </div>
             </div>
         </div>

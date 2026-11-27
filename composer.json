@@ -28,7 +28,7 @@
         "filament/upgrade": "^5.0",
         "laravel-lang/common": "^6.1",
         "laravel/boost": "^2.4",
-        "laravel/pint": "^1.0",
+        "laravel/pint": "^1.30",
         "laravel/sail": "^1.71",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^8.1",

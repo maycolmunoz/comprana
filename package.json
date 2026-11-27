@@ -14,6 +14,9 @@
         "daisyui": "^5.5.18",
         "laravel-vite-plugin": "^2.0.1",
         "postcss": "^8.4.31",
+        "prettier": "^3.10.1",
+        "prettier-plugin-blade": "^3.3.3",
+        "prettier-plugin-tailwindcss": "^0.8.1",
         "tailwindcss": "^4.1.18",
         "vite": "^7.1.3"
     }

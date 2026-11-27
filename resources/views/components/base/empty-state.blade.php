@@ -7,15 +7,18 @@
 ])
 
 <div class="py-20 text-center">
-    <div class="w-24 h-24 bg-base-content/5 rounded-full flex items-center justify-center mx-auto mb-6">
-        <x-mary-icon :name="$icon" class="w-10 h-10 text-base-content/20" />
+    <div class="bg-base-content/5 mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-full">
+        <x-mary-icon :name="$icon" class="text-base-content/20 h-10 w-10" />
     </div>
-    <h3 class="text-xl font-black uppercase tracking-tighter mb-2">{{ $title }}</h3>
-    <p class="text-[10px] font-bold uppercase tracking-widest text-base-content/60 mb-8 max-w-xs mx-auto">
+    <h3 class="mb-2 text-xl font-black tracking-tighter uppercase">{{ $title }}</h3>
+    <p class="text-base-content/60 mx-auto mb-8 max-w-xs text-[10px] font-bold tracking-widest uppercase">
         {{ $description }}
     </p>
     @if ($link)
-        <x-mary-button :link="$link" :label="$linkLabel"
-            class="btn-primary rounded-2xl px-10 font-black text-xs uppercase tracking-widest" />
+        <x-mary-button
+            :link="$link"
+            :label="$linkLabel"
+            class="btn-primary rounded-2xl px-10 text-xs font-black tracking-widest uppercase"
+        />
     @endif
 </div>

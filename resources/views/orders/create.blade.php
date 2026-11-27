@@ -4,5 +4,4 @@
     </x-slot>
 
     <livewire:orders.order :$cart />
-
 </x-app-layout>

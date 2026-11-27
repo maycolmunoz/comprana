@@ -3,27 +3,27 @@
     $sectionName = request('section') != '' ? request('section') : $product->section->name ?? 'General';
 @endphp
 
-<x-mary-card
-    class="h-full bg-base-100 rounded-4xl border border-base-content/5 shadow-xl transition-all duration-500 hover:shadow-2xl hover:shadow-red-600/5 hover:-translate-y-2 group overflow-hidden relative">
-    <x-slot:figure class="relative overflow-hidden aspect-square">
+<x-mary-card class="bg-base-100 border-base-content/5 group relative h-full overflow-hidden rounded-4xl border shadow-xl transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-red-600/5">
+    <x-slot:figure class="relative aspect-square overflow-hidden">
         {{-- Product Image with Hover Zoom --}}
-        <img src="{{ $product->imageUrl() }}"
-            class="object-cover w-full h-full transition-transform duration-700 group-hover:scale-110"
-            alt="{{ $product->name }}" />
+        <img
+            src="{{ $product->imageUrl() }}"
+            class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+            alt="{{ $product->name }}"
+        />
 
         {{-- Section Badge overlay --}}
         <div class="absolute top-4 left-4 z-10">
             <x-mary-badge
-                class="bg-white/70 backdrop-blur-md border border-white/20 text-red-600 font-bold text-[10px] uppercase tracking-widest px-3 py-1.5 shadow-sm rounded-full"
-                :value="$sectionName" />
+                class="rounded-full border border-white/20 bg-white/70 px-3 py-1.5 text-[10px] font-bold tracking-widest text-red-600 uppercase shadow-sm backdrop-blur-md"
+                :value="$sectionName"
+            />
         </div>
 
         {{-- Out of Stock Overlay --}}
-        @if (!$inStock)
-            <div
-                class="absolute inset-0 bg-white/60 backdrop-blur-[2px] flex items-center justify-center rotate-[-15deg] z-20 pointer-events-none">
-                <span
-                    class="text-2xl font-black text-red-600 border-4 border-red-600 px-6 py-2 tracking-tighter uppercase opacity-80">
+        @if (! $inStock)
+            <div class="pointer-events-none absolute inset-0 z-20 flex rotate-[-15deg] items-center justify-center bg-white/60 backdrop-blur-[2px]">
+                <span class="border-4 border-red-600 px-6 py-2 text-2xl font-black tracking-tighter text-red-600 uppercase opacity-80">
                     Agotado
                 </span>
             </div>
@@ -32,39 +32,46 @@
 
     {{-- Content --}}
     <div class="space-y-3 px-1">
-        <h3
-            class="font-black text-lg lg:text-xl leading-tight tracking-tight uppercase group-hover:text-red-600 transition-colors">
+        <h3 class="text-lg leading-tight font-black tracking-tight uppercase transition-colors group-hover:text-red-600 lg:text-xl">
             {{ $product->name }}
         </h3>
 
         <div class="flex items-center justify-between gap-2">
             <div class="flex flex-col">
-                <span class="text-[10px] font-bold uppercase opacity-30 tracking-widest">Precio</span>
-                <x-base.price :value="$product->price"
-                    class="text-2xl font-black text-base-content italic tracking-tighter" />
+                <span class="text-[10px] font-bold tracking-widest uppercase opacity-30">Precio</span>
+                <x-base.price
+                    :value="$product->price"
+                    class="text-base-content text-2xl font-black tracking-tighter italic"
+                />
             </div>
 
             <div class="flex items-center gap-1.5">
                 @if ($inStock)
                     @guest
-                        <x-mary-button :link="route('login')" icon="o-shopping-cart"
-                            class="btn-primary btn-circle shadow-lg shadow-primary/20 hover:scale-110"
-                            aria-label="Inicia sesión para comprar {{ $product->name }}" />
+                        <x-mary-button
+                            :link="route('login')"
+                            icon="o-shopping-cart"
+                            class="btn-primary btn-circle shadow-primary/20 shadow-lg hover:scale-110"
+                            aria-label="Inicia sesión para comprar {{ $product->name }}"
+                        />
                     @else
-                        <x-mary-button icon="o-shopping-cart"
-                            class="btn-primary btn-circle shadow-lg shadow-primary/20 hover:scale-110 active:scale-95 transition-all"
+                        <x-mary-button
+                            icon="o-shopping-cart"
+                            class="btn-primary btn-circle shadow-primary/20 shadow-lg transition-all hover:scale-110 active:scale-95"
                             aria-label="Ver detalles de {{ $product->name }}"
                             x-data="{
-        realizarAccion(id) {
-            $dispatch('slider');
-            $dispatch('details', { 'id': id })
-            $dispatch('reset-quantity')
-        }
-    }" @click="realizarAccion('{{ $product->id }}')" />
+                                realizarAccion(id) {
+                                    $dispatch('slider');
+                                    $dispatch('details', { id: id });
+                                    $dispatch('reset-quantity');
+                                },
+                            }"
+                            @click="realizarAccion('{{ $product->id }}')"
+                        />
                     @endguest
                 @else
-                    <div class="p-3 bg-base-content/5 rounded-full opacity-30">
-                        <x-mary-icon name="o-no-symbol" class="w-6 h-6" />
+                    <div class="bg-base-content/5 rounded-full p-3 opacity-30">
+                        <x-mary-icon name="o-no-symbol" class="h-6 w-6" />
                     </div>
                 @endif
             </div>

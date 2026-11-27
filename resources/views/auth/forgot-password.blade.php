@@ -1,7 +1,7 @@
 <x-guest-layout>
     <div class="mb-8 text-center">
-        <h2 class="text-2xl font-black uppercase tracking-tighter">¿Olvidaste tu contraseña?</h2>
-        <p class="text-[10px] font-bold uppercase tracking-widest text-base-content/60 mt-2 leading-relaxed">
+        <h2 class="text-2xl font-black tracking-tighter uppercase">¿Olvidaste tu contraseña?</h2>
+        <p class="text-base-content/60 mt-2 text-[10px] leading-relaxed font-bold tracking-widest uppercase">
             No hay problema. Ingresa tu correo y te enviaremos un enlace para restablecerla.
         </p>
     </div>
@@ -19,20 +19,23 @@
             value="{{ old('email') }}"
             required
             autofocus
-            class="bg-base-content/5 border-none focus:ring-red-600/20" />
+            class="bg-base-content/5 border-none focus:ring-red-600/20"
+        />
         <x-base.input-error :messages="$errors->get('email')" class="mt-2" />
 
         <div class="pt-4">
             <x-mary-button
                 type="submit"
                 label="Enviar enlace de restauración"
-                class="btn-primary w-full font-black text-sm uppercase tracking-widest rounded-2xl" />
+                class="btn-primary w-full rounded-2xl text-sm font-black tracking-widest uppercase"
+            />
         </div>
 
-        <div class="text-center pt-2">
+        <div class="pt-2 text-center">
             <a
                 href="{{ route('login') }}"
-                class="text-[10px] font-black uppercase tracking-widest text-base-content/60 hover:text-red-600 transition-colors">
+                class="text-base-content/60 text-[10px] font-black tracking-widest uppercase transition-colors hover:text-red-600"
+            >
                 ← Volver al inicio de sesión
             </a>
         </div>

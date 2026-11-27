@@ -7,12 +7,15 @@
     'logoClass' => '',
 ])
 
-<a href="{{ $href }}" target="{{ $target }}"
-    {{ $attributes->merge(['class' => 'flex items-center justify-center gap-x-3 text-decoration-none hover:opacity-80 transition-opacity text-base-content']) }}>
+<a
+    href="{{ $href }}"
+    target="{{ $target }}"
+    {{ $attributes->merge(['class' => 'flex items-center justify-center gap-x-3 text-decoration-none hover:opacity-80 transition-opacity text-base-content']) }}
+>
     @if ($logo || isset($logo))
         <div class="shrink-0">
             @if (isset($logo) && is_string($logo))
-                <img src="{{ $logo }}" alt="{{ $alt }} Logo" class="h-8 w-auto {{ $logoClass }}">
+                <img src="{{ $logo }}" alt="{{ $alt }} Logo" class="h-8 w-auto {{ $logoClass }}" />
             @elseif ($logo && $logo->isNotEmpty())
                 {{ $logo }}
             @endif
@@ -20,6 +23,6 @@
     @endif
 
     @if ($name)
-        <div data-slot="brand-name" class="font-bold text-lg w-full">{{ $name }}</div>
+        <div data-slot="brand-name" class="w-full text-lg font-bold">{{ $name }}</div>
     @endif
 </a>

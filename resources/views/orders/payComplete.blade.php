@@ -37,19 +37,23 @@
         };
     @endphp
 
-    <div class="max-w-2xl mx-auto px-6 py-16">
+    <div class="mx-auto max-w-2xl px-6 py-16">
         <x-base.section-card>
-            <div class="flex flex-col sm:flex-row items-start gap-6">
+            <div class="flex flex-col items-start gap-6 sm:flex-row">
                 <div class="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 {{ $statusClasses }}">
-                    <x-mary-icon :name="$icon" class="w-7 h-7" />
+                    <x-mary-icon :name="$icon" class="h-7 w-7" />
                 </div>
 
                 <div>
-                    <h2 class="text-2xl font-black uppercase tracking-tighter">{{ $title }}</h2>
-                    <p class="text-sm text-base-content/60 leading-relaxed mt-2">{{ $description }}</p>
+                    <h2 class="text-2xl font-black tracking-tighter uppercase">{{ $title }}</h2>
+                    <p class="text-base-content/60 mt-2 text-sm leading-relaxed">{{ $description }}</p>
 
-                    <x-mary-button :link="route('orders.index')" label="Ver mis pedidos" icon="o-document-text"
-                        class="btn-primary mt-6 font-black text-xs uppercase tracking-widest rounded-2xl" />
+                    <x-mary-button
+                        :link="route('orders.index')"
+                        label="Ver mis pedidos"
+                        icon="o-document-text"
+                        class="btn-primary mt-6 rounded-2xl text-xs font-black tracking-widest uppercase"
+                    />
                 </div>
             </div>
         </x-base.section-card>

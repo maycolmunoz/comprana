@@ -4,7 +4,7 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto px-6 lg:px-8 space-y-10">
+        <div class="mx-auto max-w-7xl space-y-10 px-6 lg:px-8">
             <x-base.info-list
                 title="Seguimiento de pedidos"
                 :list="[
@@ -12,7 +12,8 @@
                     'En Camino: El pedido ha sido despachado y se encuentra en tránsito seguro.',
                     'Entregado: Has recibido tu pedido satisfactoriamente.',
                     'No Entregado: Intento de entrega fallido. El paquete está disponible en sucursal.',
-                ]" />
+                ]"
+            />
 
             @include('orders.partials.filters')
 
