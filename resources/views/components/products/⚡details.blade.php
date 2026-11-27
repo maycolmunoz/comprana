@@ -44,7 +44,7 @@ new class extends Component {
 };
 ?>
 
-<div class="animate__animated animate__fadeIn">
+<div>
     <x-base.loading
         wire:loading
         class="items-center justify-center w-full min-h-100"
@@ -121,7 +121,7 @@ new class extends Component {
                             {{ $product->name }}
                         </h3>
 
-                        <p class="text-base text-base-content/70 leading-relaxed font-medium">
+                        <p class="text-base text-base-content/70 leading-relaxed font-normal">
                             {{ $product->description }}
                         </p>
                     </div>
@@ -143,8 +143,8 @@ new class extends Component {
                             Disponibilidad
                         </span>
                         <div class="flex items-center gap-1.5 pt-1">
-                            <div class="{{ $product->stock > 0 ? 'bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]' : 'bg-red-500' }} w-2 h-2 rounded-full"></div>
-                            <span class="{{ $product->stock > 0 ? 'text-emerald-600' : 'text-red-600' }} text-xs font-bold uppercase tracking-widest">
+                            <div class="{{ $product->stock > 0 ? 'bg-success ' : 'bg-base-content/50' }} w-2 h-2 rounded-full"></div>
+                            <span class="{{ $product->stock > 0 ? 'text-success' : 'text-red-600' }} text-xs font-bold uppercase tracking-widest">
                                 {{ $product->stock > 0 ? $product->stock . ' Unidades' : 'Sin Stock' }}
                             </span>
                         </div>

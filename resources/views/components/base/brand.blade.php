@@ -20,6 +20,6 @@
     @endif
 
     @if ($name)
-        <div data-slot="brand-name" class="font-semibold text-lg w-full">{{ $name }}</div>
+        <div data-slot="brand-name" class="font-bold text-lg w-full">{{ $name }}</div>
     @endif
 </a>

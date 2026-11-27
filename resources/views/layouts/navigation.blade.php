@@ -83,7 +83,8 @@
                     <x-mary-button
                         icon="o-bars-3-bottom-right"
                         @click="open = !open"
-                        class="btn-ghost btn-circle" />
+                        class="btn-ghost btn-circle"
+                        aria-label="Abrir menú" />
                 </div>
             </div>
         </div>
@@ -91,6 +92,7 @@
 
     <!-- Mobile Menu -->
     <div
+        x-cloak
         x-show="open"
         x-transition:enter="transition ease-out duration-200"
         x-transition:enter-start="opacity-0 -translate-y-4"

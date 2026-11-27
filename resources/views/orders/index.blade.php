@@ -3,7 +3,7 @@
         <x-base.page-header title="Mis Pedidos" />
     </x-slot>
 
-    <div class="py-12 animate__animated animate__fadeIn">
+    <div class="py-12">
         <div class="max-w-7xl mx-auto px-6 lg:px-8 space-y-10">
             <x-base.info-list
                 title="Seguimiento de Pedidos"

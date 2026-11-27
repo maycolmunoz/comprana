@@ -47,7 +47,7 @@ new class extends Component
     }
 }; ?>
 
-<div class="max-w-5xl mx-auto py-12 px-6 animate__animated animate__fadeIn">
+<div class="max-w-5xl mx-auto py-12 px-6">
     {{-- Process Header --}}
     <div class="mb-12 text-center">
         <h3 class="text-3xl font-black uppercase tracking-tighter">
@@ -60,7 +60,7 @@ new class extends Component
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         {{-- Left Section: Illustration --}}
-        <div class="hidden lg:block animate__animated animate__fadeInLeft">
+        <div class="hidden lg:block">
             <div class="relative group">
                 <div
                     class="absolute -inset-4 bg-red-600/5 rounded-[3rem] blur-2xl group-hover:bg-red-600/10 transition-all duration-700">
@@ -71,7 +71,7 @@ new class extends Component
         </div>
 
         {{-- Right Section: Form Card --}}
-        <div class="animate__animated animate__fadeInRight">
+        <div>
             <div
                 class="bg-base-100 border border-base-content/5 shadow-2xl shadow-red-900/5 rounded-[2.5rem] p-8 lg:p-10 relative overflow-hidden">
                 {{-- Decorative Accent --}}
@@ -90,7 +90,7 @@ new class extends Component
                     <div class="space-y-2">
                         <x-mary-input label="Número de Teléfono" wire:model='phone' type="number" icon="o-phone"
                             placeholder="Tu teléfono de contacto" class="bg-base-content/5 border-none focus:ring-red-600/20" />
-                        <x-base.input-error :messages="$errors->get('phone')" class="" />
+                        <x-base.input-error :messages="$errors->get('phone')" />
                     </div>
 
                     {{-- Address Input --}}
@@ -98,7 +98,7 @@ new class extends Component
                         <x-mary-input label="Dirección de Entrega" wire:model='address' icon="o-map-pin"
                             placeholder="Calle, número, ciudad y detalles adicionales"
                             class="bg-base-content/5 border-none focus:ring-red-600/20" />
-                        <x-base.input-error :messages="$errors->get('address')" class="" />
+                        <x-base.input-error :messages="$errors->get('address')" />
                     </div>
 
                     {{-- Actions --}}

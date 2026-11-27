@@ -8,7 +8,7 @@
 
     @if (session('status') == 'verification-link-sent')
         <div
-            class="mb-6 bg-green-500/10 border border-green-500/20 rounded-2xl p-4 text-[10px] font-bold uppercase tracking-widest text-green-600 text-center animate__animated animate__fadeIn">
+            class="mb-6 bg-success/10 border border-success/20 rounded-2xl p-4 text-[10px] font-bold uppercase tracking-widest text-success text-center">
             Se ha enviado un nuevo enlace de verificación a tu correo.
         </div>
     @endif

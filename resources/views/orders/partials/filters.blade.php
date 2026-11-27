@@ -1,4 +1,4 @@
-<div class="w-full flex justify-center mx-auto mb-8 animate__animated animate__fadeIn">
+<div class="w-full flex justify-center mx-auto mb-8">
     <div class="flex flex-wrap items-center justify-center gap-2 p-1.5 bg-base-content/5 rounded-2xl backdrop-blur-md">
         <a
             href="{{ route('orders.index') }}"

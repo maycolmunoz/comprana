@@ -87,7 +87,7 @@ new class extends Component {
             {{-- Active Glow Effect --}}
             @if ($cart->active)
                 <div
-                    class="absolute -inset-0.5 bg-linear-to-r from-red-600 to-red-400 rounded-[2.5rem] blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200 animate-pulse">
+                    class="absolute -inset-0.5 bg-linear-to-r from-red-600 to-red-400 rounded-[2.5rem] blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200">
                 </div>
             @endif
 
@@ -104,7 +104,7 @@ new class extends Component {
                     <div class="flex items-center gap-2">
                         @if ($cart->active)
                             <span
-                                class="text-[8px] font-black uppercase tracking-[0.2em] text-red-600 animate__animated animate__pulse animate__infinite">Activo</span>
+                                class="text-[8px] font-black uppercase tracking-[0.2em] text-red-600">Activo</span>
                         @endif
                         <div class="form-control">
                             <label class="label cursor-pointer p-0">

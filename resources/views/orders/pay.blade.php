@@ -16,22 +16,22 @@
                                         <tr>
                                             <th
                                                 scope="col"
-                                                class="px-6 py-4 text-sm font-medium text-left text-base-content">
+                                                class="px-6 py-4 text-sm font-normal text-left text-base-content">
                                                 Nombre
                                             </th>
                                             <th
                                                 scope="col"
-                                                class="px-6 py-4 text-sm font-medium text-left text-base-content">
+                                                class="px-6 py-4 text-sm font-normal text-left text-base-content">
                                                 Precio
                                             </th>
                                             <th
                                                 scope="col"
-                                                class="px-6 py-4 text-sm font-medium text-left text-base-content">
+                                                class="px-6 py-4 text-sm font-normal text-left text-base-content">
                                                 Cantidad
                                             </th>
                                             <th
                                                 scope="col"
-                                                class="px-6 py-4 text-sm font-medium text-left text-base-content">
+                                                class="px-6 py-4 text-sm font-normal text-left text-base-content">
                                                 Total
                                             </th>
                                         </tr>
@@ -39,17 +39,17 @@
                                     <tbody>
                                         @foreach ($cart->products as $product)
                                             <tr class="bg-base-100 border-b border-base-content/5">
-                                                <td class="px-6 py-2 text-sm font-medium text-base-content whitespace-nowrap">
+                                                <td class="px-6 py-2 text-sm font-normal text-base-content whitespace-nowrap">
                                                     {{ $product->name }}
                                                 </td>
-                                                <td class="px-6 py-2 text-sm font-light text-base-content whitespace-nowrap">
+                                                <td class="px-6 py-2 text-sm font-normal text-base-content whitespace-nowrap">
                                                     {{ $product->price }}
                                                 </td>
                                                 <td
-                                                    class="px-6 py-2 text-sm font-light text-center text-base-content whitespace-nowrap">
+                                                    class="px-6 py-2 text-sm font-normal text-center text-base-content whitespace-nowrap">
                                                     {{ $product->pivot->cant }}
                                                 </td>
-                                                <td class="px-6 py-2 text-sm font-light text-base-content whitespace-nowrap">
+                                                <td class="px-6 py-2 text-sm font-normal text-base-content whitespace-nowrap">
                                                     {{ $product->pivot->cant * $product->price }}
                                                 </td>
                                             </tr>
@@ -67,7 +67,7 @@
                 <div class="flex justify-center lg:justify-end">
                     <div class="w-full max-w-md px-4 py-3 bg-base-100 border border-base-content/10 rounded-2xl">
                         <div class="flex items-center justify-between">
-                            <h3 class="font-medium text-base-content">Total a Pagar: $ {{ $order->total }}</h3>
+                            <h3 class="font-normal text-base-content">Total a Pagar: $ {{ $order->total }}</h3>
                         </div>
 
                         <div id="wallet_container"></div>

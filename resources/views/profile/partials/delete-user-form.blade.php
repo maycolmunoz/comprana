@@ -38,7 +38,7 @@
                         <x-mary-input label="Tu Contraseña" name="password" type="password" icon="o-lock-closed"
                             placeholder="Ingresa tu contraseña para confirmar"
                             class="bg-base-content/5 border-none focus:ring-red-600/20" />
-                        <x-base.input-error :messages="$errors->userDeletion->get('password')" class="" />
+                        <x-base.input-error :messages="$errors->userDeletion->get('password')" />
                     </div>
                 </div>
 

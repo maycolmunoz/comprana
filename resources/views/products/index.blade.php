@@ -67,7 +67,7 @@
                                     </div>
 
                                     <div class="relative flex-1 overflow-y-auto px-6 py-8 sm:px-10 bg-base-200/30">
-                                        <div class="animate__animated animate__fadeIn animate__delay-1s">
+                                        <div>
                                             <livewire:products.details />
                                         </div>
                                     </div>
@@ -91,7 +91,7 @@
     <section class="bg-base-100 border-b border-base-content/5 mb-12">
         <div class="max-w-7xl mx-auto px-6 py-10 lg:py-16">
             <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-8">
-                <div class="max-w-xl animate__animated animate__fadeInLeft">
+                <div class="max-w-xl">
                     <span
                         class="text-[10px] font-black uppercase tracking-widest text-red-600 mb-2 block">
                         Catálogo Selecto
@@ -99,12 +99,12 @@
                     <h1 class="text-4xl lg:text-6xl font-black tracking-tighter uppercase leading-none mb-6">
                         Explora Nuestras <span class="italic text-base-content/40">Colecciones</span>
                     </h1>
-                    <p class="text-base text-base-content/50 font-medium">
+                    <p class="text-base text-base-content/50 font-normal">
                         Calidad garantizada y entregas seguras. Encuentra lo que necesitas con la mejor experiencia de compra.
                     </p>
                 </div>
 
-                <div class="animate__animated animate__fadeInRight">
+                <div>
                     @include('products.partials.filters')
                 </div>
             </div>

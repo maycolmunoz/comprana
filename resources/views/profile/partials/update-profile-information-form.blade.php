@@ -22,20 +22,20 @@
                 <x-mary-input label="Nombre" name="name" type="text" icon="o-user"
                     value="{{ old('name', $user->name) }}" required autofocus autocomplete="name"
                     class="bg-base-content/5 border-none focus:ring-red-600/20" />
-                <x-base.input-error :messages="$errors->get('name')" class="" />
+                <x-base.input-error :messages="$errors->get('name')" />
             </div>
 
         <div class="space-y-2">
                 <x-mary-input label="Email" name="email" type="email" icon="o-envelope"
                     value="{{ old('email', $user->email) }}" required autocomplete="username"
                     class="bg-base-content/5 border-none focus:ring-red-600/20" />
-                <x-base.input-error :messages="$errors->get('email')" class="" />
+                <x-base.input-error :messages="$errors->get('email')" />
 
             @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && !$user->hasVerifiedEmail())
                 <div class="px-4 py-2 bg-warning/10 rounded-xl border border-warning/20">
                     <p class="text-[10px] font-black uppercase tracking-widest text-warning">
                             Tu correo no está verificado.
-                            <button form="send-verification" class="ml-2 underline hover:text-amber-900 transition-colors uppercase">
+                            <button form="send-verification" class="ml-2 underline hover:underline transition-colors uppercase">
                                 Reenviar verificación
                             </button>
                         </p>
@@ -55,14 +55,14 @@
                 <x-mary-input label="Teléfono" name="phone" type="text" icon="o-phone"
                     value="{{ old('phone', $user->phone) }}" placeholder="Ej: +34 600 000 000"
                     class="bg-base-content/5 border-none focus:ring-red-600/20" />
-                <x-base.input-error :messages="$errors->get('phone')" class="" />
+                <x-base.input-error :messages="$errors->get('phone')" />
             </div>
 
             <div>
                 <x-mary-input label="Dirección" name="address" type="text" icon="o-map-pin"
                     value="{{ old('address', $user->address) }}" placeholder="Ej: Calle Real 123, Barrio Centro"
                     class="bg-base-content/5 border-none focus:ring-red-600/20" />
-                <x-base.input-error :messages="$errors->get('address')" class="" />
+                <x-base.input-error :messages="$errors->get('address')" />
             </div>
         </div>
 
@@ -72,7 +72,7 @@
 
             @if (session('status') === 'profile-updated')
                 <div x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 3000)"
-                    class="flex items-center gap-2 text-green-600 animate__animated animate__fadeIn">
+                    class="flex items-center gap-2 text-success">
                     <x-mary-icon name="o-check-circle" class="w-4 h-4" />
                     <span class="text-[10px] font-black uppercase tracking-widest">Actualizado con éxito</span>
                 </div>

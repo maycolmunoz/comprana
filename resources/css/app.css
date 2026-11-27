@@ -3,9 +3,7 @@
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 
 @theme {
-    --font-sans:
-        Figtree, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
-        "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-sans: Outfit, ui-sans-serif, system-ui, sans-serif;
 }
 
 /*
@@ -99,7 +97,7 @@ body {
   name: "forest";
   default: true;
   prefersdark: true;
-  color-scheme: "light";
+  color-scheme: "dark";
   --color-base-100: oklch(20.84% 0.008 17.911);
   --color-base-200: oklch(18.522% 0.007 17.911);
   --color-base-300: oklch(16.203% 0.007 17.911);
@@ -121,8 +119,8 @@ body {
   --color-error: oklch(71.76% 0.221 22.18);
   --color-error-content: oklch(0% 0 0);
   --radius-selector: 1rem;
-  --radius-field: 2rem;
-  --radius-box: 1rem;
+  --radius-field: 1rem;
+  --radius-box: 2rem;
   --size-selector: 0.25rem;
   --size-field: 0.25rem;
   --border: 1px;

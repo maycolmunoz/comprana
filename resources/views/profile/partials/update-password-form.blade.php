@@ -16,20 +16,20 @@
         <div>
             <x-mary-input label="Contraseña Actual" name="current_password" type="password" icon="o-lock-closed"
                 autocomplete="current-password" class="bg-base-content/5 border-none focus:ring-red-600/20" />
-            <x-base.input-error :messages="$errors->updatePassword->get('current_password')" class="" />
+            <x-base.input-error :messages="$errors->updatePassword->get('current_password')" />
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
                 <x-mary-input label="Nueva Contraseña" name="password" type="password" icon="o-key"
                     autocomplete="new-password" class="bg-base-content/5 border-none focus:ring-red-600/20" />
-                <x-base.input-error :messages="$errors->updatePassword->get('password')" class="" />
+                <x-base.input-error :messages="$errors->updatePassword->get('password')" />
             </div>
 
             <div>
                 <x-mary-input label="Confirmar Nueva Contraseña" name="password_confirmation" type="password"
                     icon="o-check-badge" autocomplete="new-password" class="bg-base-content/5 border-none focus:ring-red-600/20" />
-                <x-base.input-error :messages="$errors->updatePassword->get('password_confirmation')" class="" />
+                <x-base.input-error :messages="$errors->updatePassword->get('password_confirmation')" />
             </div>
         </div>
 
@@ -39,7 +39,7 @@
 
             @if (session('status') === 'password-updated')
                 <div x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 3000)"
-                    class="flex items-center gap-2 text-success animate__animated animate__fadeIn">
+                    class="flex items-center gap-2 text-success">
                     <x-mary-icon name="o-check-circle" class="w-4 h-4" />
                     <span class="text-[10px] font-black uppercase tracking-widest">Guardado</span>
                 </div>

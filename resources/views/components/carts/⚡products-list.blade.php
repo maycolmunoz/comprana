@@ -10,10 +10,8 @@ new class extends Component
     public function placeholder()
     {
         return <<<'HTML'
-        <div class="flex items-center justify-center my-40 space-x-2">
-            <div class="w-4 h-4 rounded-full animate-pulse dark:bg-violet-400"></div>
-            <div class="w-4 h-4 rounded-full animate-pulse dark:bg-violet-400"></div>
-            <div class="w-4 h-4 rounded-full animate-pulse dark:bg-violet-400"></div>
+        <div class="flex items-center justify-center my-40">
+            <span class="loading loading-spinner loading-lg text-primary"></span>
         </div>
         HTML;
     }
@@ -22,7 +20,7 @@ new class extends Component
     public function refresh() {}
 }; ?>
 
-<div x-data="{ pay: 0 }" class="animate__animated animate__fadeIn">
+<div x-data="{ pay: 0 }">
     {{-- Navigation & Header --}}
     <div class="flex flex-col md:flex-row justify-between items-end gap-6 mb-10 pb-8 border-b border-base-content/5">
         <div class="text-left">
@@ -73,7 +71,7 @@ new class extends Component
                             <div class="flex justify-between items-center text-sm">
                             <span
                                 class="font-bold uppercase tracking-widest text-base-content/40 text-[10px]">Envío</span>
-                                <span class="text-green-600 font-bold uppercase text-[10px] tracking-widest">Gratis</span>
+                                <span class="text-success font-bold uppercase text-[10px] tracking-widest">Gratis</span>
                             </div>
                         </div>
 
@@ -99,7 +97,7 @@ new class extends Component
             </div>
         </div>
     @else
-        <div class="py-24 text-center animate__animated animate__zoomIn">
+        <div class="py-24 text-center">
             <div class="mt-10">
                 <x-mary-button link="/" label="Explorar Catálogo"
                     class="btn-outline font-black text-xs uppercase tracking-widest rounded-2xl px-12 hover:bg-red-600 hover:text-white hover:border-red-600 transition-all" />

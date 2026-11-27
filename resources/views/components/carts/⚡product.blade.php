@@ -38,9 +38,6 @@ new class extends Component
         '
     class="group bg-base-100 border border-base-content/5 rounded-3xl p-4 flex flex-col sm:flex-row gap-6 transition-all duration-300 hover:shadow-xl hover:shadow-base-content/5 relative overflow-hidden">
 
-    {{-- Glass Shine --}}
-    <div class="absolute top-0 left-0 w-full h-px bg-linear-to-r from-transparent via-red-600/10 to-transparent"></div>
-
     {{-- Product Image --}}
     <div class="w-full sm:w-48 h-48 rounded-2xl overflow-hidden bg-base-content/5 relative shrink-0">
         <img src="{{ asset('storage/' . $product->images[0]) }}" alt="{{ $product->name }}"

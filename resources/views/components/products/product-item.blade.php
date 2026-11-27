@@ -12,7 +12,7 @@
             alt="{{ $product->name }}" />
 
         {{-- Section Badge overlay --}}
-        <div class="absolute top-4 left-4 z-10 animate__animated animate__fadeIn">
+        <div class="absolute top-4 left-4 z-10">
             <x-mary-badge
                 class="bg-white/70 backdrop-blur-md border border-white/20 text-red-600 font-bold text-[10px] uppercase tracking-widest px-3 py-1.5 shadow-sm rounded-full"
                 :value="$sectionName" />

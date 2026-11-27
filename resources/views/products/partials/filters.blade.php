@@ -1,4 +1,4 @@
-<section class="flex flex-col md:flex-row items-center gap-6 mb-10 animate__animated animate__fadeIn">
+<section class="flex flex-col md:flex-row items-center gap-6 mb-10">
     <div class="w-full md:w-auto grow max-w-md" x-data="{ query: '{{ request('search' ?? '') }}' }">
         <div class="relative group">
             <div
@@ -10,7 +10,7 @@
                 x-model="query"
                 type="text"
                 placeholder="¿Qué estás buscando hoy?"
-                class="w-full bg-base-100 border-base-content/10 focus:border-red-600 focus:ring-4 focus:ring-red-600/5 rounded-2xl py-4 pl-12 pr-32 font-medium transition-all shadow-sm group-hover:shadow-md outline-none"
+                class="w-full bg-base-100 border-base-content/10 focus:border-red-600 focus:ring-4 focus:ring-red-600/5 rounded-2xl py-4 pl-12 pr-32 font-normal transition-all shadow-sm group-hover:shadow-md outline-none"
                 @keyup.enter="$dispatch('search', {value: query})" />
 
             <div class="absolute inset-y-2 right-2">
@@ -49,7 +49,7 @@
             <div class="grid grid-cols-1 gap-1">
                 <a
                     href="{{ route('products.index') }}"
-                    class="flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-bold transition-all {{ !request('section') ? 'bg-red-600 text-white shadow-md shadow-red-600/10' : 'hover:bg-red-50 text-base-content/60 hover:text-red-700' }}">
+                    class="flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-bold transition-all {{ !request('section') ? 'bg-red-600 text-white shadow-md shadow-red-600/10' : 'hover:bg-base-content/5 text-base-content/60 hover:text-red-600' }}">
                     <x-mary-icon name="o-squares-2x2" class="w-4 h-4" />
                     Ver Todo
                 </a>
@@ -58,7 +58,7 @@
                     <a
                         wire:navigation
                         href="{{ route('products.index', ['section' => $section->name]) }}"
-                        class="flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-bold transition-all {{ request('section') == $section->name ? 'bg-red-600 text-white shadow-md shadow-red-600/10' : 'hover:bg-red-50 text-base-content/60 hover:text-red-700' }}">
+                        class="flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-bold transition-all {{ request('section') == $section->name ? 'bg-red-600 text-white shadow-md shadow-red-600/10' : 'hover:bg-base-content/5 text-base-content/60 hover:text-red-600' }}">
                         <div
                             class="w-1.5 h-1.5 rounded-full {{ request('section') == $section->name ? 'bg-white' : 'bg-red-600/30 group-hover:bg-red-600' }} transition-colors">
                         </div>

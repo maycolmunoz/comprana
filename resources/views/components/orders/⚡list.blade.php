@@ -48,7 +48,7 @@ new class extends Component
 };
 ?>
 
-<div class="space-y-6 animate__animated animate__fadeIn">
+<div class="space-y-6">
     <x-mary-modal wire:model="myModal" title="Detalles del Pedido" class="backdrop-blur-xl">
         @if ($this->order)
             <div class="space-y-4">
@@ -126,7 +126,7 @@ new class extends Component
                     <div class="space-y-1">
                         <span class="text-[9px] font-black uppercase tracking-widest text-base-content/30">Entrega en</span>
                         <p class="text-xs font-bold leading-relaxed line-clamp-2">{{ $order->address }}</p>
-                        <p class="text-[10px] font-medium text-base-content/40">{{ $order->phone }}</p>
+                        <p class="text-[10px] font-normal text-base-content/40">{{ $order->phone }}</p>
                     </div>
                     <div class="space-y-1">
                         <span
@@ -146,11 +146,6 @@ new class extends Component
                     <x-mary-button label="Ver Detalles" icon-right="o-chevron-right" wire:click="showDetails({{ $order->id }})"
                         class="btn-outline btn-sm font-black text-[10px] uppercase tracking-widest rounded-xl px-6" />
                 </div>
-            </div>
-
-            {{-- Background Decal --}}
-            <div class="absolute -right-4 -bottom-4 opacity-[0.02] group-hover:opacity-[0.05] transition-opacity duration-500">
-                <x-mary-icon name="o-shopping-bag" class="w-32 h-32 rotate-12" />
             </div>
         </div>
     @empty
