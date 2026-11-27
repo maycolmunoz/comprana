@@ -47,7 +47,12 @@ class Order extends Model
 
     public function paymentStatusLabel(): string
     {
-        return match ($this->payment_status) {
+        return self::paymentStatusLabelFor($this->payment_status);
+    }
+
+    public static function paymentStatusLabelFor(?string $status): string
+    {
+        return match ($status) {
             'approved' => 'Pagado',
             'pending', 'in_process' => 'Pendiente',
             'rejected' => 'Rechazado',

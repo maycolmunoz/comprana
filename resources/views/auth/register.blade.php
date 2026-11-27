@@ -43,7 +43,7 @@
         <x-base.input-error :messages="$errors->get('password')" class="mt-2" />
 
         <x-mary-input
-            label="Confirmar Contraseña"
+            label="Confirmar contraseña"
             name="password_confirmation"
             type="password"
             icon="o-check-badge"

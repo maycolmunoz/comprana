@@ -28,7 +28,7 @@
             <button
                 type="submit"
                 class="text-[10px] font-black uppercase tracking-widest text-base-content/60 hover:text-red-600 transition-colors">
-                Cerrar Sesión
+                Cerrar sesión
             </button>
         </form>
     </div>

@@ -58,7 +58,7 @@
 
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
-                                <x-mary-menu-item icon="o-power" label="Cerrar Sesión"
+                                <x-mary-menu-item icon="o-power" label="Cerrar sesión"
                                     onclick="event.preventDefault(); this.closest('form').submit();" />
                             </form>
                         </x-mary-dropdown>
@@ -118,7 +118,7 @@
                         class="w-full justify-start btn-ghost text-base-content/70 text-xs" />
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <x-mary-button icon="o-power" label="Cerrar Sesión"
+                        <x-mary-button icon="o-power" label="Cerrar sesión"
                             onclick="event.preventDefault(); this.closest('form').submit();"
                             class="w-full justify-start btn-ghost text-red-600 text-xs" />
                     </form>

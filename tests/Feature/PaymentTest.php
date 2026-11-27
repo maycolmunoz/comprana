@@ -87,7 +87,8 @@ it('updates the order total from the current cart before creating the preference
 
     actingAs($buyer)
         ->get(route('orders.pay', ['id' => $cart->id, 'order' => $order]))
-        ->assertOk();
+        ->assertOk()
+        ->assertSee('data-update-uri', false);
 
     expect($order->fresh()->total)->toBe(3000);
 });
@@ -263,6 +264,7 @@ it('shows a rejected payment as not approved', function () {
     actingAs($buyer)
         ->get(route('orders.complete', ['order' => $order, 'payment_id' => '123']))
         ->assertOk()
+        ->assertSee('data-update-uri', false)
         ->assertSeeText('Pago rechazado')
         ->assertDontSeeText('Pago pendiente');
 });

@@ -276,6 +276,33 @@ The diagonal clip-path on the landing page hero image (`clip-path: polygon(15% 0
 - **Section headers:** text-[10px] uppercase tracking-[0.2em] text-red-600.
 - **Links:** Hover transitions to red-600 with translate-x-1.
 
+## Component Architecture
+
+The storefront follows a three-layer contract:
+
+| Layer | Responsibility | Examples |
+| --- | --- | --- |
+| Blade pages and layouts | Compose a screen, resolve data, own the document shell | `products/index`, `orders/create`, `layouts/app` |
+| Mary UI atoms | Buttons, inputs, badges, icons, modals, dropdowns, cards | `x-mary-button`, `x-mary-input`, `x-mary-modal` |
+| `x-base.*` compositions | Repeated, stateless visual patterns with Comprana semantics | `x-base.page-header`, `x-base.section-card`, `x-base.empty-state`, `x-base.status-badge`, `x-base.price` |
+| Livewire islands | Server state, validation, and actions that change data | `products.list`, `products.details`, `carts.list`, `orders.list` |
+
+Mary UI is a Blade + Alpine library, not a Livewire library. Using it outside a Livewire component is correct and expected.
+
+### Rules
+
+1. If Mary has the component, use Mary; do not reimplement it.
+2. If a pattern repeats and carries Comprana semantics, add or reuse a stateless `x-base.*` component.
+3. Use Livewire only when the server owns state, validation, or a data-changing action.
+4. Blade pages contain composition, not new business logic.
+5. Do not wrap Mary in project-specific wrappers without a repeated visual reason.
+6. `x-base.*` components never use `wire:model` or Livewire state.
+7. Auth and profile forms stay as normal POST requests; use Mary inputs and `x-base.input-error`.
+8. Use `route()` and `wire:navigate` consistently for internal navigation.
+9. Modals use Mary; delete duplicate custom modals instead of maintaining both.
+10. Keep one `h1` per page, `h2` for sections, and `h3` for cards.
+11. Livewire and Alpine must load on every page, including pages without Livewire components; the shared head calls `app('livewire')->forceAssetInjection()`.
+
 ## Do's and Don'ts
 
 ### Do:

@@ -30,7 +30,6 @@
 
                              <div
                                  x-show="slideOverOpen"
-                                 @click.away="slideOverOpen = false"
                                  x-transition:enter="transform transition ease-out duration-500 sm:duration-700"
                                  x-transition:enter-start="translate-x-full"
                                  x-transition:enter-end="translate-x-0"
@@ -108,6 +107,6 @@
     </section>
 
     <div class="max-w-7xl mx-auto px-6 pb-24 min-h-[60vh]">
-        <livewire:products.list lazy />
+        <livewire:products.list />
     </div>
 </x-app-layout>

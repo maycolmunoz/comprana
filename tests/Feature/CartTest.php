@@ -17,6 +17,18 @@ it('calculates the cart total from quantities and prices', function () {
     expect($cart->fresh(['products'])->total())->toBe(10500);
 });
 
+it('opens the rename modal with the cart name', function () {
+    $user = User::factory()->create();
+    $cart = $user->carts()->first();
+
+    actingAs($user);
+
+    Livewire::test('carts.list')
+        ->call('editCart', $cart->id)
+        ->assertSet('showRenameModal', true)
+        ->assertSet('cartName', $cart->name);
+});
+
 it('renames the user own cart even when the name does not change', function () {
     $user = User::factory()->create();
     $cart = $user->carts()->first();

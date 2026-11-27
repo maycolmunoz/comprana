@@ -10,15 +10,6 @@ new class extends Component
     #[Locked]
     public Cart $cart;
 
-    public function placeholder()
-    {
-        return <<<'HTML'
-        <div class="flex items-center justify-center my-40">
-            <span class="loading loading-spinner loading-lg text-primary"></span>
-        </div>
-        HTML;
-    }
-
     #[On('refresh')]
     public function refresh(): void
     {

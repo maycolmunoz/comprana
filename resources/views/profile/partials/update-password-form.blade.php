@@ -27,7 +27,7 @@
             </div>
 
             <div>
-                <x-mary-input label="Confirmar Nueva contraseña" name="password_confirmation" type="password"
+                <x-mary-input label="Confirmar nueva contraseña" name="password_confirmation" type="password"
                     icon="o-check-badge" autocomplete="new-password" class="bg-base-content/5 border-none focus:ring-red-600/20" />
                 <x-base.input-error :messages="$errors->updatePassword->get('password_confirmation')" />
             </div>

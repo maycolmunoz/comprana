@@ -6,7 +6,7 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto px-6 lg:px-8 space-y-8">
             <x-base.info-list
-                title="Gestión de Productos"
+                title="Gestión de productos"
                 :list="[
                     'Ajusta las cantidades de tus productos y utiliza el botón de actualizar para confirmar.',
                     'Si agregas un producto existente, la cantidad se actualizará con la nueva selección.',
@@ -14,7 +14,7 @@
                 ]" />
 
             <div>
-                <livewire:carts.products-list :$cart lazy />
+                <livewire:carts.products-list :$cart />
             </div>
         </div>
     </div>

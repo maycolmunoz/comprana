@@ -61,6 +61,22 @@ new class extends Component
         $this->dispatch('notification', 'Se vació el carrito');
     }
 
+    public function editCart(int $cartId): void
+    {
+        $cart = Cart::whereKey($cartId)
+            ->where('user_id', Auth::id())
+            ->first();
+
+        if (! $cart) {
+            return;
+        }
+
+        $this->editingCartId = $cart->id;
+        $this->cartName = $cart->name;
+        $this->resetValidation();
+        $this->showRenameModal = true;
+    }
+
     public function renameCart(): void
     {
         $this->validate();
@@ -168,8 +184,7 @@ new class extends Component
                     <div class="grid grid-cols-2 gap-3">
                         <x-mary-button icon="o-eye" label="Ver" :link="route('carts.show', ['cart' => $cart->id])"
                             class="btn-secondary btn-sm font-black text-[10px] uppercase tracking-widest rounded-xl flex-1" />
-                        <x-mary-button icon="o-pencil" label="Editar"
-                            @click="$wire.showRenameModal = true; $wire.editingCartId = {{ $cart->id }}; $wire.cartName = @js($cart->name)"
+                        <x-mary-button icon="o-pencil" label="Editar" wire:click="editCart({{ $cart->id }})"
                             class="btn-ghost btn-sm font-black text-[10px] uppercase tracking-widest rounded-xl flex-1 bg-base-content/5 hover:bg-base-content/10" />
                         <x-mary-button icon="o-trash" label="Vaciar" :disabled="$cart->products_count === 0"
                             wire:click="clearCart({{ $cart->id }})"

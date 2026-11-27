@@ -6,7 +6,7 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto px-6 lg:px-8 space-y-8">
             <x-base.info-list
-                title="Gestión de Carritos"
+                title="Gestión de carritos"
                 :list="[
                     'Puedes gestionar hasta 8 carritos personalizados simultáneamente.',
                     'El carrito activo es el destino predeterminado de tus nuevas selecciones.',

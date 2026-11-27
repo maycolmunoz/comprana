@@ -6,7 +6,7 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto px-6 lg:px-8 space-y-10">
             <x-base.info-list
-                title="Seguimiento de Pedidos"
+                title="Seguimiento de pedidos"
                 :list="[
                     'Procesando: Tu selección está siendo preparada con los más altos estándares.',
                     'En Camino: El pedido ha sido despachado y se encuentra en tránsito seguro.',

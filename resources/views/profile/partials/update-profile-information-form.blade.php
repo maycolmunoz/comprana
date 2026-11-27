@@ -53,14 +53,14 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
                 <x-mary-input label="Teléfono" name="phone" type="text" icon="o-phone"
-                    value="{{ old('phone', $user->phone) }}" placeholder="Ej: +34 600 000 000"
+                    value="{{ old('phone', $user->phone) }}" placeholder="Ej: 300 123 4567"
                     class="bg-base-content/5 border-none focus:ring-red-600/20" />
                 <x-base.input-error :messages="$errors->get('phone')" />
             </div>
 
             <div>
                 <x-mary-input label="Dirección" name="address" type="text" icon="o-map-pin"
-                    value="{{ old('address', $user->address) }}" placeholder="Ej: Calle Real 123, Barrio Centro"
+                    value="{{ old('address', $user->address) }}" placeholder="Ej: Calle 123 #45-67, Bogotá"
                     class="bg-base-content/5 border-none focus:ring-red-600/20" />
                 <x-base.input-error :messages="$errors->get('address')" />
             </div>
