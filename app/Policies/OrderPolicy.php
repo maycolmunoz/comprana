@@ -17,6 +17,11 @@ class OrderPolicy
         return $authUser->can('ViewAny:Order');
     }
 
+    public function author(AuthUser $authUser, Order $order): bool
+    {
+        return $authUser->id === $order->customer_id;
+    }
+
     public function view(AuthUser $authUser, Order $order): bool
     {
         return $authUser->can('View:Order');

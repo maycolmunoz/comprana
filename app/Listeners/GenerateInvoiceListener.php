@@ -25,6 +25,10 @@ class GenerateInvoiceListener
 
         $nameInvoice = "order{$event->order->id}.pdf";
 
+        if ($event->order->invoice) {
+            return;
+        }
+
         $total = 0;
         $user = $event->order->user;
 
@@ -43,7 +47,8 @@ class GenerateInvoiceListener
         $this->pdf->Cell(0, 5, iconv('UTF-8', 'ISO-8859-1', '------------------------------------------------------'), 0, 0, 'C');
         $this->pdf->Ln(5);
 
-        $this->pdf->MultiCell(0, 5, iconv('UTF-8', 'ISO-8859-1', 'Fecha: '.date('d/m/Y', strtotime('13-09-2022')).' '.date('h:s A')), 0, 'C', false);
+        $orderDate = ($event->order->created_at ?? now())->format('d/m/Y h:i A');
+        $this->pdf->MultiCell(0, 5, iconv('UTF-8', 'ISO-8859-1', 'Fecha: '.$orderDate), 0, 'C', false);
         $this->pdf->SetFont('Arial', 'B', 10);
         $this->pdf->MultiCell(0, 5, iconv('UTF-8', 'ISO-8859-1', strtoupper("Ticket order{$event->order->id}")), 0, 'C', false);
         $this->pdf->SetFont('Arial', '', 9);
@@ -86,7 +91,8 @@ class GenerateInvoiceListener
 
         $this->pdf->Cell(18, 5, iconv('UTF-8', 'ISO-8859-1', ''), 0, 0, 'C');
         $this->pdf->Cell(22, 5, iconv('UTF-8', 'ISO-8859-1', 'TOTAL PAGADO'), 0, 0, 'C');
-        $this->pdf->Cell(32, 5, iconv('UTF-8', 'ISO-8859-1', "$ {$total}"), 0, 0, 'C');
+        $paidTotal = $event->order->total ?? $total;
+        $this->pdf->Cell(32, 5, iconv('UTF-8', 'ISO-8859-1', "$ {$paidTotal}"), 0, 0, 'C');
 
         $this->pdf->Ln(10);
 
@@ -100,17 +106,19 @@ class GenerateInvoiceListener
 
         $event->order->update([
             'invoice' => $nameInvoice,
-            'total' => $total,
         ]);
 
         $this->pdf->close();
 
         foreach ($event->products as $product) {
-            $p = Product::select('id', 'stock')->firstWhere('name', $product['title']);
+            $model = Product::find($product['id'] ?? null)
+                ?? Product::firstWhere('name', $product['title']);
 
-            $p->update([
-                'stock' => $p->stock -= $product['quantity'],
-            ]);
+            if (! $model) {
+                continue;
+            }
+
+            $model->decrement('stock', min((int) ($product['quantity'] ?? 0), $model->stock));
         }
 
     }

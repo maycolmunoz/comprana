@@ -21,6 +21,7 @@ class Order extends Model
         'address',
         'status',
         'payment_id',
+        'payment_status',
     ];
 
     protected $casts = [
@@ -34,6 +35,14 @@ class Order extends Model
     public function customer(): BelongsTo
     {
         return $this->belongsTo(User::class, 'customer_id', 'id');
+    }
+
+    /**
+     * Alias of customer(), used by invoices and the admin panel.
+     */
+    public function user(): BelongsTo
+    {
+        return $this->customer();
     }
 
     public function dispatcher(): BelongsTo

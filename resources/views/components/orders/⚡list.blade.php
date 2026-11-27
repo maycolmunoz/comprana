@@ -14,6 +14,10 @@ new class extends Component
     #[Url()]
     public $status = '';
 
+    public bool $myModal = false;
+
+    public ?int $order_id = null;
+
     #[Computed()]
     public function orders()
     {
@@ -25,10 +29,68 @@ new class extends Component
 
         return $query->paginate(5);
     }
+
+    #[Computed()]
+    public function order(): ?Order
+    {
+        if (! $this->order_id) {
+            return null;
+        }
+
+        return Order::where('customer_id', Auth::user()->id)->find($this->order_id);
+    }
+
+    public function showDetails(int $orderId): void
+    {
+        $this->order_id = $orderId;
+        $this->myModal = true;
+    }
 };
 ?>
 
 <div class="space-y-6 animate__animated animate__fadeIn">
+    <x-mary-modal wire:model="myModal" title="Detalles del Pedido" class="backdrop-blur-xl">
+        @if ($this->order)
+            <div class="space-y-4">
+                <div class="flex flex-wrap items-center gap-3">
+                    <span class="text-xs font-black uppercase tracking-widest text-red-600">
+                        #ORD-{{ str_pad($this->order->id, 5, '0', STR_PAD_LEFT) }}
+                    </span>
+                    <x-base.status-badge :status="$this->order->status" :icon="$this->order->status->getIcon()" />
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+                    <div>
+                        <span class="block text-[9px] font-black uppercase tracking-widest text-base-content/30">Fecha</span>
+                        <p class="font-bold">{{ $this->order->created_at->translatedFormat('d M, Y • g:i A') }}</p>
+                    </div>
+                    <div>
+                        <span class="block text-[9px] font-black uppercase tracking-widest text-base-content/30">Pago</span>
+                        <p class="font-bold">{{ $this->order->payment_status === 'approved' ? 'Pagado' : 'Pendiente' }}</p>
+                    </div>
+                    <div class="sm:col-span-2">
+                        <span class="block text-[9px] font-black uppercase tracking-widest text-base-content/30">Entrega en</span>
+                        <p class="font-bold">{{ $this->order->address }}</p>
+                        <p class="text-base-content/60">{{ $this->order->phone }}</p>
+                    </div>
+                    <div>
+                        <span class="block text-[9px] font-black uppercase tracking-widest text-base-content/30">Total del Pedido</span>
+                        <p class="text-2xl font-black tracking-tighter text-red-600">${{ number_format($this->order->total ?? 0, 0) }}</p>
+                    </div>
+                </div>
+            </div>
+        @endif
+
+        <x-slot:actions>
+            @if ($this->order?->invoice)
+                <x-mary-button label="Factura PDF" icon="o-document-text" link="{{ route('orders.invoice', ['name' => $this->order->invoice]) }}" external
+                    class="btn-ghost font-black text-[10px] uppercase tracking-widest rounded-xl" />
+            @endif
+            <x-mary-button label="Cerrar" @click="$wire.myModal = false"
+                class="btn-primary font-black text-[10px] uppercase tracking-widest rounded-xl" />
+        </x-slot:actions>
+    </x-mary-modal>
+
     @forelse ($this->orders as $order)
         <div
             class="group relative bg-base-100 border border-base-content/5 rounded-3xl p-6 lg:p-8 transition-all duration-500 hover:shadow-2xl hover:shadow-red-900/5 hover:-translate-y-1 overflow-hidden">
@@ -69,7 +131,7 @@ new class extends Component
                     <div class="space-y-1">
                         <span
                             class="text-[9px] font-black uppercase tracking-widest text-base-content/30">Total del Pedido</span>
-                        <p class="text-2xl font-black tracking-tighter text-red-600">${{ number_format($order->total, 0) }}</p>
+                        <p class="text-2xl font-black tracking-tighter text-red-600">${{ number_format($order->total ?? 0, 0) }}</p>
                     </div>
                 </div>
 
@@ -81,7 +143,7 @@ new class extends Component
                             class="btn-ghost btn-sm font-black text-[10px] uppercase tracking-widest rounded-xl bg-base-content/5 hover:bg-red-600/10 hover:text-red-600" />
                     @endif
 
-                    <x-mary-button label="Ver Detalles" icon-right="o-chevron-right"
+                    <x-mary-button label="Ver Detalles" icon-right="o-chevron-right" wire:click="showDetails({{ $order->id }})"
                         class="btn-outline btn-sm font-black text-[10px] uppercase tracking-widest rounded-xl px-6" />
                 </div>
             </div>

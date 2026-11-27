@@ -9,7 +9,9 @@ class ProductObserver
 {
     public function updating(Product $product): void
     {
-        Storage::disk('images')->delete($product->getOriginal('name'));
+        if ($product->isDirty('name')) {
+            Storage::disk('images')->delete($product->getOriginal('name'));
+        }
     }
 
     public function deleting(Product $product): void

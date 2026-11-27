@@ -5,10 +5,11 @@ namespace App\Http\Controllers;
 use App\Enums\OrderStatus;
 use App\Models\Cart;
 use App\Models\Order;
+use App\Services\MercadoPagoService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
+use RuntimeException;
 
 class OrderController extends Controller
 {
@@ -27,7 +28,7 @@ class OrderController extends Controller
      */
     public function create($id)
     {
-        $cart = Cart::find($id);
+        $cart = Cart::findOrFail($id);
         $this->authorize('author', $cart);
 
         return view('orders.create', [
@@ -35,21 +36,28 @@ class OrderController extends Controller
         ]);
     }
 
-    public function payOrder($id, Order $order)
+    public function payOrder($id, Order $order, MercadoPagoService $mercadopago)
     {
-        if ($order->payment_id) {
+        if ($order->payment_status === 'approved') {
             return redirect()->route('orders.index');
         }
-        $cart = Cart::with(['products' => function ($q) {
-            $q->select('name', 'price', 'stock')
-                ->where('stock', '>', 0);
-        }])->find($id);
+
+        $cart = Cart::with(['products' => function ($query) {
+            $query->select('products.id', 'products.name', 'products.price', 'products.stock')
+                ->where('products.stock', '>', 0);
+        }])->findOrFail($id);
 
         $this->authorize('author', $cart);
+        $this->authorize('author', $order);
+
+        $total = $cart->products->sum(fn ($product) => $product->pivot->cant * $product->price);
+
+        $order->update(['total' => $total]);
 
         return view('orders.pay', [
             'cart' => $cart,
             'order' => $order,
+            'preference' => $mercadopago->createPreference($order, $cart),
         ]);
     }
 
@@ -58,36 +66,45 @@ class OrderController extends Controller
      */
     public function showInvoice(string $name)
     {
-        $order = Order::with('user')->where('invoice', $name)->first();
+        $order = Order::where('invoice', $name)->first();
 
-        if ($order && $order->invoice) {
-            $user = Auth::user();
-            if ($order->user->id === $user->id || $user->role != 'USUARIO') {
-                return response()->file(Storage::disk('invoices')->path($order->invoice));
-            }
+        if (! $order) {
+            abort(404);
         }
-        abort(404);
+
+        $user = Auth::user();
+
+        if ($order->customer_id !== $user->id && ! $user->can('ViewAny:Order')) {
+            abort(404);
+        }
+
+        return response()->file(Storage::disk('invoices')->path($order->invoice));
     }
 
-    public function orderComplete(Order $order, Request $request)
+    public function orderComplete(Order $order, Request $request, MercadoPagoService $mercadopago)
     {
         $this->authorize('author', $order);
 
-        if ($order->payment_id) {
+        $paymentId = $request->input('payment_id') ?? $request->input('collection_id');
+
+        if (! is_string($paymentId) || $paymentId === '') {
             return redirect()->route('orders.index');
         }
 
-        $response = Http::withToken(config('services.mercadopago.token'))
-            ->withUrlParameters([
-                'id' => $request->payment_id,
-            ])
-            ->get('https://api.mercadopago.com/v1/payments/{id}');
+        $payment = $mercadopago->fetchPayment($paymentId);
 
-        if ($response->successful()) {
-            return view('orders.payComplete', [
-                'status' => $response['status'],
-            ]);
+        if (! $payment) {
+            abort(404);
         }
-        abort('404');
+
+        try {
+            $mercadopago->applyPayment($order, $payment);
+        } catch (RuntimeException) {
+            abort(403);
+        }
+
+        return view('orders.payComplete', [
+            'status' => $payment['status'],
+        ]);
     }
 }

@@ -17,6 +17,7 @@ new class extends Component
     #[Validate('required|min:5|max:255')]
     public $address = '';
 
+    #[Locked]
     public $cart;
 
     public function mount()
@@ -29,11 +30,14 @@ new class extends Component
     public function contacts()
     {
         $this->validate();
+
+        $this->cart->loadMissing('products');
+
         $order = ModelsOrder::create([
             'customer_id' => $this->user->id,
-            'cart_id' => $this->cart->id,
             'phone' => $this->phone,
             'address' => $this->address,
+            'total' => $this->cart->products->sum(fn ($product) => $product->pivot->cant * $product->price),
         ]);
 
         $this->redirectRoute('orders.pay', [

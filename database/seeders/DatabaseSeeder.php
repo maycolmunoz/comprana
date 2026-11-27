@@ -32,5 +32,9 @@ class DatabaseSeeder extends Seeder
                 $product->section_id = $sectionIds[array_rand($sectionIds)];
                 $product->save();
             });
+
+        if (app()->isLocal()) {
+            $this->call(DemoOrderSeeder::class);
+        }
     }
 }

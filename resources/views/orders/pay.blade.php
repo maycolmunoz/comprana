@@ -1,40 +1,3 @@
-<?php
-
-use MercadoPago\Client\Preference\PreferenceClient;
-use MercadoPago\MercadoPagoConfig;
-
-MercadoPagoConfig::setAccessToken(config('services.mercadopago.token'));
-
-$client = new PreferenceClient;
-
-foreach ($cart->products as $product) {
-    $item = new stdClass;
-    $item->title = $product->name;
-    $item->quantity = $product->pivot->cant;
-    $item->unit_price = $product->price;
-
-    $products[] = $item;
-}
-
-$preference = $client->create([
-    'items' => $products,
-    'back_urls' => [
-        'success' => route('orders.complete', ['order' => $order]),
-        'failure' => route('orders.pay', [$cart, $order]),
-        'pending' => route('orders.complete', ['order' => $order]),
-    ],
-    'auto_return' => 'approved',
-    'payment_methods' => [
-        'excluded_payment_types' => [
-            ['id' => 'ticket'],
-        ],
-        'installments' => 1,
-    ],
-    'notification_url' => route('webhooks', ['order' => $order]),
-]);
-
-$total = 0;
-?>
 <x-app-layout>
     <x-slot name="header">
         <x-base.page-header title="Pagar Pedido" />
@@ -75,9 +38,6 @@ $total = 0;
                                     </thead>
                                     <tbody>
                                         @foreach ($cart->products as $product)
-                                            @php
-                                                $total += $product->pivot->cant * $product->price;
-                                            @endphp
                                             <tr class="bg-base-100 border-b border-base-content/5">
                                                 <td class="px-6 py-2 text-sm font-medium text-base-content whitespace-nowrap">
                                                     {{ $product->name }}
@@ -107,7 +67,7 @@ $total = 0;
                 <div class="flex justify-center lg:justify-end">
                     <div class="w-full max-w-md px-4 py-3 bg-base-100 border border-base-content/10 rounded-2xl">
                         <div class="flex items-center justify-between">
-                            <h3 class="font-medium text-base-content">Total a Pagar: $ {{ $total }}</h3>
+                            <h3 class="font-medium text-base-content">Total a Pagar: $ {{ $order->total }}</h3>
                         </div>
 
                         <div id="wallet_container"></div>
@@ -125,7 +85,7 @@ $total = 0;
 
     mp.bricks().create("wallet", "wallet_container", {
         initialization: {
-            preferenceId: '{{ $preference->id }}',
+            preferenceId: '{{ $preference['id'] }}',
         },
         customization: {
             texts: {

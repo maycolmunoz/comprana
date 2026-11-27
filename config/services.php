@@ -33,6 +33,8 @@ return [
     'mercadopago' => [
         'key' => env('MP_PUBLIC_KEY'),
         'token' => env('MP_ACCESS_TOKEN'),
+        'webhook_secret' => env('MP_WEBHOOK_SECRET'),
+        'currency' => env('MP_CURRENCY_ID', 'COP'),
     ],
 
 ];
