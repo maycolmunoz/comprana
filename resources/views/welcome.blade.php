@@ -34,9 +34,11 @@
         </div>
     </nav>
 
-    <main class="flex flex-col lg:flex-row min-h-screen">
+    <main class="flex flex-col lg:flex-row min-h-screen lg:h-full">
         <div class="w-full lg:w-3/5 flex items-center justify-center px-8 pb-12 pt-28 lg:p-20 order-2 lg:order-1">
             <div class="max-w-2xl">
+                <div class="h-1.5 w-16 rounded-full bg-linear-to-r from-red-600 to-red-400 mb-6"></div>
+
                 <h1 class="text-6xl lg:text-8xl font-black leading-[0.9] mb-8 tracking-tighter">
                     COMPRA<span class="text-red-600 text-glow">NA</span>
                 </h1>
