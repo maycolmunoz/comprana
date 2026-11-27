@@ -24,3 +24,12 @@ it('loads Livewire on the admin login page', function () {
         ->assertOk()
         ->assertSee('data-update-uri', false);
 });
+
+it('loads Alpine on pages without Livewire components', function () {
+    $user = User::factory()->create();
+
+    $this->actingAs($user)
+        ->get('/profile')
+        ->assertOk()
+        ->assertSee('data-update-uri', false);
+});
