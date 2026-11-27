@@ -1,55 +1,65 @@
 <section class="space-y-6">
     <header>
-        <h2 class="text-2xl font-black uppercase tracking-tighter text-red-600">
-            Eliminar Cuenta
-        </h2>
+        <h2 class="text-2xl font-black tracking-tighter text-red-600 uppercase">Eliminar cuenta</h2>
 
-        <p class="text-[10px] font-bold uppercase tracking-widest text-base-content/40 mt-1 leading-relaxed">
-            Una vez que se elimine tu cuenta, todos sus recursos y datos se borrarán permanentemente. Por favor, descarga cualquier dato que desees conservar antes de proceder.
+        <p class="text-base-content/40 mt-1 text-[10px] leading-relaxed font-bold tracking-widest uppercase">
+            Una vez que se elimine tu cuenta, todos sus recursos y datos se borrarán permanentemente. Por favor,
+            descarga cualquier dato que desees conservar antes de proceder.
         </p>
     </header>
 
     <div class="pt-4">
-        <x-mary-button label="Eliminar mi Cuenta" icon="o-trash"
-            class="btn-error btn-outline font-black text-xs uppercase tracking-widest rounded-2xl px-8" x-data=""
-            x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')" />
+        <x-mary-button
+            label="Eliminar mi cuenta"
+            icon="o-trash"
+            class="btn-error btn-outline rounded-2xl px-8 text-xs font-black tracking-widest uppercase"
+            onclick="document.getElementById('confirm-user-deletion').showModal()"
+        />
     </div>
 
-    <x-base.modal name="confirm-user-deletion" :show="$errors->userDeletion->isNotEmpty()" focusable>
-        <div class="p-8 bg-base-100 rounded-4xl border border-base-content/5 shadow-2xl relative overflow-hidden">
-            <div class="absolute top-0 left-0 w-full h-1.5 bg-red-600"></div>
+    <x-mary-modal id="confirm-user-deletion" title="Eliminar cuenta" class="backdrop-blur-xl" without-trap-focus>
+        <form method="post" action="{{ route('profile.destroy') }}" class="space-y-6">
+            @csrf
+            @method('delete')
 
-            <form method="post" action="{{ route('profile.destroy') }}">
-                @csrf
-                @method('delete')
+            <p class="text-base-content/70 text-sm leading-relaxed">
+                Esta acción es permanente. Introduce tu contraseña para confirmar que deseas eliminar tu cuenta de forma
+                definitiva.
+            </p>
 
-                <div class="mb-8">
-                    <h3 class="text-2xl font-black tracking-tighter uppercase text-base-content">
-                        ¿Estás seguro de eliminar tu cuenta?
-                    </h3>
+            <div>
+                <x-mary-input
+                    label="Tu contraseña"
+                    name="password"
+                    type="password"
+                    icon="o-lock-closed"
+                    placeholder="Ingresa tu contraseña para confirmar"
+                    class="bg-base-content/5 border-none focus:ring-red-600/20"
+                />
+                <x-base.input-error :messages="$errors->userDeletion->get('password')" />
+            </div>
 
-                    <p class="text-[10px] font-bold uppercase tracking-widest text-base-content/40 mt-2 leading-relaxed">
-                        Esta acción es permanente. Por favor, introduce tu contraseña para confirmar que deseas eliminar tu cuenta de forma definitiva.
-                    </p>
-                </div>
+            <div class="border-base-content/5 flex items-center justify-end gap-3 border-t pt-6">
+                <x-mary-button
+                    label="Cancelar"
+                    type="button"
+                    onclick="document.getElementById('confirm-user-deletion').close()"
+                    class="btn-ghost rounded-xl text-xs font-black tracking-widest uppercase"
+                />
 
-                <div class="space-y-6">
-                    <div>
-                        <x-mary-input label="Tu Contraseña" name="password" type="password" icon="o-lock-closed"
-                            placeholder="Ingresa tu contraseña para confirmar"
-                            class="bg-base-content/5 border-none focus:ring-red-600/20" />
-                        <x-base.input-error :messages="$errors->userDeletion->get('password')" class="" />
-                    </div>
-                </div>
+                <x-mary-button
+                    type="submit"
+                    label="Sí, eliminar definitivamente"
+                    icon="o-exclamation-triangle"
+                    class="btn-error rounded-xl px-6 text-xs font-black tracking-widest uppercase"
+                />
+            </div>
+        </form>
+    </x-mary-modal>
 
-                <div class="mt-10 flex items-center justify-end gap-3 pt-6 border-t border-base-content/5">
-                    <x-mary-button label="Cancelar" x-on:click="$dispatch('close')"
-                        class="btn-ghost font-black text-xs uppercase tracking-widest rounded-xl" />
-
-                    <x-mary-button type="submit" label="Sí, Eliminar Definitivamente" icon="o-exclamation-triangle"
-                        class="btn-error font-black text-xs uppercase tracking-widest rounded-xl px-6" />
-                </div>
-            </form>
-        </div>
-    </x-base.modal>
+    @if ($errors->userDeletion->isNotEmpty())
+        <script>
+            document.getElementById('confirm-user-deletion')?.showModal();
+        </script>
+    @endif
 </section>

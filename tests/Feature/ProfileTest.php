@@ -15,6 +15,15 @@ test('profile page is displayed', function () {
     $response->assertOk();
 });
 
+test('account deletion dialog does not initialize a focus trap', function () {
+    $user = User::factory()->create();
+
+    $this->actingAs($user)
+        ->get('/profile')
+        ->assertOk()
+        ->assertDontSee('x-trap="open"', false);
+});
+
 test('profile information can be updated', function () {
     $user = User::factory()->create();
 

@@ -13,15 +13,45 @@ it('shows the order details when the details button is pressed', function () {
         'total' => 5000,
         'address' => 'Calle 99 #1-23',
         'phone' => '3001234567',
+        'created_at' => '2026-01-15 14:30:00',
     ]);
 
     actingAs($buyer);
 
     Livewire::test('orders.list')
         ->call('showDetails', $order->id)
-        ->assertSet('myModal', true)
+        ->assertSet('showDetailsModal', true)
         ->assertSee('Calle 99 #1-23')
-        ->assertSee('5,000');
+        ->assertSee('5.000')
+        ->assertSee('15/01/2026');
+});
+
+it('shows translated order status labels in the filters', function () {
+    $buyer = User::factory()->create();
+
+    actingAs($buyer);
+
+    $this->get(route('orders.index'))
+        ->assertOk()
+        ->assertSeeText('En Camino')
+        ->assertSee('status=en_camino', false)
+        ->assertDontSeeText('en_camino');
+});
+
+it('shows the real payment status instead of inferring it from the payment id', function () {
+    $buyer = User::factory()->create();
+    Order::factory()->create([
+        'customer_id' => $buyer->id,
+        'payment_id' => 123,
+        'payment_status' => 'pending',
+        'total' => 5000,
+    ]);
+
+    actingAs($buyer);
+
+    Livewire::test('orders.list')
+        ->assertSeeText('Pendiente')
+        ->assertDontSeeText('Pagado');
 });
 
 it('does not show another user order details', function () {

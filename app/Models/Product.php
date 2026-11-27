@@ -44,4 +44,9 @@ class Product extends Model
     {
         return $this->stock > 0;
     }
+
+    public function imageUrl(): string
+    {
+        return asset('storage/'.$this->images[0]);
+    }
 }

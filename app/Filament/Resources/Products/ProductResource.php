@@ -42,13 +42,14 @@ class ProductResource extends Resource
                     ->label('Nombre'),
                 TextEntry::make('price')
                     ->label('Precio'),
-                TextEntry::make('stock'),
+                TextEntry::make('stock')
+                    ->label('Existencias'),
                 TextEntry::make('description')
                     ->label('Descripción')
                     ->columnSpanFull(),
                 ImageEntry::make('images')
                     ->disk('images')
-                    ->label('imágenes')
+                    ->label('Imágenes')
                     ->columnSpanFull(),
             ]);
     }
@@ -71,6 +72,7 @@ class ProductResource extends Resource
                     ->numeric()
                     ->prefix('$'),
                 TextInput::make('stock')
+                    ->label('Existencias')
                     ->required()
                     ->numeric(),
                 Textarea::make('description')
@@ -100,12 +102,12 @@ class ProductResource extends Resource
                 TextColumn::make('section.name')
                     ->label('Sección')
                     ->searchable()
-                    ->numeric()
-                    ->sortable(true),
+                    ->sortable(),
                 TextColumn::make('name')
                     ->label('Nombre')
                     ->searchable(),
                 TextColumn::make('stock')
+                    ->label('Existencias')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('price')

@@ -45,6 +45,23 @@ class Order extends Model
         return $this->customer();
     }
 
+    public function paymentStatusLabel(): string
+    {
+        return self::paymentStatusLabelFor($this->payment_status);
+    }
+
+    public static function paymentStatusLabelFor(?string $status): string
+    {
+        return match ($status) {
+            'approved' => 'Pagado',
+            'pending', 'in_process' => 'Pendiente',
+            'rejected' => 'Rechazado',
+            'cancelled' => 'Cancelado',
+            'refunded' => 'Reembolsado',
+            default => 'Sin pago',
+        };
+    }
+
     public function dispatcher(): BelongsTo
     {
         return $this->belongsTo(User::class, 'dispatcher_id', 'id');

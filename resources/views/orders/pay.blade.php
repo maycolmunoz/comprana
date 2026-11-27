@@ -1,97 +1,71 @@
 <x-app-layout>
     <x-slot name="header">
-        <x-base.page-header title="Pagar Pedido" />
+        <x-base.page-header title="Pagar pedido" />
     </x-slot>
 
-    <div class="container px-6 mx-auto">
-        <div class="flex flex-col my-10 lg:flex-row">
-            {{-- Order Details --}}
-            <div class="order-2 w-full lg:w-1/2">
-                <div class="flex flex-col my-5">
-                    <div class="overflow-x-auto">
-                        <div class="inline-block min-w-full py-2 sm:px-1 lg:px-2">
-                            <div class="overflow-hidden">
-                                <table class="min-w-full">
-                                    <thead class="bg-base-200 border-b border-base-content/5">
-                                        <tr>
-                                            <th
-                                                scope="col"
-                                                class="px-6 py-4 text-sm font-medium text-left text-base-content">
-                                                Nombre
-                                            </th>
-                                            <th
-                                                scope="col"
-                                                class="px-6 py-4 text-sm font-medium text-left text-base-content">
-                                                Precio
-                                            </th>
-                                            <th
-                                                scope="col"
-                                                class="px-6 py-4 text-sm font-medium text-left text-base-content">
-                                                Cantidad
-                                            </th>
-                                            <th
-                                                scope="col"
-                                                class="px-6 py-4 text-sm font-medium text-left text-base-content">
-                                                Total
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($cart->products as $product)
-                                            <tr class="bg-base-100 border-b border-base-content/5">
-                                                <td class="px-6 py-2 text-sm font-medium text-base-content whitespace-nowrap">
-                                                    {{ $product->name }}
-                                                </td>
-                                                <td class="px-6 py-2 text-sm font-light text-base-content whitespace-nowrap">
-                                                    {{ $product->price }}
-                                                </td>
-                                                <td
-                                                    class="px-6 py-2 text-sm font-light text-center text-base-content whitespace-nowrap">
-                                                    {{ $product->pivot->cant }}
-                                                </td>
-                                                <td class="px-6 py-2 text-sm font-light text-base-content whitespace-nowrap">
-                                                    {{ $product->pivot->cant * $product->price }}
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+    <div class="mx-auto max-w-7xl px-6 py-12">
+        <div class="mb-8">
+            <h2 class="text-2xl font-black tracking-tighter uppercase">Resumen del pedido</h2>
+            <p class="text-base-content/50 mt-2 text-sm">Revisa tu compra antes de completar el pago.</p>
+        </div>
+
+        <div class="grid grid-cols-1 items-start gap-8 lg:grid-cols-2">
+            <x-base.section-card>
+                <h3 class="mb-6 text-xl font-black tracking-tighter uppercase">Productos</h3>
+
+                <div class="divide-base-content/5 divide-y">
+                    @foreach ($cart->products as $product)
+                        <div class="flex items-center justify-between gap-4 py-4">
+                            <div class="min-w-0">
+                                <p class="truncate font-bold">{{ $product->name }}</p>
+                                <p class="text-base-content/50 mt-1 text-xs">
+                                    {{ $product->pivot->cant }} ×
+                                    <x-base.price :value="$product->price" class="text-xs font-normal" />
+                                </p>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            {{-- Payment Box --}}
-            <div class="shrink-0 order-1 w-full mb-8 lg:w-1/2 lg:mb-0 lg:order-2">
-                <div class="flex justify-center lg:justify-end">
-                    <div class="w-full max-w-md px-4 py-3 bg-base-100 border border-base-content/10 rounded-2xl">
-                        <div class="flex items-center justify-between">
-                            <h3 class="font-medium text-base-content">Total a Pagar: $ {{ $order->total }}</h3>
+                            <x-base.price
+                                :value="$product->pivot->cant * $product->price"
+                                class="font-black tracking-tighter"
+                            />
                         </div>
-
-                        <div id="wallet_container"></div>
-                    </div>
+                    @endforeach
                 </div>
-            </div>
+
+                <div class="border-base-content/5 mt-4 flex items-end justify-between border-t pt-6">
+                    <span class="text-sm font-black tracking-tighter uppercase">Total</span>
+                    <x-base.price
+                        :value="$order->total ?? $cart->total()"
+                        class="text-3xl font-black tracking-tighter text-red-600"
+                    />
+                </div>
+            </x-base.section-card>
+
+            <x-base.section-card>
+                <h3 class="mb-2 text-xl font-black tracking-tighter uppercase">Pago seguro</h3>
+                <p class="text-base-content/60 mb-6 text-sm">
+                    Paga con Mercado Pago. Serás redirigido a su plataforma segura para completar la compra.
+                </p>
+
+                <div id="wallet_container"></div>
+            </x-base.section-card>
         </div>
     </div>
 
     <script src="https://sdk.mercadopago.com/js/v2"></script>
 
     <script>
-    const mp = new MercadoPago("{{ config('services.mercadopago.key') }}");
-    const bricksBuilder = mp.bricks();
+        const mp = new MercadoPago("{{ config('services.mercadopago.key') }}");
 
-    mp.bricks().create("wallet", "wallet_container", {
-        initialization: {
-            preferenceId: '{{ $preference['id'] }}',
-        },
-        customization: {
-            texts: {
-                valueProp: 'smart_option',
+        mp.bricks().create('wallet', 'wallet_container', {
+            initialization: {
+                preferenceId: '{{ $preference['id'] }}',
             },
-        },
-    });
+            customization: {
+                texts: {
+                    valueProp: 'smart_option',
+                },
+            },
+        });
     </script>
 </x-app-layout>

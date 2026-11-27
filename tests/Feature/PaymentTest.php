@@ -64,7 +64,7 @@ it('stores the cart total when creating an order', function () {
     Livewire::test('orders.order', ['cart' => $cart])
         ->set('phone', '3001234567')
         ->set('address', 'Calle 1')
-        ->call('contacts');
+        ->call('placeOrder');
 
     expect(Order::first()->total)->toBe(2000);
 });
@@ -87,7 +87,8 @@ it('updates the order total from the current cart before creating the preference
 
     actingAs($buyer)
         ->get(route('orders.pay', ['id' => $cart->id, 'order' => $order]))
-        ->assertOk();
+        ->assertOk()
+        ->assertSee('data-update-uri', false);
 
     expect($order->fresh()->total)->toBe(3000);
 });
@@ -233,9 +234,96 @@ it('applies the payment on the success redirect', function () {
     actingAs($buyer)
         ->get(route('orders.complete', ['order' => $order, 'payment_id' => '123']))
         ->assertOk()
-        ->assertSee('Compra realizada correctamente');
+        ->assertSee('Pago aprobado');
 
     expect($order->fresh()->payment_status)->toBe('approved');
+});
+
+it('shows a rejected payment as not approved', function () {
+    Storage::fake('invoices');
+
+    $buyer = User::factory()->create();
+    $cart = cartWithProduct($buyer, 2, 1000);
+    $product = $cart->products->first();
+    $order = Order::factory()->create([
+        'customer_id' => $buyer->id,
+        'total' => 2000,
+        'invoice' => null,
+    ]);
+
+    Http::preventStrayRequests();
+    Http::fake([
+        'api.mercadopago.com/v1/payments/123' => Http::response([
+            ...approvedPayment($order, $product),
+            'status' => 'rejected',
+        ]),
+    ]);
+
+    $this->withoutVite();
+
+    actingAs($buyer)
+        ->get(route('orders.complete', ['order' => $order, 'payment_id' => '123']))
+        ->assertOk()
+        ->assertSee('data-update-uri', false)
+        ->assertSeeText('Pago rechazado')
+        ->assertDontSeeText('Pago pendiente');
+});
+
+it('shows a pending payment as pending', function () {
+    Storage::fake('invoices');
+
+    $buyer = User::factory()->create();
+    $cart = cartWithProduct($buyer, 2, 1000);
+    $product = $cart->products->first();
+    $order = Order::factory()->create([
+        'customer_id' => $buyer->id,
+        'total' => 2000,
+        'invoice' => null,
+    ]);
+
+    Http::preventStrayRequests();
+    Http::fake([
+        'api.mercadopago.com/v1/payments/123' => Http::response([
+            ...approvedPayment($order, $product),
+            'status' => 'pending',
+        ]),
+    ]);
+
+    $this->withoutVite();
+
+    actingAs($buyer)
+        ->get(route('orders.complete', ['order' => $order, 'payment_id' => '123']))
+        ->assertOk()
+        ->assertSeeText('Pago pendiente');
+});
+
+it('shows a refunded payment as refunded', function () {
+    Storage::fake('invoices');
+
+    $buyer = User::factory()->create();
+    $cart = cartWithProduct($buyer, 2, 1000);
+    $product = $cart->products->first();
+    $order = Order::factory()->create([
+        'customer_id' => $buyer->id,
+        'total' => 2000,
+        'invoice' => null,
+    ]);
+
+    Http::preventStrayRequests();
+    Http::fake([
+        'api.mercadopago.com/v1/payments/123' => Http::response([
+            ...approvedPayment($order, $product),
+            'status' => 'refunded',
+        ]),
+    ]);
+
+    $this->withoutVite();
+
+    actingAs($buyer)
+        ->get(route('orders.complete', ['order' => $order, 'payment_id' => '123']))
+        ->assertOk()
+        ->assertSeeText('Pago reembolsado')
+        ->assertDontSeeText('Pago rechazado');
 });
 
 it('forbids showing the completion page for another user order', function () {

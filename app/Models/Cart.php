@@ -13,6 +13,16 @@ class Cart extends Model
 
     public $timestamps = false;
 
+    protected $fillable = [
+        'name',
+        'active',
+        'user_id',
+    ];
+
+    protected $casts = [
+        'active' => 'boolean',
+    ];
+
     /**
      * Get the user that owns the Cart
      */
@@ -27,5 +37,12 @@ class Cart extends Model
     public function products(): BelongsToMany
     {
         return $this->belongsToMany(Product::class, 'cart_product', 'cart_id', 'product_id')->withPivot('cant');
+    }
+
+    public function total(): int
+    {
+        return (int) $this->products->sum(
+            fn (Product $product): int => (int) $product->pivot->cant * (int) $product->price
+        );
     }
 }

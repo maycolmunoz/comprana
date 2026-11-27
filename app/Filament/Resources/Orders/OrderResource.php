@@ -87,19 +87,22 @@ class OrderResource extends Resource
                     ->badge()
                     ->sortable(),
                 TextColumn::make('payment_id')
-                    ->label('id de pago'),
+                    ->label('ID de pago'),
                 TextColumn::make('payment_status')
                     ->label('Estado de pago')
                     ->badge()
-                    ->color(fn (string $state): string => match ($state) {
+                    ->formatStateUsing(fn (?string $state): string => Order::paymentStatusLabelFor($state))
+                    ->color(fn (Order $record): string => match ($record->payment_status) {
                         'approved' => 'success',
-                        'pending' => 'warning',
+                        'pending', 'in_process' => 'warning',
+                        'rejected', 'cancelled' => 'danger',
                         default => 'gray',
                     }),
                 TextColumn::make('total')
                     ->prefix('$')
                     ->numeric(),
                 ViewColumn::make('invoice')
+                    ->label('Factura')
                     ->view('filament.column-invoice'),
                 TextColumn::make('user.name')
                     ->label('Cliente')
@@ -115,11 +118,11 @@ class OrderResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('dispatcher.name')
                     ->label('Despachador')
-                    ->default('XXXXX')
+                    ->default('Sin asignar')
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('delivery.name')
                     ->label('Repartidor')
-                    ->default('XXXXX')
+                    ->default('Sin asignar')
                     ->toggleable(isToggledHiddenByDefault: true),
 
             ])
