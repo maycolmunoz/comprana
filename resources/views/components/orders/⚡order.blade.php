@@ -27,7 +27,7 @@ new class extends Component
         $this->address = $this->user->address;
     }
 
-    public function contacts()
+    public function placeOrder()
     {
         $this->validate();
 
@@ -37,7 +37,7 @@ new class extends Component
             'customer_id' => $this->user->id,
             'phone' => $this->phone,
             'address' => $this->address,
-            'total' => $this->cart->products->sum(fn ($product) => $product->pivot->cant * $product->price),
+            'total' => $this->cart->total(),
         ]);
 
         $this->redirectRoute('orders.pay', [
@@ -77,7 +77,7 @@ new class extends Component
                 {{-- Decorative Accent --}}
                 <div class="absolute top-0 left-0 w-full h-1.5 bg-linear-to-r from-red-600 to-red-400"></div>
 
-                <form wire:submit.prevent='contacts' class="space-y-8">
+                <form wire:submit.prevent='placeOrder' class="space-y-8">
                     {{-- Instructions --}}
                     <div class="flex items-start gap-4 p-4 bg-base-content/5 rounded-2xl mb-2">
                         <x-mary-icon name="o-information-circle" class="w-5 h-5 text-red-600 shrink-0" />

@@ -2,83 +2,110 @@
 
 use App\Models\Cart;
 use Illuminate\Support\Facades\Auth;
-use Livewire\Attributes\Validate;
+use Illuminate\Validation\Rule;
 use Livewire\Component;
 
-new class extends Component {
-    public bool $myModal1 = false;
+new class extends Component
+{
+    public bool $showRenameModal = false;
 
-    public $carts;
+    public ?int $editingCartId = null;
 
-    public $user_id;
+    public string $cartName = '';
 
-    public $cart_id = '';
-
-    #[Validate('required|min:2|max:25|unique:carts')]
-    public $name = '';
-
-    public function mount()
+    /**
+     * @return array<string, array<int, mixed>>
+     */
+    protected function rules(): array
     {
-        $this->user_id = Auth::user()->id;
-        $this->myModal1 = false;
+        return [
+            'cartName' => [
+                'required',
+                'string',
+                'min:2',
+                'max:25',
+                Rule::unique('carts', 'name')
+                    ->where('user_id', Auth::id())
+                    ->ignore($this->editingCartId),
+            ],
+        ];
     }
 
-    public function active_cart(string $cart_id)
+    public function activateCart(int $cartId): void
     {
-        Cart::whereActive(true)
-            ->whereUserId($this->user_id)
-            ->update(['active' => false]);
+        $cart = Cart::whereKey($cartId)
+            ->where('user_id', Auth::id())
+            ->first();
 
-        Cart::whereId($cart_id)
-            ->whereUserId($this->user_id)
-            ->update(['active' => true]);
+        if (! $cart) {
+            return;
+        }
+
+        Cart::where('user_id', Auth::id())->update(['active' => false]);
+        $cart->update(['active' => true]);
     }
 
-    public function void_cart(string $cart_id)
+    public function clearCart(int $cartId): void
     {
-        $cart = Cart::find($cart_id);
+        $cart = Cart::whereKey($cartId)
+            ->where('user_id', Auth::id())
+            ->first();
+
+        if (! $cart) {
+            return;
+        }
+
         $this->authorize('author', $cart);
         $cart->products()->detach();
+
         $this->dispatch('notification', 'Se vació el carrito');
     }
 
-    public function edit_cart()
+    public function renameCart(): void
     {
         $this->validate();
-        Cart::whereId($this->cart_id)->update(['name' => $this->name]);
+
+        $cart = Cart::whereKey($this->editingCartId)
+            ->where('user_id', Auth::id())
+            ->first();
+
+        if (! $cart) {
+            return;
+        }
+
+        $cart->update(['name' => $this->cartName]);
 
         $this->dispatch('notification', 'Se editó el carrito');
-        $this->myModal1 = false;
-        $this->reset('name');
+        $this->showRenameModal = false;
+        $this->reset('cartName', 'editingCartId');
     }
 
     public function with(): array
     {
         return [
-            'carts' => Cart::whereUserId($this->user_id)->withCount('products')->orderBy('active', 'desc')->get(),
+            'carts' => Cart::where('user_id', Auth::id())
+                ->withCount('products')
+                ->orderByDesc('active')
+                ->get(),
         ];
     }
 }; ?>
 
-<section x-data="{ id: @entangle('cart_id'), name: '', show: false }" @close-edit="show=false"
-    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
 
     {{-- Edit Cart Name Modal --}}
-    <x-mary-modal wire:model="myModal1" class="backdrop-blur-xl">
-        <div class="p-4 text-center">
-            <h3 class="text-2xl font-black uppercase tracking-tighter mb-2">Renombrar carrito</h3>
-            <form wire:submit.prevent='edit_cart()' class="space-y-6">
-                <x-mary-input label="Nuevo nombre" wire:model='name' icon="o-pencil-square"
-                    class="bg-base-content/5 border-none focus:ring-red-600/20" />
+    <x-mary-modal wire:model="showRenameModal" title="Renombrar carrito" class="backdrop-blur-xl">
+        <form wire:submit.prevent="renameCart" class="space-y-6">
+            <x-mary-input label="Nuevo nombre" wire:model="cartName" icon="o-pencil-square"
+                class="bg-base-content/5 border-none focus:ring-red-600/20" />
 
-                <div class="flex gap-3 pt-4">
-                    <x-mary-button label="Cancelar" @click="$wire.myModal1 = false"
-                        class="btn-ghost flex-1 font-black text-xs uppercase tracking-widest rounded-xl" />
-                    <x-mary-button type="submit" label="Actualizar"
-                        class="btn-primary flex-1 font-black text-xs uppercase tracking-widest rounded-xl" />
-                </div>
-            </form>
-        </div>
+            <div class="flex gap-3 pt-4">
+                <x-mary-button label="Cancelar" @click="$wire.showRenameModal = false"
+                    class="btn-ghost flex-1 font-black text-xs uppercase tracking-widest rounded-xl" />
+                <x-mary-button type="submit" label="Actualizar"
+                    class="btn-primary flex-1 font-black text-xs uppercase tracking-widest rounded-xl" />
+            </div>
+        </form>
     </x-mary-modal>
 
     {{-- Cart Cards Grid --}}
@@ -103,15 +130,14 @@ new class extends Component {
 
                     <div class="flex items-center gap-2">
                         @if ($cart->active)
-                            <span
-                                class="text-[8px] font-black uppercase tracking-[0.2em] text-red-600">Activo</span>
+                            <span class="text-[8px] font-black uppercase tracking-[0.2em] text-red-600">Activo</span>
                         @endif
                         <div class="form-control">
                             <label class="label cursor-pointer p-0">
                                 <input type="checkbox"
                                     class="toggle toggle-sm {{ $cart->active ? 'toggle-error' : 'opacity-30' }}"
                                     {{ $cart->active ? 'checked disabled' : '' }} wire:loading.attr="disabled"
-                                    wire:click="active_cart('{{ $cart->id }}')" />
+                                    wire:click="activateCart({{ $cart->id }})" />
                             </label>
                         </div>
                     </div>
@@ -126,7 +152,7 @@ new class extends Component {
                     <div class="flex items-center gap-2 mb-6">
                         <div class="h-1 w-8 bg-red-600 rounded-full"></div>
                         <span class="text-[10px] font-bold uppercase tracking-widest text-base-content/40">
-                            {{ $cart->products_count }} Productos
+                            {{ $cart->products_count }} {{ $cart->products_count === 1 ? 'producto' : 'productos' }}
                         </span>
                     </div>
 
@@ -135,11 +161,11 @@ new class extends Component {
                         <x-mary-button icon="o-eye" label="Ver" :link="route('carts.show', ['cart' => $cart->id])"
                             class="btn-secondary btn-sm font-black text-[10px] uppercase tracking-widest rounded-xl flex-1" />
                         <x-mary-button icon="o-pencil" label="Editar"
-                            @click="$wire.myModal1 = true; $wire.cart_id = '{{ $cart->id }}'; $wire.name = '{{ $cart->name }}'"
+                            @click="$wire.showRenameModal = true; $wire.editingCartId = {{ $cart->id }}; $wire.cartName = @js($cart->name)"
                             class="btn-ghost btn-sm font-black text-[10px] uppercase tracking-widest rounded-xl flex-1 bg-base-content/5 hover:bg-base-content/10" />
                         <x-mary-button icon="o-trash" label="Vaciar" :disabled="$cart->products_count === 0"
-                            wire:click="void_cart('{{ $cart->id }}')"
-                            wire:confirm='¿Desea vaciar el carrito {{ $cart->name }}?'
+                            wire:click="clearCart({{ $cart->id }})"
+                            wire:confirm="¿Deseas vaciar este carrito?"
                             class="col-span-2 btn-error btn-outline btn-sm font-black text-[10px] uppercase tracking-widest rounded-xl w-full border-red-600/20 hover:bg-red-600/10 hover:border-red-600/40 text-red-600" />
                     </div>
                 </div>

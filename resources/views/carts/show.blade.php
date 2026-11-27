@@ -9,7 +9,7 @@
                 title="Gestión de Productos"
                 :list="[
                     'Ajusta las cantidades de tus productos y utiliza el botón de actualizar para confirmar.',
-                    'Si agregas un producto existente, la cantidad se consolidará automáticamente.',
+                    'Si agregas un producto existente, la cantidad se actualizará con la nueva selección.',
                     'Revisa tu selección antes de proceder al pago seguro.',
                 ]" />
 

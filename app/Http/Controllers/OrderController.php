@@ -50,9 +50,7 @@ class OrderController extends Controller
         $this->authorize('author', $cart);
         $this->authorize('author', $order);
 
-        $total = $cart->products->sum(fn ($product) => $product->pivot->cant * $product->price);
-
-        $order->update(['total' => $total]);
+        $order->update(['total' => $cart->total()]);
 
         return view('orders.pay', [
             'cart' => $cart,

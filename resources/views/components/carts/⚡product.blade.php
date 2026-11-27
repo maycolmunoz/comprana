@@ -1,51 +1,52 @@
 <?php
 
+use App\Models\Cart;
+use App\Models\Product;
+use Livewire\Attributes\Locked;
 use Livewire\Component;
 
 new class extends Component
 {
-    public $product;
+    #[Locked]
+    public Product $product;
 
-    public $cart;
+    #[Locked]
+    public Cart $cart;
 
-    public $cant;
+    public int $quantity = 1;
 
-    public function mount($cant)
+    public function updateQuantity(): void
     {
-        $this->cant = $cant;
-    }
+        $this->validate([
+            'quantity' => ['required', 'integer', 'min:1', 'max:'.$this->product->stock],
+        ]);
 
-    public function edit()
-    {
-        $this->cart->products()->updateExistingPivot($this->product->id, ['cant' => $this->cant]);
+        $this->cart->products()->updateExistingPivot($this->product->id, ['cant' => $this->quantity]);
+
         $this->dispatch('notification', 'Se actualizó la cantidad del producto');
         $this->dispatch('refresh');
-
     }
 
-    public function delete()
+    public function removeProduct(): void
     {
         $this->cart->products()->detach($this->product->id);
+
         $this->dispatch('notification', 'Se eliminó el producto');
         $this->dispatch('refresh');
     }
 }; ?>
 
-<div x-data="{ cant: @entangle('cant'), price: {{ $product->price }}, total: 0 }"
-    x-init=' $watch("cant", value => total = price * cant)
-        total = cant * price
-        pay += total;
-        '
+<div x-data="{ quantity: @entangle('quantity'), price: {{ $product->price }} }"
     class="group bg-base-100 border border-base-content/5 rounded-3xl p-4 flex flex-col sm:flex-row gap-6 transition-all duration-300 hover:shadow-xl hover:shadow-base-content/5 relative overflow-hidden">
 
     {{-- Product Image --}}
     <div class="w-full sm:w-48 h-48 rounded-2xl overflow-hidden bg-base-content/5 relative shrink-0">
-        <img src="{{ asset('storage/' . $product->images[0]) }}" alt="{{ $product->name }}"
+        <img src="{{ $product->imageUrl() }}" alt="{{ $product->name }}"
             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
         <div class="absolute top-3 left-3">
             <span
                 class="bg-base-100/80 backdrop-blur-md px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest border border-white/20 shadow-sm transition-colors group-hover:bg-red-600 group-hover:text-white group-hover:border-red-600 font-outfit">
-                ${{ number_format($product->price, 0) }}
+                ${{ number_format($product->price, 0, ',', '.') }}
             </span>
         </div>
     </div>
@@ -56,7 +57,7 @@ new class extends Component
                 <h4 class="text-xl font-black uppercase tracking-tighter truncate leading-none">{{ $product->name }}</h4>
                 <div class="text-right shrink-0">
                     <span class="text-xs font-black uppercase tracking-widest text-red-600">$<span
-                            x-text="total.toLocaleString()"></span></span>
+                            x-text="(price * quantity).toLocaleString('es-CO')"></span></span>
                 </div>
             </div>
 
@@ -72,23 +73,18 @@ new class extends Component
         <div class="flex flex-wrap items-center justify-between gap-6 mt-6 pt-6 border-t border-base-content/5">
             {{-- Quantity Controls --}}
             <div class="flex items-center bg-base-content/5 rounded-xl p-1 gap-1">
-                <button @click="pay = cant <= 1 ? pay : pay - price; cant = cant <= 1 ? 1 : parseInt(cant) - 1"
-                    class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-red-600 hover:text-white transition-all text-base-content/40">
-                    <x-mary-icon name="o-minus" class="w-3 h-3" />
-                </button>
-                <span class="w-10 text-center text-xs font-black tabular-nums" x-text="cant"></span>
-                <button @click="pay += price; cant = cant >= {{ $product->stock }} ? cant : parseInt(cant) + 1"
-                    class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-red-600 hover:text-white transition-all text-base-content/40">
-                    <x-mary-icon name="o-plus" class="w-3 h-3" />
-                </button>
+                <x-mary-button icon="o-minus" class="btn-ghost btn-circle btn-sm"
+                    @click="quantity = quantity <= 1 ? 1 : parseInt(quantity) - 1" />
+                <span class="w-10 text-center text-xs font-black tabular-nums" x-text="quantity"></span>
+                <x-mary-button icon="o-plus" class="btn-ghost btn-circle btn-sm"
+                    @click="quantity = quantity >= {{ $product->stock }} ? quantity : parseInt(quantity) + 1" />
             </div>
 
             {{-- Actions --}}
             <div class="flex items-center gap-2">
-                <x-mary-button wire:click='edit()' icon="o-arrow-path" label="Actualizar"
+                <x-mary-button wire:click="updateQuantity" icon="o-arrow-path" label="Actualizar"
                     class="btn-ghost btn-sm font-black text-[10px] uppercase tracking-widest rounded-xl bg-base-content/5 hover:bg-red-600/10 hover:text-red-600" />
-                <x-mary-button
-                    @click="if(confirm('¿Seguro desea eliminar {{ $product->name }} de su carrito?')){ $wire.delete(); pay -= total; }"
+                <x-mary-button wire:click="removeProduct" wire:confirm="¿Seguro deseas eliminar este producto de tu carrito?"
                     icon="o-trash"
                     class="btn-error btn-outline btn-sm font-black text-[10px] uppercase tracking-widest rounded-xl border-red-600/20 hover:bg-red-600/10 text-red-600" />
             </div>

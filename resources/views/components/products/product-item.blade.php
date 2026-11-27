@@ -7,7 +7,7 @@
     class="h-full bg-base-100 rounded-4xl border border-base-content/5 shadow-xl transition-all duration-500 hover:shadow-2xl hover:shadow-red-600/5 hover:-translate-y-2 group overflow-hidden relative">
     <x-slot:figure class="relative overflow-hidden aspect-square">
         {{-- Product Image with Hover Zoom --}}
-        <img src="{{ asset("/storage/{$product->images[0]}") }}"
+        <img src="{{ $product->imageUrl() }}"
             class="object-cover w-full h-full transition-transform duration-700 group-hover:scale-110"
             alt="{{ $product->name }}" />
 
@@ -57,7 +57,7 @@
         realizarAccion(id) {
             $dispatch('slider');
             $dispatch('details', { 'id': id })
-            $dispatch('reset-count')
+            $dispatch('reset-quantity')
         }
     }" @click="realizarAccion('{{ $product->id }}')" />
                     @endguest

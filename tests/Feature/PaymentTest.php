@@ -64,7 +64,7 @@ it('stores the cart total when creating an order', function () {
     Livewire::test('orders.order', ['cart' => $cart])
         ->set('phone', '3001234567')
         ->set('address', 'Calle 1')
-        ->call('contacts');
+        ->call('placeOrder');
 
     expect(Order::first()->total)->toBe(2000);
 });
