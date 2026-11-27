@@ -14,9 +14,9 @@ new class extends Component
     #[Url()]
     public $status = '';
 
-    public bool $myModal = false;
+    public bool $showDetailsModal = false;
 
-    public ?int $order_id = null;
+    public ?int $selectedOrderId = null;
 
     #[Computed()]
     public function orders()
@@ -33,23 +33,23 @@ new class extends Component
     #[Computed()]
     public function order(): ?Order
     {
-        if (! $this->order_id) {
+        if (! $this->selectedOrderId) {
             return null;
         }
 
-        return Order::where('customer_id', Auth::user()->id)->find($this->order_id);
+        return Order::where('customer_id', Auth::user()->id)->find($this->selectedOrderId);
     }
 
     public function showDetails(int $orderId): void
     {
-        $this->order_id = $orderId;
-        $this->myModal = true;
+        $this->selectedOrderId = $orderId;
+        $this->showDetailsModal = true;
     }
 };
 ?>
 
 <div class="space-y-6">
-    <x-mary-modal wire:model="myModal" title="Detalles del pedido" class="backdrop-blur-xl">
+    <x-mary-modal wire:model="showDetailsModal" title="Detalles del pedido" class="backdrop-blur-xl">
         @if ($this->order)
             <div class="space-y-4">
                 <div class="flex flex-wrap items-center gap-3">
@@ -86,7 +86,7 @@ new class extends Component
                 <x-mary-button label="Factura PDF" icon="o-document-text" link="{{ route('orders.invoice', ['name' => $this->order->invoice]) }}" external
                     class="btn-ghost font-black text-[10px] uppercase tracking-widest rounded-xl" />
             @endif
-            <x-mary-button label="Cerrar" @click="$wire.myModal = false"
+            <x-mary-button label="Cerrar" @click="$wire.showDetailsModal = false"
                 class="btn-primary font-black text-[10px] uppercase tracking-widest rounded-xl" />
         </x-slot:actions>
     </x-mary-modal>
