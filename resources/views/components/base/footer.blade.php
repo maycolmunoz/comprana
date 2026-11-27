@@ -79,12 +79,6 @@
             <p class="text-[10px] font-bold uppercase tracking-widest text-base-content/40">
                 &copy; {{ date('Y') }} COMPRANA. TODOS LOS DERECHOS RESERVADOS.
             </p>
-            <div class="flex items-center gap-6 opacity-60 italic font-normal text-[10px]">
-                <span>Visa</span>
-                <span>Mastercard</span>
-                <span>American Express</span>
-                <span>PayPal</span>
-            </div>
         </div>
     </div>
 </footer>
