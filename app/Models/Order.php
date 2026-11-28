@@ -3,13 +3,15 @@
 namespace App\Models;
 
 use App\Enums\OrderStatus;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\MassPrunable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Order extends Model
 {
-    use HasFactory;
+    use HasFactory, MassPrunable;
 
     protected $fillable = [
         'customer_id',
@@ -28,6 +30,15 @@ class Order extends Model
         'status' => OrderStatus::class,
         'total' => 'int',
     ];
+
+    /**
+     * Get the prunable model query.
+     */
+    public function prunable(): Builder
+    {
+        return static::whereNull('payment_id')
+            ->where('created_at', '<', now()->subMonth());
+    }
 
     /**
      * Get the user that owns the Order

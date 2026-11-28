@@ -70,7 +70,7 @@ El proyecto requiere configurar las siguientes variables en el archivo `.env`:
 
 *   `php artisan app:install`: Realiza todo el setup inicial interactivo (migraciones, seeders, roles, admin).
 *   `php artisan boost:install`: Configura Laravel Boost para tu agente de IA preferido (guías, skills y MCP).
-*   `php artisan clean-orders`: Elimina órdenes sin pago registradas hace más de un mes.
+*   `php artisan model:prune --model=App\Models\Order`: Elimina órdenes sin pago registradas hace más de un mes (programado mensualmente).
 
 ### 🧪 Pruebas (Testing)
 
