@@ -45,4 +45,17 @@ class Cart extends Model
             fn (Product $product): int => (int) $product->pivot->cant * (int) $product->price
         );
     }
+
+    /**
+     * @return array<int, array{id: string, title: string, quantity: int, unit_price: int}>
+     */
+    public function toOrderItems(): array
+    {
+        return $this->products->map(fn (Product $product): array => [
+            'id' => (string) $product->id,
+            'title' => $product->name,
+            'quantity' => (int) $product->pivot->cant,
+            'unit_price' => (int) $product->price,
+        ])->values()->all();
+    }
 }

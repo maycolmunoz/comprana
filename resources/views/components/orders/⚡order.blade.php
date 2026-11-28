@@ -1,7 +1,9 @@
 <?php
 
 use App\Models\Order as ModelsOrder;
+use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Locked;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
@@ -31,19 +33,44 @@ new class extends Component
     {
         $this->validate();
 
-        $this->cart->loadMissing('products');
+        $this->cart->load('products');
 
-        $order = ModelsOrder::create([
-            'customer_id' => $this->user->id,
-            'phone' => $this->phone,
-            'address' => $this->address,
-            'total' => $this->cart->total(),
-        ]);
+        if ($this->cart->products->isEmpty()) {
+            $this->dispatch('notification', 'Tu carrito está vacío.');
 
-        $this->redirectRoute('orders.pay', [
-            'id' => $this->cart->id,
-            'order' => $order,
-        ]);
+            return;
+        }
+
+        $unavailableProducts = $this->cart->products
+            ->filter(fn (Product $product): bool => $product->stock < (int) $product->pivot->cant)
+            ->pluck('name');
+
+        if ($unavailableProducts->isNotEmpty()) {
+            $this->dispatch('notification', 'Sin stock suficiente: '.$unavailableProducts->implode(', '));
+
+            return;
+        }
+
+        $items = $this->cart->toOrderItems();
+        $total = (int) collect($items)->sum(
+            fn (array $item): int => (int) $item['unit_price'] * (int) $item['quantity']
+        );
+
+        $order = DB::transaction(function () use ($items, $total) {
+            $order = ModelsOrder::create([
+                'customer_id' => $this->user->id,
+                'phone' => $this->phone,
+                'address' => $this->address,
+                'total' => $total,
+                'items' => $items,
+            ]);
+
+            $this->cart->products()->detach();
+
+            return $order;
+        });
+
+        $this->redirectRoute('orders.pay', ['order' => $order]);
     }
 }; ?>
 
@@ -125,6 +152,7 @@ new class extends Component
                             type="submit"
                             label="Continuar al pago"
                             icon-right="o-credit-card"
+                            spinner="placeOrder"
                             class="btn-primary group h-auto rounded-2xl px-8 py-4 text-xs font-black tracking-widest uppercase"
                         >
                             <x-slot:append>

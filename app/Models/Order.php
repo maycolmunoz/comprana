@@ -19,6 +19,7 @@ class Order extends Model
         'delivery_id',
         'invoice',
         'total',
+        'items',
         'phone',
         'address',
         'status',
@@ -29,6 +30,7 @@ class Order extends Model
     protected $casts = [
         'status' => OrderStatus::class,
         'total' => 'int',
+        'items' => 'array',
     ];
 
     /**
@@ -56,6 +58,31 @@ class Order extends Model
         return $this->customer();
     }
 
+    public function invoiceFileName(): string
+    {
+        return 'factura-'.str_pad((string) $this->id, 5, '0', STR_PAD_LEFT).'-'.($this->created_at ?? now())->format('Y-m-d').'.pdf';
+    }
+
+    public function isPaid(): bool
+    {
+        return $this->payment_status === 'approved';
+    }
+
+    public function isPaymentPending(): bool
+    {
+        return filled($this->payment_id)
+            && in_array($this->payment_status, ['pending', 'in_process'], true);
+    }
+
+    public function canRetryPayment(): bool
+    {
+        if (in_array($this->payment_status, ['pending', 'in_process'], true)) {
+            return blank($this->payment_id);
+        }
+
+        return in_array($this->payment_status, [null, 'rejected', 'cancelled'], true);
+    }
+
     public function paymentStatusLabel(): string
     {
         return self::paymentStatusLabelFor($this->payment_status);
@@ -69,6 +96,8 @@ class Order extends Model
             'rejected' => 'Rechazado',
             'cancelled' => 'Cancelado',
             'refunded' => 'Reembolsado',
+            'charged_back' => 'Contracargo',
+            'in_mediation' => 'En mediación',
             default => 'Sin pago',
         };
     }

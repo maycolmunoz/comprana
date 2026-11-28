@@ -94,8 +94,9 @@ class OrderResource extends Resource
                     ->formatStateUsing(fn (?string $state): string => Order::paymentStatusLabelFor($state))
                     ->color(fn (Order $record): string => match ($record->payment_status) {
                         'approved' => 'success',
-                        'pending', 'in_process' => 'warning',
-                        'rejected', 'cancelled' => 'danger',
+                        'pending', 'in_process', 'in_mediation' => 'warning',
+                        'rejected', 'cancelled', 'charged_back' => 'danger',
+                        'refunded' => 'info',
                         default => 'gray',
                     }),
                 TextColumn::make('total')

@@ -19,10 +19,11 @@ return new class extends Migration
                 array_column(OrderStatus::cases(), 'value')
             )->default(OrderStatus::Processing->value);
             $table->decimal('total', 14, 2)->nullable();
+            $table->json('items')->nullable();
             $table->string('invoice')->nullable();
             $table->string('address');
             $table->string('phone', 10);
-            $table->integer('payment_id')->nullable();
+            $table->unsignedBigInteger('payment_id')->nullable();
             $table->string('payment_status')->nullable();
 
             $table->foreignId('customer_id')

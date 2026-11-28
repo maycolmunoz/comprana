@@ -32,9 +32,13 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/carritos/{id}/ordenar', [OrderController::class, 'create'])->name('orders.create');
 
-    Route::get('/carritos/{id}/ordenar/{order}', [OrderController::class, 'payOrder'])->name('orders.pay');
+    Route::get('/pedidos/{order}/pagar', [OrderController::class, 'payOrder'])->name('orders.pay');
+
+    Route::get('/carritos/{id}/ordenar/{order}', [OrderController::class, 'legacyPayOrder'])->name('orders.pay.legacy');
 
     Route::get('/pedido/{order}/estado', [OrderController::class, 'orderComplete'])->name('orders.complete');
+
+    Route::get('/pedido/{order}/estado-pago', [OrderController::class, 'paymentStatus'])->name('orders.payment-status');
 
     Route::get('/pedidos', [OrderController::class, 'index'])->name('orders.index');
 
